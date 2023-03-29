@@ -1,0 +1,47 @@
+{% extends 'layouts.html' %} {% block content %}
+<div class="container">
+	<div class="jumbotron">
+		<h1>VARIABLE.HTML</h1>
+		{% comment %} use '|' to call filter of Django template language {% endcomment %}
+		<h2>Her first name was {{first_name | upper}} and her last name was {{last_name}}</h2>
+		<h2>Her first name was {{first_name | lower | capfirst}} and her last name was {{last_name |capfirst}}</h2>
+		<h2>Her first name was {{first_name | length}} and her last name was {{last_name}}</h2>
+		<!-- Django template language use '.x' as index -->
+		<h2>{{some_list.0}}</h2>
+		<h2>{{some_dict.inside_key}}</h2>
+		<!-- Django template language comment -->
+		<!-- <h2>{# This is an Django template language comment #}</h2> -->
+		<!-- Loop -->
+		<ul>
+			{% for item in some_list %}
+			<li>{{ item }}</li>
+			{% endfor %}
+		</ul>
+		<!-- loop for dict-->
+		<ul>
+			{% for k,v in some_dict.items %}
+			<li>{{ k }},{{ v }}</li>
+			{% endfor %}
+		</ul>
+
+		<!--IF ELSE-->
+
+		{% if user_logged_in %}
+		<h1>User is logged In !</h1>
+		{% else %}
+		<h1>No one is logged In</h1>
+		{% endif %}
+		<ul>
+			{% for num in some_list %} {% if num == 2 %}
+			<li>TWO</li>
+			{% else %}
+			<li>{{ num }}</li>
+			{% endif %} {% endfor %}
+		</ul>
+
+		{% if user_logged_in %}
+		<h1>Welcome back {{ first_name }}</h1>
+		{% endif %}
+	</div>
+</div>
+{% endblock content %}

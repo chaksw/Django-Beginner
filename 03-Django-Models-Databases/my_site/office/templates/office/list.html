@@ -1,0 +1,8 @@
+{% extends 'layouts.html' %} {% block content %}
+<ul class="mt-2">
+	{% for person in patients %}
+	<li>{{ person.last_name }}</li>
+	{% endfor %}
+</ul>
+
+{% endblock content %}
