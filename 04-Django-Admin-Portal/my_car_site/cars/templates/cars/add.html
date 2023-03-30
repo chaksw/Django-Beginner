@@ -1,0 +1,21 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container">
+	<h1>ADD HTML</h1>
+	<h2>Add a new car to database:</h2>
+	<form action="" method="POST">
+		<!-- Cross Side Request Forgery-->
+		{% csrf_token %}
+		<div class="from-group">
+			<!--for specifies which form element a label is bound to-->
+			<label for="brand">Brand:</label>
+			<input class="form-control" type="text" id="brand" name="brand" />
+		</div>
+		<div class="from-group">
+			<label for="year">Year:</label>
+			<input class="form-control" type="text" id="year" name="year" />
+		</div>
+		<input class="btn-primary mt-2" type="submit" />
+	</form>
+</div>
+
+{% endblock content %}

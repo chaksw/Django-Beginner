@@ -24,12 +24,14 @@ Likes:
 -   html file define the content of page
 -   view file define which html file will be sent to client (with certain logic) using
 
-```py
+```python
  - render()
  - HttpResponse()
  - HttpResponseNotFound()
  - HttpResponseRedirect()
 ```
+
+refer [view.py](/01_Django-Views-Routing-URLs/my_site/first_app/views.py) to see the example
 
 -   urls file define where (urls path) a view should be displayed by using path() in urlpatterns[] list
 
@@ -134,12 +136,85 @@ Operators are also available in Django (`& |`) by referring `Q()` object class
 -   In **html**, use django templates language to call context define in **views**
 
 # Django Admin
-
+Take Project [car](./04-Django-Admin-Portal/my_car_site/) as an example, inside which apply all previous learning
 One of the MOST POWERFUL FEATURES of Django, able to automatically create an Admin interface, to have a graphical interface for interacting with data and users on the site.
-<br>
 Django has pre-built admin paths in site `urls.py` file(`'/admin'`) as well as indications of an existing Django Admin app (`"django.contrib.admin"`).
+Admin panel is meant for a manager of the website. so we need to **create a 'superuser'**
+```bash
+python manager.py createsuperuser
+# enter username, email and password
+```
+## Model admin object class
+### Resigter model in to admin
+In `admin.py` of app, use `admin.site.register(model, modeladmin)` to add Model to administrator site. (ref <a href="https://docs.djangoproject.com/en/4.1/ref/contrib/admin/">Modeladmin</a>)
+### ModelAdmin Class example
+```python
+class CarAdmin(admin.ModelAdmin):
+    # change order of fields in admin site
+    # fields = ['year', 'brand']
+    # split up field into different section
+    fieldsets = (
+        ("TIME INFORMATION", {
+            "fields": (
+                ['year']
+            ),
+        }),
+        ("CAR INFORMATION", {
+            "fields": (
+                ['brand']
+            ),
+        }),
+    )
+```
 
-## Configuration of admin
+# Django Form
+Django comes with a built-in Forms class which can be used with Django and python to create forms and send to the tempalte through `{{form}}`
+## Reivew - Form
+1. GET, POST, and CSRD review
+2. Django Form Class Bascis
+3. Form Fields and Validation
+4. Form Widgets and CSS Styling
+5. ModelForms
+
+## GET, POST, and CSRD review
+`GET` and `POST` methods are the key methods for http interaction (sending and receiving data)
+- `GET`: request data from a specified resource(local | remote form, model, etc..). no used to update/create information
+- `POST`: Request to send data to a server to create/update a resource, normaly raised by submit operation
+- CSRD can be called by `{% csrf_token %}` and it's used to make sure the information `POST` or `GET` are legitimate
+
+## Django Form Class Bascis
+ref <a href="https://docs.djangoproject.com/en/4.1/topics/forms/">Working with Forms</a> for more.
+Code example for Form Class
+```python
+from django import forms
+
+class ReivewForm(forms.Form):
+    # the variable create here will connect to TextInput widget of html 
+    # with maybe defined a label
+    first_name = forms.CharField(label='First Name', max_length=100)
+    last_name = forms.CharField(label='Last Name', max_length=100)
+    email = forms.EmailField(label='Email')
+    review = forms.CharField(label='Please write your review here')
+```
+
+To be able to use form class in html, we need to import `Form` Class into `views.py`
+```python
+def rental_review(request):
+    # POST REQUEST --> FORM CONTENTS --> THANK YOU\
+    # if actually post sth (through submit)
+    if request.method == 'POST':
+        # pass to review form
+        form = ReivewForm(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data)
+            return redirect(reverse('cars:thank_you'))
+    # ELSE, RENDER FORM
+    else:
+        # first time visite page, no submit operation
+        # just create form
+        form = ReivewForm
+    return render(request, 'cars/rental_review.html', context={'form': form})
+```
 
 # Appendix
 
