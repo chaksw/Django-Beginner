@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -11,6 +12,7 @@
             integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp"
             crossorigin="anonymous"
         />
+        <link rel="stylesheet" href="{% static 'cars/custom.css' %}" />
     </head>
     <body>
         <h1>RENTAL REVIEW</h1>
@@ -18,38 +20,10 @@
             <form action="" method="POST">
                 {% csrf_token %}
                 <div>
-                    <h2>Dispaly as paragraph</h2>
-                    <!-- Display as paragraph-->
-                    {{form.as_p}}
-                </div>
-                <div>
-                    <h2>Dispaly as list</h2>
-                    <!-- Display as list -->
-                    {{form.as_ul}}
-                </div>
-                <div>
-                    <h2>Dispaly as table</h2>
-                    <!-- Display as table -->
-                    {{form.as_table}}
-                </div>
-                <div>
-                    <h2>Pass attribute</h2>
-                    <!-- passing only label-->
-                    {{ form.first_name.label_tag }}
-                    <!-- passing only field-->
-                    {{ form.first_name }}
-                    <p></p>
-                    <!-- passing only label-->
-                    {{ form.last_name.label_tag }}
-                    <!-- passing only field-->
-                    {{ form.last_name }}
-                </div>
-
-                <div>
                     <h2>Loop the form</h2>
                     {% for field in form %}
                     <div class="mb-3">{{ field.label_tag }}</div>
-                    {{ field }} {% endfor %}
+                    {{ field }} {{ field.errors }} {% endfor %}
                 </div>
 
                 <input type="submit" />

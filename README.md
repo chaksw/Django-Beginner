@@ -200,8 +200,9 @@ foundation for the method of **sending** and **receiving** data over the world w
 
 ## Django Form Class Bascis
 
-ref <a href="https://docs.djangoproject.com/en/4.1/topics/forms/">Working with Forms</a> for more.
-Code example for Form Class
+Django `form.py` used to create a form field (class) that ends up generating a Django widget which in turn renders the actual HTML form input/label tags
+ref <a href="https://docs.djangoproject.com/en/4.1/topics/forms/">Working with Forms</a> for more.<br>
+**Code example for Form Class**
 
 ```python
 from django import forms
@@ -239,7 +240,7 @@ When passing `{{form}}` to the template, we saw that the HTML tags rendered by t
 Actually, there are more details around template rendering inside the .html files<br>
 PS: Render 是渲染的意思， Django 创建的 from 用来渲染 HTML
 
--   Example
+**Example:**
 
 ```html
 <div class="container">
@@ -285,14 +286,141 @@ PS: Render 是渲染的意思， Django 创建的 from 用来渲染 HTML
 </div>
 ```
 
-```html
-<form action="" method="POST">
-    {% csrf_token %} {{form.as_p}}
-    <!-- display each form element as paragraph-->
-    <p></p>
-    <input type="submit" />
-</form>
+### Form widget and styling - widget attributes
+
+To have more control over styling and presentation, we can access <a href="https://docs.djangoproject.com/en/4.1/ref/forms/widgets/">widget</a> attributes.
+Linking a **static files** directory to hold our custom css files:
+
+-   Create app/static/app/custom.css file
+-   Load static directory in .html
+
+```django-html
+{% load static %}
 ```
+
+-   Link static CSS file connection
+
+```html
+<link rel="stylesheet" href="{% static 'appname/cssfile.css' %}" />
+```
+
+-   Run migrate to load new app in setting.py file
+
+**Example:**
+
+```python
+from django import forms
+
+class ReivewForm(forms.Form):
+    # the variable create here will connect to TextInput widget of html
+    # with maybe defined a label
+    first_name = forms.CharField(label='First Name', max_length=100)
+    last_name = forms.CharField(label='Last Name', max_length=100)
+    email = forms.EmailField(label='Email')
+    # use widget in python and call css style using "attrs={'class':'myform'}"
+    # all the attribute of certain HTML tag can be passed in as a dictionary in the "attrs" of widget
+    review = forms.CharField(label='Please write your review here', widget=forms.Textarea(attrs={'class':'myform', 'rows': '2', 'cols': '2'}))
+```
+
+### ModelForm
+
+`ModelForm` class automatically creates a Form with fields connected to each model field.
+自动创建 instance 来保存前端数据，并连接保存到 modelfield 中？
+
+-   Create ModelForm in `models.py`
+
+```python
+from django.db import models
+
+# Create your models here.
+class Review(models.Model):
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=30)
+    stars = models.IntegerField()
+```
+
+-   Register Model in `admin.py` <br>
+    `admin.site.register(Review)`
+
+-   Make migration to apply model <br>
+
+```bash
+python manage.py makemigrations
+python manage.py migrate
+```
+
+-   <a href="https://docs.djangoproject.com/en/4.1/topics/forms/modelforms/">Creating form from models</a>
+    See doc for more information about specify form style
+
+```python
+from django import forms
+from .models import Review
+from django.forms import ModelForm
+
+# Creating form from models
+class ReviewForm(ModelForm):
+    class Meta:
+        model = Review
+        fields = ['first_name', 'last_name', 'stars']
+```
+
+-   In `view.py`, save data create POST from user
+
+```python
+if request.method == 'POST':
+        # pass to review form
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            form.save()
+            print(form.cleaned_data)
+            return redirect(reverse('cars:thank_you'))
+# ELSE, RENDER FORM
+else:
+    # first time visite page, no submit operation
+    # just create form
+    form = ReviewForm
+return render(request, 'cars/rental_review.html', context={'form': form})
+```
+
+### ModelForms Customizaton
+
+1. Customize Error Message of `Interge Field` refer Built-in Field classes in <a href="https://docs.djangoproject.com/en/4.1/ref/forms/fields/">Field Class</a><br>
+   **Example:** in `forms.py`
+
+```python
+class ReviewForm(ModelForm):
+    class Meta:
+        model = Review
+        fields = "__all__" # pass all the model fields as form fields
+        # fields = ['first_name', 'last_name', 'stars']
+        # over write label
+        labels = {
+            'first_name': "YOUR FIRST NAME",
+            'last_name' : "Last Name",
+            'stars':'Rating'
+        }
+        error_message = {
+            'stars':{
+                'min_value': "YO! Min value is 1",
+                'max_value': "YO! YO! Max value is 5",
+            }
+        }
+```
+
+## <a href="https://docs.djangoproject.com/en/4.1/topics/class-based-views/">Class-Based Views (CBVs)</a>
+
+Django privodes an entrie View class system that is very powerful for quickly rendering commonly used views.
+Django CBVs come with many pre-build generic class views for common tasks, such as listing all the values for a particular model in a database (ListView) or creating a new instance of a model object (CreateView).
+
+### Class Based Views Bascis
+
+### Generic Views
+
+-   TemplateView
+-   ListView
+-   DetailView
+-   CreateView
+-   DeleteView
 
 # Appendix
 
@@ -306,3 +434,7 @@ PS: Render 是渲染的意思， Django 创建的 from 用来渲染 HTML
 ## Git plugs
 
 1. <a href="https://github.com/git-ecosystem/git-credential-manager">git credential manager</a>
+
+```
+
+```
