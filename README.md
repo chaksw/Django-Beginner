@@ -136,18 +136,25 @@ Operators are also available in Django (`& |`) by referring `Q()` object class
 -   In **html**, use django templates language to call context define in **views**
 
 # Django Admin
+
 Take Project [car](./04-Django-Admin-Portal/my_car_site/) as an example, inside which apply all previous learning
 One of the MOST POWERFUL FEATURES of Django, able to automatically create an Admin interface, to have a graphical interface for interacting with data and users on the site.
 Django has pre-built admin paths in site `urls.py` file(`'/admin'`) as well as indications of an existing Django Admin app (`"django.contrib.admin"`).
 Admin panel is meant for a manager of the website. so we need to **create a 'superuser'**
+
 ```bash
 python manager.py createsuperuser
 # enter username, email and password
 ```
+
 ## Model admin object class
+
 ### Resigter model in to admin
+
 In `admin.py` of app, use `admin.site.register(model, modeladmin)` to add Model to administrator site. (ref <a href="https://docs.djangoproject.com/en/4.1/ref/contrib/admin/">Modeladmin</a>)
+
 ### ModelAdmin Class example
+
 ```python
 class CarAdmin(admin.ModelAdmin):
     # change order of fields in admin site
@@ -168,28 +175,39 @@ class CarAdmin(admin.ModelAdmin):
 ```
 
 # Django Form
+
 Django comes with a built-in Forms class which can be used with Django and python to create forms and send to the tempalte through `{{form}}`
+
 ## Reivew - Form
+
 1. GET, POST, and CSRD review
 2. Django Form Class Bascis
 3. Form Fields and Validation
 4. Form Widgets and CSS Styling
 5. ModelForms
 
+## HTTP (Hyptertext Transfer Protocol)
+
+foundation for the method of **sending** and **receiving** data over the world wide web.
+
 ## GET, POST, and CSRD review
+
 `GET` and `POST` methods are the key methods for http interaction (sending and receiving data)
-- `GET`: request data from a specified resource(local | remote form, model, etc..). no used to update/create information
-- `POST`: Request to send data to a server to create/update a resource, normaly raised by submit operation
-- CSRD can be called by `{% csrf_token %}` and it's used to make sure the information `POST` or `GET` are legitimate
+
+-   `GET`: request data from a specified resource (local | remote form, model, etc..). not used to update/create information (请求从网页服务器上接受数据)
+-   `POST`: Request to send data to a server to create/update a resource, normaly raised by submit operation
+-   CSRD can be called by `{% csrf_token %}` and it's used to make sure the information `POST` or `GET` are legitimate （请求向网页服务器上发送数据（更新/添加/删除））
 
 ## Django Form Class Bascis
+
 ref <a href="https://docs.djangoproject.com/en/4.1/topics/forms/">Working with Forms</a> for more.
 Code example for Form Class
+
 ```python
 from django import forms
 
 class ReivewForm(forms.Form):
-    # the variable create here will connect to TextInput widget of html 
+    # the variable create here will connect to TextInput widget of html
     # with maybe defined a label
     first_name = forms.CharField(label='First Name', max_length=100)
     last_name = forms.CharField(label='Last Name', max_length=100)
@@ -197,7 +215,8 @@ class ReivewForm(forms.Form):
     review = forms.CharField(label='Please write your review here')
 ```
 
-To be able to use form class in html, we need to import `Form` Class into `views.py`
+To be able to passing form class to template(html), we need to import `Form` Class into `views.py`
+
 ```python
 def rental_review(request):
     # POST REQUEST --> FORM CONTENTS --> THANK YOU\
@@ -214,6 +233,65 @@ def rental_review(request):
         # just create form
         form = ReivewForm
     return render(request, 'cars/rental_review.html', context={'form': form})
+```
+
+When passing `{{form}}` to the template, we saw that the HTML tags rendered by the Django Form Widgets are all in the same line and don't look visually appealing.
+Actually, there are more details around template rendering inside the .html files<br>
+PS: Render 是渲染的意思， Django 创建的 from 用来渲染 HTML
+
+-   Example
+
+```html
+<div class="container">
+    <form action="" method="POST">
+        {% csrf_token %}
+        <div>
+            <h2>Dispaly as paragraph</h2>
+            <!-- Display as paragraph-->
+            {{form.as_p}}
+        </div>
+        <div>
+            <h2>Dispaly as list</h2>
+            <!-- Display as list -->
+            {{form.as_ul}}
+        </div>
+        <div>
+            <h2>Dispaly as table</h2>
+            <!-- Display as table -->
+            {{form.as_table}}
+        </div>
+        <div>
+            <h2>Pass attribute</h2>
+            <!-- passing only label-->
+            {{ form.first_name.label_tag }}
+            <!-- passing only field-->
+            {{ form.first_name }}
+            <p></p>
+            <!-- passing only label-->
+            {{ form.last_name.label_tag }}
+            <!-- passing only field-->
+            {{ form.last_name }}
+        </div>
+
+        <div>
+            <h2>Loop the form</h2>
+            {% for field in form %}
+            <div class="mb-3">{{ field.label_tag }}</div>
+            {{ field }} {% endfor %}
+        </div>
+
+        <input type="submit" />
+    </form>
+</div>
+```
+
+```html
+<form action="" method="POST">
+    {% csrf_token %} {{form.as_p}}
+    <!-- display each form element as paragraph-->
+    <p></p>
+    <input type="submit" />
+</form>
 ```
 
 # Appendix

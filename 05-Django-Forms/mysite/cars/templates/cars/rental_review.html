@@ -1,17 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>RENTAL REVIEW</h1>
-    <form action="" method="POST">
-        {% csrf_token %}
-        {{form}}
-        <input type="submit">
-    </form>
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp"
+            crossorigin="anonymous"
+        />
+    </head>
+    <body>
+        <h1>RENTAL REVIEW</h1>
+        <div class="container">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div>
+                    <h2>Dispaly as paragraph</h2>
+                    <!-- Display as paragraph-->
+                    {{form.as_p}}
+                </div>
+                <div>
+                    <h2>Dispaly as list</h2>
+                    <!-- Display as list -->
+                    {{form.as_ul}}
+                </div>
+                <div>
+                    <h2>Dispaly as table</h2>
+                    <!-- Display as table -->
+                    {{form.as_table}}
+                </div>
+                <div>
+                    <h2>Pass attribute</h2>
+                    <!-- passing only label-->
+                    {{ form.first_name.label_tag }}
+                    <!-- passing only field-->
+                    {{ form.first_name }}
+                    <p></p>
+                    <!-- passing only label-->
+                    {{ form.last_name.label_tag }}
+                    <!-- passing only field-->
+                    {{ form.last_name }}
+                </div>
+
+                <div>
+                    <h2>Loop the form</h2>
+                    {% for field in form %}
+                    <div class="mb-3">{{ field.label_tag }}</div>
+                    {{ field }} {% endfor %}
+                </div>
+
+                <input type="submit" />
+            </form>
+        </div>
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+            crossorigin="anonymous"
+        ></script>
+    </body>
 </html>
