@@ -417,7 +417,52 @@ Django CBVs come with many pre-build generic class views for common tasks, such 
 ### Generic Views
 
 -   TemplateView
--   ListView
+
+in `views.py`
+```python
+from django.views.generic import TemplateView
+# Create your views here.
+class HomeView(TemplateView):
+    template_name = 'classroom/home.html'
+```
+
+in `urls.py`
+```python
+urlpatterns = [
+    path('', HomeView.as_view(), name='home')  # path expects a function!
+]
+```
+-   FormView
+    -  Create a form in `forms.py` 
+    -  import form in `views.py`
+    -  Create a form view class in `views.py`
+
+```python
+from django import forms
+
+class ContactForm(forms.Form):
+    name = forms.CharField()
+    message = forms.CharField(widget=forms.Textarea)
+```
+```python
+from .forms import ContactForm
+class ContactFormView(FormView):
+    # connect form class to form view class
+    form_class = ContactForm
+    template_name = 'classroom/contact.html'
+
+    # success URL ? where to go to after submit successfully
+    # reverse() returns a string and reverse_lazy() returns an object
+    # if using success_url, use reverse_lazy().
+    success_url = reverse_lazy('classroom:thank_you')
+    # What to do with form ?
+
+    def form_valid(self, form):
+        print(form.cleaned_data['name'])
+        # ContactFormView(request.POST)
+        return super().form_valid(form)
+        # form.save()
+```
 -   DetailView
 -   CreateView
 -   DeleteView
