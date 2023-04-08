@@ -412,13 +412,18 @@ class ReviewForm(ModelForm):
 Django privodes an entrie View class system that is very powerful for quickly rendering commonly used views.
 Django CBVs come with many pre-build generic class views for common tasks, such as listing all the values for a particular model in a database (ListView) or creating a new instance of a model object (CreateView).
 
-### Class Based Views Bascis
+# Class Based Views Bascis - eneric Views
 
-### Generic Views
+-   templateview
+-   Formview
+-   Listview
+-   UpdateView
+-   DeleteView
 
--   TemplateView
+## TemplateView
 
 in `views.py`
+
 ```python
 from django.views.generic import TemplateView
 # Create your views here.
@@ -427,15 +432,18 @@ class HomeView(TemplateView):
 ```
 
 in `urls.py`
+
 ```python
 urlpatterns = [
     path('', HomeView.as_view(), name='home')  # path expects a function!
 ]
 ```
--   FormView
-    -  Create a form in `forms.py` 
-    -  import form in `views.py`
-    -  Create a form view class in `views.py`
+
+## FormView
+
+-   Create a form in `forms.py`
+-   import form in `views.py`
+-   Create a form view class in `views.py`
 
 ```python
 from django import forms
@@ -444,6 +452,7 @@ class ContactForm(forms.Form):
     name = forms.CharField()
     message = forms.CharField(widget=forms.Textarea)
 ```
+
 ```python
 from .forms import ContactForm
 class ContactFormView(FormView):
@@ -462,10 +471,169 @@ class ContactFormView(FormView):
         # ContactFormView(request.POST)
         return super().form_valid(form)
         # form.save()
+    # cleaned_data is a dictionary
 ```
--   DetailView
--   CreateView
+
+### `cleaned_data()`
+
+The clean() method on a Field subclass is responsible for running to_python(), validate(), and run_validators() in the correct order and propagating their errors. If, at any time, any of the methods raise ValidationError, the validation stops and that error is raised. This method returns the clean data, which is then inserted into the cleaned_data dictionary of the form.
+
+## Model based CBVs (Class Based Views)
+
+There are a few operations with models
+
+### CreateView
+
+Django provodes CBVs that automatically create the appropriate views, forms, and context objects for predefined template names by simply being connected to a model(database)<br>
+These classes require just a few attributes and automatically do the work for you !<br>
+
+-   model_form.html - teacher_form.html
+    <br>
+
+#### **Important Note**
+
+Because the classes are designed to be simple, these views require a template name to follow specific pattern. (`templatename`\_form.html)
+
+```python
+
+class TeacherCreateView(CreateView):
+    model = Teacher # connect to a model(database)
+    # fields = ['first_name', 'last_name'] # connect to data attribute
+    fields = '__all__'
+    # reverse to another template after submit, 'thank_you` is name of path defined in urls
+    success_url = reverse_lazy('classroom:thank_you')
+
+```
+
+once defined `model = Teacher` to connect to model, django will create a `form` based on model look for the template named `modelname_form.html` just like the definition of `template_name = 'classroom/teacher_form.html`, then the created form will be used once you call `form.as_p` in html. Also when you hit the submit button, it's will automatically hit `save()` after all the field are validated.
+
+```html
+<h1>Teacher Form</h1>
+<form action="" method="POST">
+    {% csrf_token %} {{ form.as_p }}
+    <input type="submit" value="Submit" />
+</form>
+```
+
+### ListView
+
+`ListView` used to list all the instances for a particular model.
+A `ListView` will do a query request for all the objects inside the model look for the template named `modelname_list.html`
+
+```python
+class TeacherListView(ListView):
+    # model_list.html
+    model = Teacher
+    # Grab instances in model
+    queryset = Teacher.objects.all()
+    # define the list name used in html
+    context_object_name = "teacher_list"
+```
+
+```html
+<h1>List of Teachers (ListView)</h1>
+<ul>
+    {% for teacher in teacher_list %}
+    <li>{{ teacher.first_name}} {{ teacher.last_name }}</li>
+    {% endfor %}
+</ul>
+```
+
+### DetailView
+
+The main purpose of the `DetailView` is to view a single instance of (PK) a particular entry inside a model.A `DetailView` will look forthe template named `modelname_detail.html`
+
+```python
+class TeacherDetailView(DetailView):
+    # RETURN ONLY ONE MODEL ENTRY using primary key
+    model = Teacher
+    # PK --> {{ teacher }}
+```
+
+A `DetailView` will only grab a unique model entry by referring their primary key. by doing that the URL actually needs to be set up in a way to specifically refer to that primary key.
+
+```python
+path('teacher_detail/<int:pk>', TeacherDetailView.as_view(), name='detail_teacher')
+```
+
+Then we need to set up the link in a way on template side of things so that we can pass the primary key to the URL
+
+```html
+<h1>List of Teachers (ListView)</h1>
+<ul>
+    {% for teacher in teacher_list %}
+    <li>
+        <a href="/classroom/teacher_detail/{{teacher.id}}"
+            >{{ teacher.first_name}} {{ teacher.last_name }}</a
+        >
+    </li>
+    {% endfor %}
+</ul>
+```
+
+### UpdateView
+
+`UpdateView` is kind of like a mix between a `CreateView` and a `DetailView`, it's kind of like a `CreateView` because you will be filling out a form to up the information. but it's also kind of like a `DetailView` because when you're talking about updating, you're talking aoubt a specific entry with a unique primary key.<br>
+The intention of `UpdateView`, it's to SHARE the `model_form.html` from HTML template that `CreateView` also uses, and it looks a lot like create view as far as attributes concerned, but we can limit the field upon updating.<br>
+In coding, kind of like using `CreateView` **views form** and using `UpdateView` **html form**
+
+```python
+class TeacherUpdateView(UpdateView):
+    model = Teacher
+    fields = ['last_name', 'first_name']
+    # fields = '__all__'
+    success_url = reverse_lazy('classroom:list_teacher')
+```
+
+URL will be:
+
+```python
+path('update_teacher/<int:pk>', TeacherUpdateView.as_view(), name='update_teacher')</int:pk>
+```
+
+HTML will be (using `teacher_list.html`)
+
+```html
+<h1>List of Teachers (ListView)</h1>
+<ul>
+    {% for teacher in teacher_list %}
+    <li>
+        <a href="/classroom/teacher_detail/{{teacher.id}}"
+            >{{ teacher.first_name}} {{ teacher.last_name }}</a
+        >
+        <ul>
+            <li>
+                <a href="/classroom/update_teacher/{{teacher.id}}"
+                    >Update Information for {{ teacher.first_name }}</a
+                >
+            </li>
+        </ul>
+    </li>
+    {% endfor %}
+</ul>
+```
+
 -   DeleteView
+
+## HOME Page
+
+```html
+<h1>Welcome to home.html</h1>
+<ul>
+    <li>
+        <a href="{% url "classroom:thank_you" %}">THANK YOU PAGE LINK</a>
+    </li>
+    <li>
+        <a href="{% url "classroom:contact" %}">CONTACT FORM PAGE LINK</a>
+    </li>
+    <li>
+        <a href="{% url "classroom:create_teacher" %}">CREATE NEW TEACHER FORM PAGE LINK</a>
+    </li>
+    <li>
+        <a href="{% url "classroom:list_teacher" %}">LIST TEACHER FORM PAGE LINK</a>
+    </li>
+</ul>
+```
 
 # Appendix
 
