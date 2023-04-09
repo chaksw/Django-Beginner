@@ -48,6 +48,12 @@ class TeacherUpdateView(UpdateView):
     success_url = reverse_lazy('classroom:list_teacher') 
     
 
+class TeacherDeleteView(DeleteView):
+    model = Teacher
+    # default template name:
+    # model_confirm_delete.html
+    success_url = reverse_lazy('classroom:list_teacher') 
+
 class ContactFormView(FormView):
     # connect form class to form view class
     form_class = ContactForm # connect to form

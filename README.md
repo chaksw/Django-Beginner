@@ -541,7 +541,7 @@ class TeacherListView(ListView):
 
 ### DetailView
 
-The main purpose of the `DetailView` is to view a single instance of (PK) a particular entry inside a model.A `DetailView` will look forthe template named `modelname_detail.html`
+The main purpose of the `DetailView` is to view a single instance of (PK) a particular entry inside a model.A `DetailView` will look fort he template named `modelname_detail.html`
 
 ```python
 class TeacherDetailView(DetailView):
@@ -613,7 +613,68 @@ HTML will be (using `teacher_list.html`)
 </ul>
 ```
 
--   DeleteView
+### DeleteView
+
+Used to pointed to a primary key and delete a particular instance of the model<br>
+`DeleteView` is technically a form, it sends back a form that just has a single confirmed deleted button.<br>
+A `DeleteView` will look fort he template named `modelname_confirm_delete.html`<br>
+In `ListView` we have link button links to the particular primary key.<br>
+
+```html
+<h1>List of Teachers (ListView)</h1>
+<ul>
+    {% for teacher in teacher_list %}
+    <li>
+        <a href="/classroom/teacher_detail/{{teacher.id}}"
+            >{{ teacher.first_name}} {{ teacher.last_name }}</a
+        >
+        <ul>
+            <li>
+                <a href="/classroom/update_teacher/{{teacher.id}}"
+                    >Update Information for {{ teacher.first_name }}</a
+                >
+            </li>
+            <li>
+                <a href="/classroom/delete_teacher/{{teacher.id}}"
+                    >DELETE {{ teacher.first_name }}</a
+                >
+            </li>
+        </ul>
+    </li>
+    {% endfor %}
+</ul>
+```
+
+Once link is cliked, it's will go head and go to the `delete_theacher` url (refer to `urls.py`), and brings back to the `DeleteView`, which connects to the teacher model and renders(calls) the `teacher_confirm_delete.html`.<br>
+
+-   **URLs**
+
+```python
+path('delete_teacher/<int:pk>', TeacherDeleteView.as_view(), name='delete_teacher')
+```
+
+-   `DeleteView`
+
+```python
+class TeacherDeleteView(DeleteView):
+    model = Teacher
+    # default template name:
+    # model_confirm_delete.html
+    success_url = reverse_lazy('classroom:list_teacher')
+```
+
+-   `teacher_confirm_delete.html`
+
+```html
+<h1>Are you sure you want to delete this teacher?</h1>
+<h2>{{ teahcer }}</h2>
+<form action="" method="post">
+    {% csrf_token %}
+    <input type="submit" name="" id="" value="Confirm Delete" />
+</form>
+```
+
+After submit button is clicked, it's will go ahead and execute the deletion.
 
 ## HOME Page
 

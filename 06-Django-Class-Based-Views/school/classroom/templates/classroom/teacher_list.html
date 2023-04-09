@@ -11,6 +11,11 @@
                     >Update Information for {{ teacher.first_name }}</a
                 >
             </li>
+            <li>
+                <a href="/classroom/delete_teacher/{{teacher.id}}"
+                    >DELETE {{ teacher.first_name }}</a
+                >
+            </li>
         </ul>
     </li>
     {% endfor %}
