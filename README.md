@@ -1,3 +1,59 @@
+**Table of Contents** _generated with [DocToc](https://github.com/thlorenz/doctoc)_
+
+-   [Django Project](#django-project)
+    -   [Basic](#basic)
+        -   [Start project](#start-project)
+        -   [Views Routing URLs](#views-routing-urls)
+    -   [Template and Django template language](#template-and-django-template-language)
+    -   [Migration](#migration)
+        -   [Base commands](#base-commands)
+        -   [Steps for migrations](#steps-for-migrations)
+    -   [Data Interaction (CRUD)](#data-interaction-crud)
+        -   [ADD/INSERT data](#addinsert-data)
+            -   [Relative Function](#relative-function)
+        -   [READ data](#read-data)
+            -   [Relative Function](#relative-function-1)
+        -   [Updating Models, Entries (add | delete)](#updating-models-entries-add--delete)
+    -   [Connecting Tempaltes and Database Models](#connecting-tempaltes-and-database-models)
+-   [Django Admin](#django-admin)
+    -   [Model admin object class](#model-admin-object-class)
+    -   [Resigter model in to admin](#resigter-model-in-to-admin)
+    -   [ModelAdmin Class example](#modeladmin-class-example)
+-   [Django Form](#django-form)
+    -   [Reivew - Form](#reivew---form)
+    -   [HTTP (Hyptertext Transfer Protocol)](#http-hyptertext-transfer-protocol)
+    -   [GET, POST, and CSRD review](#get-post-and-csrd-review)
+    -   [Django Form Class Bascis](#django-form-class-bascis)
+    -   [Form widget and styling - widget attributes](#form-widget-and-styling---widget-attributes)
+    -   [ModelForm](#modelform)
+    -   [ModelForms Customizaton](#modelforms-customizaton)
+-   [Class-Based Views(CBVs)](#class-based-viewscbvs)
+    -   [TemplateView](#templateview)
+    -   [FormView](#formview)
+        -   [`cleaned_data()`](#cleaned_data)
+    -   [Model based CBVs (Class Based Views)](#model-based-cbvs-class-based-views)
+        -   [CreateView](#createview)
+            -   [**Important Note**](#important-note)
+        -   [ListView](#listview)
+        -   [DetailView](#detailview)
+        -   [UpdateView](#updateview)
+        -   [DeleteView](#deleteview)
+        -   [HOME Page](#home-page)
+-   [jQuery](#jquery)
+    -   [Basics](#basics)
+        -   [Styling element with object](#styling-element-with-object)
+        -   [Styling element in list](#styling-element-in-list)
+        -   [Grap content using jQuery](#grap-content-using-jquery)
+        -   [Change attribute](#change-attribute)
+        -   [Add `css` class into `html`](#add-css-class-into-html)
+        -   [Events](#events)
+    -   [Event animation (Effects)](#event-animation-effects)
+-   [Appendix](#appendix)
+    -   [Extensions](#extensions)
+    -   [Git plugs](#git-plugs)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Django Project
 
 ## Basic
@@ -149,11 +205,11 @@ python manager.py createsuperuser
 
 ## Model admin object class
 
-### Resigter model in to admin
+## Resigter model in to admin
 
 In `admin.py` of app, use `admin.site.register(model, modeladmin)` to add Model to administrator site. (ref <a href="https://docs.djangoproject.com/en/4.1/ref/contrib/admin/">Modeladmin</a>)
 
-### ModelAdmin Class example
+## ModelAdmin Class example
 
 ```python
 class CarAdmin(admin.ModelAdmin):
@@ -286,7 +342,7 @@ PS: Render 是渲染的意思， Django 创建的 from 用来渲染 HTML
 </div>
 ```
 
-### Form widget and styling - widget attributes
+## Form widget and styling - widget attributes
 
 To have more control over styling and presentation, we can access <a href="https://docs.djangoproject.com/en/4.1/ref/forms/widgets/">widget</a> attributes.
 Linking a **static files** directory to hold our custom css files:
@@ -322,7 +378,7 @@ class ReivewForm(forms.Form):
     review = forms.CharField(label='Please write your review here', widget=forms.Textarea(attrs={'class':'myform', 'rows': '2', 'cols': '2'}))
 ```
 
-### ModelForm
+## ModelForm
 
 `ModelForm` class automatically creates a Form with fields connected to each model field.
 自动创建 instance 来保存前端数据，并连接保存到 modelfield 中？
@@ -382,7 +438,7 @@ else:
 return render(request, 'cars/rental_review.html', context={'form': form})
 ```
 
-### ModelForms Customizaton
+## ModelForms Customizaton
 
 1. Customize Error Message of `Interge Field` refer Built-in Field classes in <a href="https://docs.djangoproject.com/en/4.1/ref/forms/fields/">Field Class</a><br>
    **Example:** in `forms.py`
@@ -407,14 +463,12 @@ class ReviewForm(ModelForm):
         }
 ```
 
-## <a href="https://docs.djangoproject.com/en/4.1/topics/class-based-views/">Class-Based Views (CBVs)</a>
+# <a href="https://docs.djangoproject.com/en/4.1/topics/class-based-views/">Class-Based Views(CBVs)</a>
 
 Django privodes an entrie View class system that is very powerful for quickly rendering commonly used views.
 Django CBVs come with many pre-build generic class views for common tasks, such as listing all the values for a particular model in a database (ListView) or creating a new instance of a model object (CreateView).
 
-# Class Based Views Bascis - eneric Views
-
--   templateview
+-   Templateview
 -   Formview
 -   Listview
 -   UpdateView
@@ -676,7 +730,7 @@ class TeacherDeleteView(DeleteView):
 
 After submit button is clicked, it's will go ahead and execute the deletion.
 
-## HOME Page
+### HOME Page
 
 ```html
 <h1>Welcome to home.html</h1>
@@ -694,6 +748,254 @@ After submit button is clicked, it's will go ahead and execute the deletion.
         <a href="{% url "classroom:list_teacher" %}">LIST TEACHER FORM PAGE LINK</a>
     </li>
 </ul>
+```
+
+# <a href="https://releases.jquery.com/">jQuery</a>
+
+jQuery is a `javascript` library (a large single `.js` file) that has many pre-built methods and objects that simplify workflow, specifucally when you interacting with the DOM and making HTTP requests (AJAX)<br>
+One of its main features is the use of `$`.
+
+-   Grap attribute
+
+```js
+// jQuery
+let divs = $("div");
+
+// Vanilla
+let divs = documents.querySelectorAll("div");
+```
+
+In situation we actullay want to edit the **styling** of a certain variable called `el`.
+
+-   Styling
+
+```js
+// jQuery
+$(el).css("border-width", "20px");
+
+// Vanilla
+el.style.borderWidth = "20px";
+
+// Styling element with css style object
+const newCss = {
+    color: "white",
+    background: "green",
+    border: "20px solid red",
+};
+
+let list = $("h1");
+list.css(newCss);
+```
+
+-   Function called
+
+```js
+// jQuery
+$(document).ready(function () {});
+
+// Vanilla
+function ready(fn) {
+    if (document.readyState != "loading") {
+        fn();
+    } else {
+        document.addEventListener("DOMConetentLoaded", fn);
+    }
+}
+```
+
+## Basics
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>jQuery</title>
+        <style>
+            .turnBlue {
+                color: white;
+                background: blue;
+            }
+            .turnRed {
+                color: white;
+                background: red;
+            }
+        </style>
+        <!-- Get Bootstrap -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+            crossorigin="anonymous" />
+        <!-- Get jQuery -->
+        <script
+            src="https://code.jquery.com/jquery-3.6.4.js"
+            integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
+            crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <h1>Selection with jQuery</h1>
+        <p>
+            You can use the $ to select elements from the DOM, it will fell a
+            lot like selection using querySelectorAll()
+        </p>
+        <p>For example:</p>
+        <ul>
+            <li>
+                Selecting all 'a' Tags:
+                <ul>
+                    <li>$('a')</li>
+                </ul>
+            </li>
+            <li>
+                Selecting all element from the class "container":
+                <ul>
+                    <li>$('.container')</li>
+                </ul>
+            </li>
+            <li>
+                Selecting all elements with id "special":
+                <ul>
+                    <li>$('#special')</li>
+                </ul>
+            </li>
+        </ul>
+    </body>
+</html>
+```
+
+### Styling element with object
+
+```js
+// Styling element with css style object
+const newCss = {
+    color: "white",
+    background: "green",
+    border: "20px solid red",
+};
+
+let list = $("h1");
+list.css(newCss);
+```
+
+### Styling element in list
+
+```js
+var listItems = $("li");
+// use .eq to index element in list
+listItems.eq(0).css("color", "orange");
+
+// negative index for last elemnt
+listItems.eq(-1).css("color", "orange");
+```
+
+### Grap content using jQuery
+
+The JQuery `html()` and `text()` methods are two methods that you can use to get or set the contents of an HTML element. The difference between them is stated below: <br>
+`html()` is used to return or change the **html** and **text** content of an element. `text()` can only return or change the text content of an element.
+
+```js
+$("h1").text();
+// Change text in page (temporatry)
+$("h1").text("Brand New Text");
+// Actullay change html
+$("h1").html("<em>New</em>");
+```
+
+### Change attribute
+
+```js
+// change attribute 'type' from 'submit' to 'checkbox'
+$("input").eq(1).attr("type", "checkbox");
+// change attribute 'value'
+$("input").eq(0).val("new value");
+```
+
+### Add `css` class into `html`
+
+We add add the pre-defined `css` class in to element using `addClass()`, and use `removeClass()` to remove the class. We can also toggle to class in elemnt using `toggleClass()`
+
+```js
+// add class
+$("h1").addClass("turnRed");
+// remove class
+$("h1").removeClass("turnRed");
+// toggle class
+$("h1").toggleClass("turnBlue");
+```
+
+### [Events](https://api.jquery.com/category/events/)
+
+-   Event `click()`
+
+```js
+// Event 'Click'
+$("h1").click(function (e) {
+    console.log("There was a click!");
+});
+
+// Grap multiple event
+$("li").click(function (e) {
+    console.log("any li was clicked!");
+});
+```
+
+-   `this` key word: `this` means any object we selected, here is 'h1'
+
+```js
+// use 'this' key word
+$("h1").dblclick(function (e) {
+    //
+    $(this).text("Double click is triggered");
+    console.log($(this).text());
+});
+```
+
+-   Event `keypress()` : Each key has number code that stored in event.which()
+
+```js
+// Key press
+$("input")
+    .eq(0)
+    .keypress(function (event) {
+        // Each key has number code that stored in event.which()
+        // 'enter' = 13
+        if (event.which === 13) {
+            console.log(event);
+            $("h3").toggleClass("turnBlue");
+        }
+    });
+```
+
+-   `on()` : `on()` method essentially act like addEventListener
+
+```js
+// on()
+$("h1").on("dblclick", function () {
+    $(this).toggleClass("turnBlue");
+});
+
+// grap mouseEnter using on()
+$("h1").on("mouseenter", function () {
+    $(this).toggleClass("turnBlue");
+});
+```
+
+## Event animation ([Effects](https://api.jquery.com/category/effects/))
+
+```js
+// event animation
+$("input")
+    .eq(1)
+    .on("click", function () {
+        // grap every thing in the `.container` class
+        // fadeOut(x), make selector disappear in x milleseconds
+        // $(".container").fadeOut(1000);
+        // slideUp()
+        $(".container").slideUp(1000);
+    });
 ```
 
 # Appendix

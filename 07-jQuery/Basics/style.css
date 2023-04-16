@@ -1,0 +1,14 @@
+.turnBlue {
+    color: white;
+    background: blue;
+}
+.turnRed {
+    color: white;
+    background: red;
+}
+.jumbotron {
+    padding: 2rem 1rem;
+    margin-bottom: 2rem;
+    background-color: #eaecf4;
+    border-radius: 0.3rem;
+}
