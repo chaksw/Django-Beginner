@@ -21,125 +21,134 @@
         <link href="css/sidebars.css" rel="stylesheet" />
         <!-- <link href="css/workspace.css" rel="stylesheet" /> -->
     </head>
-    <body>
+    <body data-bs-spy="scroll" data-bs-target="#TableofContents">
         <!-- .container-fluid set width:100 at all breakpoints -->
         <!-- Navbar -->
-        <header class="navbar navbar-expand-sm sticky-top bg-danger-subtle"></header>
-        <nav
-            class="navbar container-fluid navbar-expand-sm sticky-top bg-danger-subtle"
-            data-bs-theme="dark">
-            <a
-                href="/"
-                class="d-flex link-body-emphasis text-decoration-none mx-3">
-                <i class="bi bi-file-earmark-bar-graph fs-3"></i>
-                <span class="fs-3 ms-2">SCGA</span>
-            </a>
-            <div class="">
-                <!-- Button when collapse -->
-                <button
-                    class="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div
-                    class="collapse navbar-collapse mx-5"
-                    id="navbarSupportedContent">
-                    <!-- <ul class="navbar-nav me-auto mb-lg-0">
-                        <li class="nav-item me-1">
-                            <a
-                                class="nav-link"
-                                data-bs-toggle="offcanvas"
-                                href="#TreeView"
-                                role="button"
-                                aria-controls="TreeView"
-                                href="#"
-                                >TreeView</a
-                            >
-                        </li>
-                        <div class="vr"></div>
-                        <li class="nav-item ms-2">
-                            <button
-                                class="btn btn-outline-primary"
-                                type="button">
-                                Import Load
-                            </button>
-                        </li> 
-
-                    
-                    </ul>-->
-                </div>
-            </div>
-        </nav>
-
-        <div class="d-flex flex-row">
-            <!-- SideBar -->
-            <!-- flex-nowrap ? -->
-            <div
-                class="d-flex flex-column bg-body-tertiary p-3"
-                style="width: 110px">
-                <ul class="nav nav-pills">
-                    <li class="nav-item">
-                        <a
-                            href="#"
-                            class="nav-link link-body-emphasis"
-                            aria-current="page">
-                            HOME
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link link-body-emphasis">
-                            Create
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link active link-body-emphasis">
-                            Browse
-                        </a>
-                    </li>
-                </ul>
-                <hr />
-            </div>
-
-            <!-- Funtion Search -->
-            <div class="container-fluid mt-3 me-3">
-                <form class="d-flex justify-content-end" role="search">
-                    <input
-                        class="form-control me-2"
-                        type="search"
-                        placeholder="Search for function"
-                        aria-label="Search"
-                        style="width: 200px" />
-                    <button class="btn btn-primary" type="submit">
-                        Search
-                    </button>
-                </form>
-            </div>
-            <div
-                class="offcanvas offcanvas-start"
-                data-bs-backdrop="false"
-                tabindex="-1"
-                id="TreeView"
-                aria-labelledby="offcanvasScrollingLabel">
-                <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasExampleLabel">
-                        Load 1.1
-                    </h5>
+        <header class="navbar navbar-expand-lg bg-light gx-2 sticky-top">
+            <!-- flex-warp: 包裹元素,按照窗口大小调整排列，可多行 -->
+            <!-- flex-lg-nowwarp: 不包裹元素，永远为单行排列-->
+            <nav
+                class="container-xxl flex-wrap flex-lg-nowrap"
+                aria-label="Main navigation">
+                <!-- bd-navbar-toggle -->
+                <div class="flex">
                     <button
+                        class="navbar-toggler p-2"
                         type="button"
-                        class="btn-close"
-                        data-bs-dismiss="offcanvas"
-                        aria-label="Close"></button>
+                        data-bs-toggle="offcanvas"
+                        data-bs-target="#bdSideBar"
+                        aria-controls="bdSideBar"
+                        aria-label="Toggle treeView navigation">
+                        <i class="bi bi-list-ul"></i>
+                    </button>
                 </div>
-                <div class="offcanvas-body">
-                    <div>Here Display TreeView of load files</div>
-                    <!-- <div class="dropdown mt-3"></div> -->
+                <a
+                    href="/"
+                    class="d-flex link-body-emphasis text-decoration-none me-lg-2 p-0 me-0">
+                    <i class="bi bi-file-earmark-bar-graph fs-3"></i>
+                    <span class="fs-3 ms-2">SCGA</span>
+                </a>
+
+                <div class="flex">
+                    <button
+                        class="navbar-toggler d-flex d-lg-none order-3 p-2"
+                        type="button"
+                        data-bs-toggle="offcanvas"
+                        data-bs-target="#bdNavBar"
+                        aria-controls="bdNavBar"
+                        aria-label="Toggle navigation">
+                        <i class="bi bi-three-dots"></i>
+                    </button>
                 </div>
-            </div>
+
+                <!-- 定义一个offcanvas,当窗口缩放触发了collapse时，点击collapse button后内容会显示在右侧(offcanvas-end)-->
+                <!-- data-bs-scroll 设置offcanvas是否可滚动 -->
+                <!-- flex-grow-1 获取 flex盒子的剩余空间 -->
+                <div
+                    class="offcanvas-lg offcanvas-end flex-grow-1"
+                    tabindex="-1"
+                    id="bdNavBar"
+                    aria-labelledby="bdNavBarOffcanvasLabel"
+                    data-bs-scroll="true">
+                    <!-- Header of offcanvas -->
+                    <div class="offcanvas-header px-4 pb-0">
+                        <h5
+                            class="offcanvas-title text-black-50 fs-4"
+                            id="bdNavBarOffcanvasLabel">
+                            SCGA
+                        </h5>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="offcanvas"
+                            aria-label="Close"
+                            data-bs-target="#bdNavBar"></button>
+                    </div>
+                    <!-- body (content) of offcanvas -->
+                    <div class="offcanvas-body p-4 pt-0 p-lg-0">
+                        <!-- d-lg-none: do not display in large screen -->
+                        <hr class="d-lg-none text-black-50" />
+                        <ul class="navbar-nav flex-row flex-nowrap mx-4">
+                            <li class="nav-item col-6 col-lg-auto mx-2">
+                                <button
+                                    class="btn btn-outline-primary"
+                                    type="button">
+                                    Import Load
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="container-xxl mt-1 gx-2 bd-layout">
+            <aside class="bd-sidebar">
+                <div
+                    class="offcanvas-lg offcanvas-start"
+                    tabindex="-1"
+                    id="bdSideBar"
+                    aria-labelledby="bdSideBarOffcanvasLabel">
+                    <div class="offcanvas-header border-bottom">
+                        <h5
+                            class="offcanvas-title text-black-50 fs-4"
+                            id="bdSideBarOffcanvasLabel">
+                            TreeView
+                        </h5>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="offcanvas"
+                            aria-label="Close"
+                            data-bs-target="#bdSideBar"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <nav
+                            class="bd-links w-100"
+                            id="bd-docs-nav"
+                            aria-label="Docs navigation">
+                            <ul class="bd-links-group py-2"></ul>
+                        </nav>
+                    </div>
+                </div>
+            </aside>
+            <main class="bd-main order-1">
+                <div class="d-flex flex-row">
+                    <!-- Funtion Search -->
+                    <div class="container-fluid mt-3 me-3">
+                        <form class="d-flex justify-content-end" role="search">
+                            <input
+                                class="form-control me-2"
+                                type="search"
+                                placeholder="Search for function"
+                                aria-label="Search"
+                                style="width: 200px" />
+                            <button class="btn btn-primary" type="submit">
+                                Search
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </main>
         </div>
 
         <script
