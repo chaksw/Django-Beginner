@@ -1,0 +1,12 @@
+/* only valid when screen size larger than 768px */
+@media (min-width: 768px) {
+    .flex-input {
+        width: 50%;
+    }
+}
+
+body::before {
+    display: block;
+    content: '';
+    height: 56px;
+}
