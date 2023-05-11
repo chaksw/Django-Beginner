@@ -12,13 +12,39 @@
 }
 
 .bd-sidebar {
-    /* position: sticky; */
+    position: sticky;
     top: 5rem;
     display: block !important;
     height: calc(100vh - 6rem);
     padding-left: 0.25rem;
     margin-left: -0.25rem;
     overflow-y: auto;
-    /* width: 20%;
-    right: 80%; */
+    width: 30%;
+    right: 80%;
+    max-width: 200px;
+    min-width: 150px;
 }
+
+.top-nav-item {
+    text-align: right;
+}
+
+body::before {
+    display: block;
+    content: '';
+    height: 56px;
+}
+
+.btn-search {
+    max-width: 400px;
+    min-width: 300px;
+}
+
+.tb-fs{
+    font-size: 13px;
+}
+
+.th-fs{
+    font-size: 14px;
+}
+

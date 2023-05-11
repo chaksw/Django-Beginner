@@ -21,134 +21,506 @@
         <link href="css/sidebars.css" rel="stylesheet" />
         <!-- <link href="css/workspace.css" rel="stylesheet" /> -->
     </head>
-    <body data-bs-spy="scroll" data-bs-target="#TableofContents">
+    <body>
         <!-- .container-fluid set width:100 at all breakpoints -->
         <!-- Navbar -->
-        <header class="navbar navbar-expand-lg bg-light gx-2 sticky-top">
-            <!-- flex-warp: 包裹元素,按照窗口大小调整排列，可多行 -->
-            <!-- flex-lg-nowwarp: 不包裹元素，永远为单行排列-->
-            <nav
-                class="container-xxl flex-wrap flex-lg-nowrap"
-                aria-label="Main navigation">
-                <!-- bd-navbar-toggle -->
-                <div class="flex">
+        <!-- flex-warp: 包裹元素,按照窗口大小调整排列，可多行 -->
+        <!-- flex-lg-nowwarp: 不包裹元素，永远为单行排列-->
+        <nav class="navbar navbar-expand-lg bg-light fixed-top">
+            <!-- bd-navbar-toggle -->
+            <div class="container-fluid">
+                <div class="ps-2">
                     <button
-                        class="navbar-toggler p-2"
+                        class="navbar-toggler"
                         type="button"
                         data-bs-toggle="offcanvas"
                         data-bs-target="#bdSideBar"
-                        aria-controls="bdSideBar"
-                        aria-label="Toggle treeView navigation">
+                        aria-controls="bdSideBar">
                         <i class="bi bi-list-ul"></i>
                     </button>
                 </div>
-                <a
-                    href="/"
-                    class="d-flex link-body-emphasis text-decoration-none me-lg-2 p-0 me-0">
-                    <i class="bi bi-file-earmark-bar-graph fs-3"></i>
-                    <span class="fs-3 ms-2">SCGA</span>
-                </a>
-
-                <div class="flex">
+                <div class="">
+                    <a href="/" class="link-body-emphasis text-decoration-none">
+                        <i class="bi bi-file-earmark-bar-graph fs-3"></i>
+                        <span class="fs-3">SCGA</span>
+                    </a>
+                </div>
+                <div class="pe-2">
                     <button
-                        class="navbar-toggler d-flex d-lg-none order-3 p-2"
+                        class="navbar-toggler"
                         type="button"
-                        data-bs-toggle="offcanvas"
-                        data-bs-target="#bdNavBar"
-                        aria-controls="bdNavBar"
-                        aria-label="Toggle navigation">
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navmenu">
                         <i class="bi bi-three-dots"></i>
                     </button>
                 </div>
-
-                <!-- 定义一个offcanvas,当窗口缩放触发了collapse时，点击collapse button后内容会显示在右侧(offcanvas-end)-->
-                <!-- data-bs-scroll 设置offcanvas是否可滚动 -->
-                <!-- flex-grow-1 获取 flex盒子的剩余空间 -->
-                <div
-                    class="offcanvas-lg offcanvas-end flex-grow-1"
-                    tabindex="-1"
-                    id="bdNavBar"
-                    aria-labelledby="bdNavBarOffcanvasLabel"
-                    data-bs-scroll="true">
-                    <!-- Header of offcanvas -->
-                    <div class="offcanvas-header px-4 pb-0">
-                        <h5
-                            class="offcanvas-title text-black-50 fs-4"
-                            id="bdNavBarOffcanvasLabel">
-                            SCGA
-                        </h5>
-                        <button
-                            type="button"
-                            class="btn-close"
-                            data-bs-dismiss="offcanvas"
-                            aria-label="Close"
-                            data-bs-target="#bdNavBar"></button>
-                    </div>
-                    <!-- body (content) of offcanvas -->
-                    <div class="offcanvas-body p-4 pt-0 p-lg-0">
-                        <!-- d-lg-none: do not display in large screen -->
-                        <hr class="d-lg-none text-black-50" />
-                        <ul class="navbar-nav flex-row flex-nowrap mx-4">
-                            <li class="nav-item col-6 col-lg-auto mx-2">
-                                <button
-                                    class="btn btn-outline-primary"
-                                    type="button">
-                                    Import Load
-                                </button>
-                            </li>
-                        </ul>
-                    </div>
+                <div class="collapse navbar-collapse me-3" id="navmenu">
+                    <!-- ms: margin start(left)-->
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item top-nav-item ms-md-2 pt-3 pt-lg-0">
+                            <a class="btn btn-outline-primary" type="button">
+                                Import Load
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-            </nav>
-        </header>
-        <div class="container-xxl mt-1 gx-2 bd-layout">
-            <aside class="bd-sidebar">
+            </div>
+        </nav>
+        <div class="d-flex">
+            <div class="bd-sidebar">
+                <!-- aside: aside元素用来定义当前页面或者文章的附属信息部分 -->
+                <aside>
+                    <!-- 定义一个offcanvas,当窗口缩放触发了collapse时，点击collapse button后内容会显示在右侧(offcanvas-end)-->
+                    <!-- data-bs-scroll 设置offcanvas是否可滚动 -->
+                    <!-- flex-grow-1 获取 flex盒子的剩余空间 -->
+                    <!-- d-lg-none: do not display in large screen -->
+                    <div
+                        class="offcanvas-lg offcanvas-start"
+                        tabindex="-1"
+                        id="bdSideBar"
+                        aria-labelledby="bdSideBarOffcanvasLabel">
+                        <div class="offcanvas-header border-bottom">
+                            <h5
+                                class="offcanvas-title text-black-50 fs-4"
+                                id="bdSideBarOffcanvasLabel">
+                                TreeView
+                            </h5>
+                            <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="offcanvas"
+                                aria-label="Close"
+                                data-bs-target="#bdSideBar"></button>
+                        </div>
+                        <div class="offcanvas-body">
+                            <nav
+                                class=""
+                                id="bd-docs-nav"
+                                aria-label="Docs navigation">
+                                <ul class="py-2">
+                                    <li class="nav-item">
+                                        <div class="nav-link">Link 1</div>
+                                    </li>
+                                    <li class="nav-item">
+                                        <div class="nav-link">Link 2</div>
+                                    </li>
+                                    <li class="nav-item">
+                                        <div class="nav-link">Link 3</div>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+            <div class="container-fluid">
                 <div
-                    class="offcanvas-lg offcanvas-start"
-                    tabindex="-1"
-                    id="bdSideBar"
-                    aria-labelledby="bdSideBarOffcanvasLabel">
-                    <div class="offcanvas-header border-bottom">
-                        <h5
-                            class="offcanvas-title text-black-50 fs-4"
-                            id="bdSideBarOffcanvasLabel">
-                            TreeView
-                        </h5>
-                        <button
-                            type="button"
-                            class="btn-close"
-                            data-bs-dismiss="offcanvas"
-                            aria-label="Close"
-                            data-bs-target="#bdSideBar"></button>
-                    </div>
-                    <div class="offcanvas-body">
-                        <nav
-                            class="bd-links w-100"
-                            id="bd-docs-nav"
-                            aria-label="Docs navigation">
-                            <ul class="bd-links-group py-2"></ul>
-                        </nav>
-                    </div>
-                </div>
-            </aside>
-            <main class="bd-main order-1">
-                <div class="d-flex flex-row">
-                    <!-- Funtion Search -->
-                    <div class="container-fluid mt-3 me-3">
-                        <form class="d-flex justify-content-end" role="search">
+                    class="row row-cols-md-4 align-items-center justify-content-between">
+                    <div class="col mt-3 align-self-end order-2">
+                        <div class="input-group btn-search" role="search">
                             <input
-                                class="form-control me-2"
+                                class="form-control flex-input"
                                 type="search"
                                 placeholder="Search for function"
-                                aria-label="Search"
-                                style="width: 200px" />
+                                aria-label="Search" />
                             <button class="btn btn-primary" type="submit">
                                 Search
                             </button>
-                        </form>
+                        </div>
                     </div>
+                    <div class="col mt-3">
+                        <button class="btn btn-outline-dark" type="button">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="20"
+                                height="20"
+                                fill="currentColor"
+                                class="bi bi-filter-left"
+                                viewBox="0 0 16 16">
+                                <path
+                                    d="M2 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="col"></div>
+                    <!-- Funtion Search -->
                 </div>
-            </main>
+                <hr />
+                <div class="p-3 table-responsive ">
+                    <table
+                        class="table table-hover table-striped table-bordered container-fluid">
+                        <caption class="caption-top">
+                            Search reuslt..
+                        </caption>
+                        <thead
+                            class="table-light text-center align-items-start th-fs">
+                            <tr>
+                                <th scope="col" rowspan="2">#</th>
+                                <th scope="col" colspan="2">
+                                    EDS_GGF_GVII_01_006
+                                </th>
+                                <th scope="col" colspan="7">
+                                    Level # Coverage
+                                </th>
+                                <th scope="col" rowspan="1" colspan="1">
+                                    Issue
+                                </th>
+                                <th scope="col" rowspan="1" colspan="1">
+                                    Applicable
+                                </th>
+                            </tr>
+                            <tr>
+                                <th scope="col">Note#</th>
+                                <th scope="col">Module</th>
+                                <th scope="col">Function</th>
+                                <th scope="col">Line</th>
+                                <th scope="col">Requirement Tag</th>
+                                <th scope="col">Analyst</th>
+                                <th scope="col"><a href="">Class</a></th>
+                                <th scope="col">
+                                    <a href="">Analysis Summary</a>
+                                </th>
+                                <th scope="col">
+                                    <a href="">Corrective Action Summary</a>
+                                </th>
+                                <th scope="col">Y/T</th>
+                                <th scope="col">PAR/CR #</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-group-divider tb-fs">
+                            <tr>
+                                <th scope="row">8</th>
+                                <td>GgfTcasS1</td>
+                                <td>GgfTcasDspG.cpp</td>
+                                <td>GgfTcasDspDraw</td>
+                                <td>
+                                    <p>
+                                        962 to 964 977 to 979 992 to 994 995 to
+                                        1001 1001 to1009 1012 to 1028
+                                    </p>
+                                </td>
+                                <td>DDD A TCAS DRAW 05</td>
+                                <td>Arun Behera</td>
+                                <td>
+                                    <a href="">Test Environment Limitations</a>
+                                </td>
+                                <td>
+                                    <p>
+                                        1. The specific test environment
+                                        limitation: TCAS window processes the
+                                        data Front to Back and HSI processes the
+                                        data Back to front. Intruder rendering
+                                        order is controlled by TCAS or HSI
+                                        process so it is not possible to control
+                                        or change through test hence analysis
+                                        has been used to verify the requirement.
+                                        2. The conditions that would cause the
+                                        code to be executed: if(Back_To_Front)
+                                        is set to true 3. The results of the
+                                        code being executed:
+                                        GgfTcasDspDrawSymbol
+                                        (gGgfTcasData.Intruder[i]), which draws
+                                        TCAS symbols from back to front ordering
+                                        from 31-0.
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        Test By Inspection done in
+                                        G7G_D03A_0004.tbi; Available at
+                                        GVII\TEST\RFS_RESULTS under the WORKSET
+                                        "EDS_GGF:_WORK_MAIN".
+                                    </p>
+                                </td>
+                                <td></td>
+                                <td>N/A</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>GgfTcasS1</td>
+                                <td>GgfTcasDspG.cpp</td>
+                                <td>GgfTcasDspDraw</td>
+                                <td>
+                                    <p>
+                                        962 to 964 977 to 979 992 to 994 995 to
+                                        1001 1001 to1009 1012 to 1028
+                                    </p>
+                                </td>
+                                <td>DDD A TCAS DRAW 05</td>
+                                <td>Arun Behera</td>
+                                <td>
+                                    <a href="">Test Environment Limitations</a>
+                                </td>
+                                <td>
+                                    <p>
+                                        1. The specific test environment
+                                        limitation: TCAS window processes the
+                                        data Front to Back and HSI processes the
+                                        data Back to front. Intruder rendering
+                                        order is controlled by TCAS or HSI
+                                        process so it is not possible to control
+                                        or change through test hence analysis
+                                        has been used to verify the requirement.
+                                        2. The conditions that would cause the
+                                        code to be executed: if(Back_To_Front)
+                                        is set to true 3. The results of the
+                                        code being executed:
+                                        GgfTcasDspDrawSymbol
+                                        (gGgfTcasData.Intruder[i]), which draws
+                                        TCAS symbols from back to front ordering
+                                        from 31-0.
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        Test By Inspection done in
+                                        G7G_D03A_0004.tbi; Available at
+                                        GVII\TEST\RFS_RESULTS under the WORKSET
+                                        "EDS_GGF:_WORK_MAIN".
+                                    </p>
+                                </td>
+                                <td></td>
+                                <td>N/A</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>GgfTcasS1</td>
+                                <td>GgfTcasDspG.cpp</td>
+                                <td>GgfTcasDspDraw</td>
+                                <td>
+                                    <p>
+                                        962 to 964 977 to 979 992 to 994 995 to
+                                        1001 1001 to1009 1012 to 1028
+                                    </p>
+                                </td>
+                                <td>DDD A TCAS DRAW 05</td>
+                                <td>Arun Behera</td>
+                                <td>
+                                    <a href="">Test Environment Limitations</a>
+                                </td>
+                                <td>
+                                    <p>
+                                        1. The specific test environment
+                                        limitation: TCAS window processes the
+                                        data Front to Back and HSI processes the
+                                        data Back to front. Intruder rendering
+                                        order is controlled by TCAS or HSI
+                                        process so it is not possible to control
+                                        or change through test hence analysis
+                                        has been used to verify the requirement.
+                                        2. The conditions that would cause the
+                                        code to be executed: if(Back_To_Front)
+                                        is set to true 3. The results of the
+                                        code being executed:
+                                        GgfTcasDspDrawSymbol
+                                        (gGgfTcasData.Intruder[i]), which draws
+                                        TCAS symbols from back to front ordering
+                                        from 31-0.
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        Test By Inspection done in
+                                        G7G_D03A_0004.tbi; Available at
+                                        GVII\TEST\RFS_RESULTS under the WORKSET
+                                        "EDS_GGF:_WORK_MAIN".
+                                    </p>
+                                </td>
+                                <td></td>
+                                <td>N/A</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">4</th>
+                                <td>GgfTcasS1</td>
+                                <td>GgfTcasDspG.cpp</td>
+                                <td>GgfTcasDspDraw</td>
+                                <td>
+                                    <p>
+                                        962 to 964 977 to 979 992 to 994 995 to
+                                        1001 1001 to1009 1012 to 1028
+                                    </p>
+                                </td>
+                                <td>DDD A TCAS DRAW 05</td>
+                                <td>Arun Behera</td>
+                                <td>
+                                    <a href="">Test Environment Limitations</a>
+                                </td>
+                                <td>
+                                    <p>
+                                        1. The specific test environment
+                                        limitation: TCAS window processes the
+                                        data Front to Back and HSI processes the
+                                        data Back to front. Intruder rendering
+                                        order is controlled by TCAS or HSI
+                                        process so it is not possible to control
+                                        or change through test hence analysis
+                                        has been used to verify the requirement.
+                                        2. The conditions that would cause the
+                                        code to be executed: if(Back_To_Front)
+                                        is set to true 3. The results of the
+                                        code being executed:
+                                        GgfTcasDspDrawSymbol
+                                        (gGgfTcasData.Intruder[i]), which draws
+                                        TCAS symbols from back to front ordering
+                                        from 31-0.
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        Test By Inspection done in
+                                        G7G_D03A_0004.tbi; Available at
+                                        GVII\TEST\RFS_RESULTS under the WORKSET
+                                        "EDS_GGF:_WORK_MAIN".
+                                    </p>
+                                </td>
+                                <td></td>
+                                <td>N/A</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">5</th>
+                                <td>GgfTcasS1</td>
+                                <td>GgfTcasDspG.cpp</td>
+                                <td>GgfTcasDspDraw</td>
+                                <td>
+                                    <p>
+                                        962 to 964 977 to 979 992 to 994 995 to
+                                        1001 1001 to1009 1012 to 1028
+                                    </p>
+                                </td>
+                                <td>DDD A TCAS DRAW 05</td>
+                                <td>Arun Behera</td>
+                                <td>
+                                    <a href="">Test Environment Limitations</a>
+                                </td>
+                                <td>
+                                    <p>
+                                        1. The specific test environment
+                                        limitation: TCAS window processes the
+                                        data Front to Back and HSI processes the
+                                        data Back to front. Intruder rendering
+                                        order is controlled by TCAS or HSI
+                                        process so it is not possible to control
+                                        or change through test hence analysis
+                                        has been used to verify the requirement.
+                                        2. The conditions that would cause the
+                                        code to be executed: if(Back_To_Front)
+                                        is set to true 3. The results of the
+                                        code being executed:
+                                        GgfTcasDspDrawSymbol
+                                        (gGgfTcasData.Intruder[i]), which draws
+                                        TCAS symbols from back to front ordering
+                                        from 31-0.
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        Test By Inspection done in
+                                        G7G_D03A_0004.tbi; Available at
+                                        GVII\TEST\RFS_RESULTS under the WORKSET
+                                        "EDS_GGF:_WORK_MAIN".
+                                    </p>
+                                </td>
+                                <td></td>
+                                <td>N/A</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">6</th>
+                                <td>GgfTcasS1</td>
+                                <td>GgfTcasDspG.cpp</td>
+                                <td>GgfTcasDspDraw</td>
+                                <td>
+                                    <p>
+                                        962 to 964 977 to 979 992 to 994 995 to
+                                        1001 1001 to1009 1012 to 1028
+                                    </p>
+                                </td>
+                                <td>DDD A TCAS DRAW 05</td>
+                                <td>Arun Behera</td>
+                                <td>
+                                    <a href="">Test Environment Limitations</a>
+                                </td>
+                                <td>
+                                    <p>
+                                        1. The specific test environment
+                                        limitation: TCAS window processes the
+                                        data Front to Back and HSI processes the
+                                        data Back to front. Intruder rendering
+                                        order is controlled by TCAS or HSI
+                                        process so it is not possible to control
+                                        or change through test hence analysis
+                                        has been used to verify the requirement.
+                                        2. The conditions that would cause the
+                                        code to be executed: if(Back_To_Front)
+                                        is set to true 3. The results of the
+                                        code being executed:
+                                        GgfTcasDspDrawSymbol
+                                        (gGgfTcasData.Intruder[i]), which draws
+                                        TCAS symbols from back to front ordering
+                                        from 31-0.
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        Test By Inspection done in
+                                        G7G_D03A_0004.tbi; Available at
+                                        GVII\TEST\RFS_RESULTS under the WORKSET
+                                        "EDS_GGF:_WORK_MAIN".
+                                    </p>
+                                </td>
+                                <td></td>
+                                <td>N/A</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">7</th>
+                                <td>GgfTcasS1</td>
+                                <td>GgfTcasDspG.cpp</td>
+                                <td>GgfTcasDspDraw</td>
+                                <td>
+                                    <p>
+                                        962 to 964 977 to 979 992 to 994 995 to
+                                        1001 1001 to1009 1012 to 1028
+                                    </p>
+                                </td>
+                                <td>DDD A TCAS DRAW 05</td>
+                                <td>Arun Behera</td>
+                                <td>
+                                    <a href="">Test Environment Limitations</a>
+                                </td>
+                                <td>
+                                    <p>
+                                        1. The specific test environment
+                                        limitation: TCAS window processes the
+                                        data Front to Back and HSI processes the
+                                        data Back to front. Intruder rendering
+                                        order is controlled by TCAS or HSI
+                                        process so it is not possible to control
+                                        or change through test hence analysis
+                                        has been used to verify the requirement.
+                                        2. The conditions that would cause the
+                                        code to be executed: if(Back_To_Front)
+                                        is set to true 3. The results of the
+                                        code being executed:
+                                        GgfTcasDspDrawSymbol
+                                        (gGgfTcasData.Intruder[i]), which draws
+                                        TCAS symbols from back to front ordering
+                                        from 31-0.
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        Test By Inspection done in
+                                        G7G_D03A_0004.tbi; Available at
+                                        GVII\TEST\RFS_RESULTS under the WORKSET
+                                        "EDS_GGF:_WORK_MAIN".
+                                    </p>
+                                </td>
+                                <td></td>
+                                <td>N/A</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
 
         <script
