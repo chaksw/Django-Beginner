@@ -1,0 +1,81 @@
+/* @media screen and (max-width: 2000px) {
+    .tb-fs {
+        font-size: 16px;
+    }
+    .th-fs {
+        font-size: 16px;
+    }
+} */
+/* Remove default bullets */
+ul {
+    list-style-type: none;
+}
+
+*,
+::before,
+::after {
+    box-sizing: border-box;
+}
+
+.bd-layout {
+    display: grid;
+    /* grid-template-areas: 'sidebar main'; */
+    grid-template-columns: 1fr 5fr;
+    gap: 0.5rem;
+}
+
+.bd-sidebar {
+    position: sticky;
+    top: 5rem;
+    display: block !important;
+    height: calc(100vh - 6rem);
+    padding-left: 0.25rem;
+    margin-left: -0.25rem;
+    overflow-y: auto;
+    /* width: 30%; */
+    right: 80%;
+    max-width: 250px;
+    /* min-width: 200px; */
+}
+
+.top-nav-item {
+    text-align: right;
+}
+
+body::before {
+    display: block;
+    content: '';
+    height: 56px;
+}
+
+.btn-search {
+    max-width: 400px;
+    min-width: 300px;
+}
+
+.tb-fs {
+    font-size: 13px;
+}
+
+.th-fs {
+    font-size: 14px;
+}
+
+/* Style the caret/arrow */
+.caret {
+    cursor: pointer;
+    user-select: none; /* Prevent text selection */
+}
+
+/* Create the caret/arrow with a unicode, and style it */
+.caret::before {
+    content: '\25B6';
+    color: black;
+    display: inline-block;
+    margin-right: 3px;
+}
+
+/* Hide the nested list */
+/* .nested {
+    display: none;
+} */
