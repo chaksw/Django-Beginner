@@ -25,17 +25,16 @@ ul {
 }
 
 .bd-sidebar {
-    position: sticky;
+    /* position: sticky;
     top: 5rem;
     display: block !important;
     height: calc(100vh - 6rem);
     padding-left: 0.25rem;
     margin-left: -0.25rem;
-    overflow-y: auto;
+    overflow-y: auto; */
     /* width: 30%; */
-    right: 80%;
+    /* right: 80%; */
     max-width: 250px;
-    /* min-width: 200px; */
 }
 
 .top-nav-item {

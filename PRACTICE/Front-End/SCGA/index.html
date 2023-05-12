@@ -66,9 +66,9 @@
             </div>
         </nav>
         <div class="d-flex row">
-            <div class="bd-sidebar col-2 d-none d-lg-block">
+            <div class="bd-sidebar col-lg-2 d-md-flex d-none d-lg-block">
                 <!-- aside: aside元素用来定义当前页面或者文章的附属信息部分 -->
-                <aside class="z-1000">
+                <aside>
                     <!-- 定义一个offcanvas,当窗口缩放触发了collapse时，点击collapse button后内容会显示在右侧(offcanvas-end)-->
                     <!-- data-bs-scroll 设置offcanvas是否可滚动 -->
                     <!-- flex-grow-1 获取 flex盒子的剩余空间 -->
@@ -98,7 +98,7 @@
                                 class=""
                                 id="bd-docs-nav"
                                 aria-label="Docs navigation">
-                                <ul class="py-2 link-primary fs-5">
+                                <ul class="py-2 link-primary">
                                     <li><span class="caret">Floder 1</span></li>
                                     <ul class="nested">
                                         <li>
@@ -115,17 +115,6 @@
                                             <ul class="nested">
                                                 <li>File 3</li>
                                                 <li>File 4</li>
-                                                <li>
-                                                    <span class="caret"
-                                                        >Folder 3</span
-                                                    >
-                                                    <ul class="nested">
-                                                        <li>File 5</li>
-                                                        <li>File 6</li>
-                                                        <li>File 7</li>
-                                                        <li>File 8</li>
-                                                    </ul>
-                                                </li>
                                             </ul>
                                         </li>
                                     </ul>
@@ -135,7 +124,7 @@
                     </div>
                 </aside>
             </div>
-            <div class="container-fluid col-10">
+            <div class="container-fluid col-lg-10 px-5 px-lg-1">
                 <div
                     class="row row-cols-md-4 align-items-center justify-content-between">
                     <div class="col mt-3">
@@ -155,7 +144,7 @@
                     <div class="col"></div>
                     <!-- Funtion Search -->
 
-                    <div class="col mt-3 me-3">
+                    <div class="col mt-3 me-5 me-lg-0">
                         <div class="input-group btn-search" role="search">
                             <input
                                 class="form-control flex-input"
@@ -168,15 +157,15 @@
                         </div>
                     </div>
                 </div>
-                <hr class="z-n1" />
-                <div class="p-2 table-responsive">
+                <hr />
+                <div class="py-2 table-responsive-lg">
                     <table
-                        class="table table-hover table-striped table-bordered">
+                        class="table table-light table-hover table-striped table-bordered">
                         <caption class="caption-top">
-                            Search reuslt..
+                            Level C Test Exception
                         </caption>
                         <thead
-                            class="table-light text-center align-items-start th-fs">
+                            class="table-success text-center align-items-start th-fs">
                             <tr>
                                 <th scope="col" rowspan="2">#</th>
                                 <th scope="col" colspan="2">
@@ -210,7 +199,8 @@
                                 <th scope="col">PAR/CR #</th>
                             </tr>
                         </thead>
-                        <tbody class="table-group-divider tb-fs">
+                        <tbody
+                            class="table-group-divider tb-fs text-center align-middle">
                             <tr>
                                 <th scope="row">8</th>
                                 <td>GgfTcasS1</td>
