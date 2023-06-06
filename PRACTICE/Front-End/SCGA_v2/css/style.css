@@ -1,0 +1,12 @@
+.bd-search {
+    position: absolute;
+    top: 0.875rem;
+    left: 50%;
+    width: 300px;
+    margin-left: -100px;
+}
+body::before {
+    display: block;
+    content: '';
+    height: 56px;
+}
