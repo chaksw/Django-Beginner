@@ -10,3 +10,6 @@ body::before {
     content: '';
     height: 56px;
 }
+li.sidebar-fs {
+    font-size: 12px;
+}
