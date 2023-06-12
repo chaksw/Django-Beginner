@@ -1015,18 +1015,25 @@ $('input')
 
 ## Data Structure
 
+-   Project 1(F6)
 -   Cert 1
-    -   Load 1
-        -   Process 1
-            -   Module 1 (file)
-                -   Function 1
-                -   Function 2
+    -   Function 1(GGF)
+        -   Load 1 (Configuration ID <- Dilivery Letter)
+            -   Process 1
+                -   Module 1 (file.cpp)
+                    -   Methode 1
+                        -   Code Line Number 1
+                        -   Code Line Number 2
+                        -   ...
+                    -   Methode 2
+                    -   ...
+                -   Module 2
                 -   ...
-            -   Module 2
+            -   Process 2
             -   ...
-        -   Process 2
+        -   Load 2
         -   ...
-    -   Load 2
+    -   Function 2(MWF)
     -   ...
 -   Cert 2
 -   ...
