@@ -31,13 +31,13 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'scData.apps.ScdataConfig',
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'scData.apps.ScdataConfig',  # scData app
+    'django.contrib.admin',  # administartor site
+    'django.contrib.auth',  # authentication system
+    'django.contrib.contenttypes',  # content type system
+    'django.contrib.sessions',  # session framework
+    'django.contrib.messages',  # message framework
+    'django.contrib.staticfiles',  # static file management
 ]
 
 MIDDLEWARE = [

@@ -1,71 +1,73 @@
 **Table of Contents** _generated with [DocToc](https://github.com/thlorenz/doctoc)_
 
--   [Django Project](#django-project)
-    -   [Basic](#basic)
-        -   [Start project](#start-project)
-        -   [Views Routing URLs](#views-routing-urls)
-    -   [Template and Django template language](#template-and-django-template-language)
-    -   [Migration](#migration)
-        -   [Base commands](#base-commands)
-        -   [Steps for migrations](#steps-for-migrations)
-    -   [Data Interaction (CRUD)](#data-interaction-crud)
-        -   [ADD/INSERT data](#addinsert-data)
-            -   [Relative Function](#relative-function)
-        -   [READ data](#read-data)
-            -   [Relative Function](#relative-function-1)
-        -   [Updating Models, Entries (add | delete)](#updating-models-entries-add--delete)
-    -   [Connecting Tempaltes and Database Models](#connecting-tempaltes-and-database-models)
--   [Django Admin](#django-admin)
-    -   [Model admin object class](#model-admin-object-class)
-    -   [Resigter model in to admin](#resigter-model-in-to-admin)
-    -   [ModelAdmin Class example](#modeladmin-class-example)
--   [Django Form](#django-form)
-    -   [Reivew - Form](#reivew---form)
-    -   [HTTP (Hyptertext Transfer Protocol)](#http-hyptertext-transfer-protocol)
-    -   [GET, POST, and CSRD review](#get-post-and-csrd-review)
-    -   [Django Form Class Bascis](#django-form-class-bascis)
-    -   [Form widget and styling - widget attributes](#form-widget-and-styling---widget-attributes)
-    -   [ModelForm](#modelform)
-    -   [ModelForms Customizaton](#modelforms-customizaton)
--   [Class-Based Views(CBVs)](#class-based-viewscbvs)
-    -   [TemplateView](#templateview)
-    -   [FormView](#formview)
-        -   [`cleaned_data()`](#cleaned_data)
-    -   [Model based CBVs (Class Based Views)](#model-based-cbvs-class-based-views)
-        -   [CreateView](#createview)
-            -   [**Important Note**](#important-note)
-        -   [ListView](#listview)
-        -   [DetailView](#detailview)
-        -   [UpdateView](#updateview)
-        -   [DeleteView](#deleteview)
-        -   [HOME Page](#home-page)
--   [jQuery](#jquery)
-    -   [Basics](#basics)
-        -   [Styling element with object](#styling-element-with-object)
-        -   [Styling element in list](#styling-element-in-list)
-        -   [Grap content using jQuery](#grap-content-using-jquery)
-        -   [Change attribute](#change-attribute)
-        -   [Add `css` class into `html`](#add-css-class-into-html)
-        -   [Events](#events)
-    -   [Event animation (Effects)](#event-animation-effects)
--   [Appendix](#appendix)
-    -   [Extensions](#extensions)
-    -   [Git plugs](#git-plugs)
+-   [1. Django Learnning](#1-django-learnning)
+    -   [1.1. Basic](#11-basic)
+        -   [1.1.1. Start project](#111-start-project)
+        -   [1.1.2. Views Routing URLs](#112-views-routing-urls)
+    -   [1.2. Template and Django template language](#12-template-and-django-template-language)
+    -   [1.3. Migration](#13-migration)
+        -   [1.3.1. Base commands](#131-base-commands)
+        -   [1.3.2. Steps for migrations](#132-steps-for-migrations)
+    -   [1.4. Data Interaction (CRUD)](#14-data-interaction-crud)
+        -   [1.4.1. ADD/INSERT data](#141-addinsert-data)
+            -   [1.4.1.1. Relative Function](#1411-relative-function)
+        -   [1.4.2. READ data](#142-read-data)
+            -   [1.4.2.1. Relative Function](#1421-relative-function)
+        -   [1.4.3. Updating Models, Entries (add | delete)](#143-updating-models-entries-add--delete)
+    -   [1.5. Connecting Tempaltes and Database Models](#15-connecting-tempaltes-and-database-models)
+-   [2. Django Admin](#2-django-admin)
+    -   [2.1. Model admin object class](#21-model-admin-object-class)
+    -   [2.2. Resigter model in to admin](#22-resigter-model-in-to-admin)
+    -   [2.3. ModelAdmin Class example](#23-modeladmin-class-example)
+-   [3. Django Form](#3-django-form)
+    -   [3.1. Reivew - Form](#31-reivew---form)
+    -   [3.2. HTTP (Hyptertext Transfer Protocol)](#32-http-hyptertext-transfer-protocol)
+    -   [3.3. GET, POST, and CSRD review](#33-get-post-and-csrd-review)
+    -   [3.4. Django Form Class Bascis](#34-django-form-class-bascis)
+    -   [3.5. Form widget and styling - widget attributes](#35-form-widget-and-styling---widget-attributes)
+    -   [3.6. ModelForm](#36-modelform)
+    -   [3.7. ModelForms Customizaton](#37-modelforms-customizaton)
+-   [4. Class-Based Views(CBVs)](#4-class-based-viewscbvs)
+    -   [4.1. TemplateView](#41-templateview)
+    -   [4.2. FormView](#42-formview)
+        -   [4.2.1. `cleaned_data()`](#421-cleaned_data)
+    -   [4.3. Model based CBVs (Class Based Views)](#43-model-based-cbvs-class-based-views)
+        -   [4.3.1. CreateView](#431-createview)
+            -   [4.3.1.1. **Important Note**](#4311-important-note)
+        -   [4.3.2. ListView](#432-listview)
+        -   [4.3.3. DetailView](#433-detailview)
+        -   [4.3.4. UpdateView](#434-updateview)
+        -   [4.3.5. DeleteView](#435-deleteview)
+        -   [4.3.6. HOME Page](#436-home-page)
+-   [5. jQuery](#5-jquery)
+    -   [5.1. Basics](#51-basics)
+        -   [5.1.1. Styling element with object](#511-styling-element-with-object)
+        -   [5.1.2. Styling element in list](#512-styling-element-in-list)
+        -   [5.1.3. Grap content using jQuery](#513-grap-content-using-jquery)
+        -   [5.1.4. Change attribute](#514-change-attribute)
+        -   [5.1.5. Add `css` class into `html`](#515-add-css-class-into-html)
+        -   [5.1.6. Events](#516-events)
+    -   [5.2. Event animation (Effects)](#52-event-animation-effects)
+-   [6. Appendix](#6-appendix)
+    -   [6.1. Extensions](#61-extensions)
+    -   [6.2. Git plugs](#62-git-plugs)
+-   [Django Project -SCGA](#django-project--scga)
+    -   [Data Structure](#data-structure)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# Django Project
+# 1. Django Learnning
 
-## Basic
+## 1.1. Basic
 
-### Start project
+### 1.1.1. Start project
 
 ```bash
 django-admin startproject project
 django-admin startapp app
 ```
 
-### Views Routing URLs
+### 1.1.2. Views Routing URLs
 
 -   View
     View dictate what information is being shown to the client (html to render in function)
@@ -91,13 +93,13 @@ refer [view.py](/01_Django-Views-Routing-URLs/my_site/first_app/views.py) to see
 
 -   urls file define where (urls path) a view should be displayed by using path() in urlpatterns[] list
 
-## Template and Django template language
+## 1.2. Template and Django template language
 
 Refer [Layouts](/02-Django-and-Templates/my_site/templates/layouts.html) and to [example](/02-Django-and-Templates/my_site/my_app/templates/my_app/variable.html) to view html example
 
-## Migration
+## 1.3. Migration
 
-### Base commands
+### 1.3.1. Base commands
 
 ```bash
 - makemigrations
@@ -119,7 +121,7 @@ Create the set of instructions(code) that will **apply changes to the database**
 python manage.py migrate
 ```
 
-Run any existing migrations (typically created through the makemigrations command). <br>
+Run any existing migrations (typically created through the `makemigrations` command). <br>
 This is actually running the files under the migrations directory created by makemigrations
 
 ```bash
@@ -129,7 +131,7 @@ python manage.py sqlmigrate app 0001
 After running migrate command, if wanna to see what the SQL code looked like, you could run the sqlmigrate command to view. <br>
 PS: Typically we won't reviewthe files created under the migrations directory or run sqlmigrate
 
-### Steps for migrations
+### 1.3.2. Steps for migrations
 
 1. Inital project migrate command
 2. Create app and create models (datebase)
@@ -137,13 +139,13 @@ PS: Typically we won't reviewthe files created under the migrations directory or
 4. Run makemigrations for new app
 5. Run migrate for new migrations
 
-## Data Interaction (CRUD)
+## 1.4. Data Interaction (CRUD)
 
 Something like `MyModel.objects` is Django Model Manager. This Manager can do the CRUD of database and also provides other enhanced functions
 
-### ADD/INSERT data
+### 1.4.1. ADD/INSERT data
 
-#### Relative Function
+#### 1.4.1.1. Relative Function
 
 ```python
 MyModel.objects.save() # INSERT, to create we need to create an instance of object first
@@ -155,9 +157,9 @@ MyModel.objects.bulk_create() # CREATE a bulk data
 -   Alternatively, usign the built-in `.objects.create()` method to both **create** and **save** the new data entry in a single line.
 -   In instances where want to create multiple new data entries in bulk(庞大的), you can use the `.object.bulk_create()` methode to pass in a likst of newly created objects.
 
-### READ data
+### 1.4.2. READ data
 
-#### Relative Function
+#### 1.4.2.1. Relative Function
 
 ```python
 MyModel.objects.all() # grap all the entries in a database table
@@ -174,24 +176,24 @@ keys:
 5. ...
 ```
 
--   for more method aoubt database oprations, check <a href='https://docs.djangoproject.com/en/4.1/ref/models/querysets/'>QuerySet API</a>
--   for more keys of lookups, see <a href='https://docs.djangoproject.com/en/4.1/ref/models/querysets/#id4'>lookups list</a>
+-   for more method aoubt database oprations, check <a href='https://docs.djangoproject.com/en/4.2/ref/models/querysets/'>QuerySet API</a>
+-   for more keys of lookups, see <a href='https://docs.djangoproject.com/en/4.2/ref/models/querysets/#id4'>lookups list</a>
 
 Operators are also available in Django (`& |`) by referring `Q()` object class
 
-### Updating Models, Entries (add | delete)
+### 1.4.3. Updating Models, Entries (add | delete)
 
 -   Entries updated can be done by overwriting attribute of existing data entry and call `.save()` to save the changes.
 -   Similarly, use `.delete()` to delete an object.
 
-## Connecting Tempaltes and Database Models
+## 1.5. Connecting Tempaltes and Database Models
 
 -   In **project urls**, add **app** as routing
 -   In **app urls**, create routing and connect to method in **views**
 -   In **views**, import models to use database models as variable and use as context of render() so that we built **connection of template and database models**
 -   In **html**, use django templates language to call context define in **views**
 
-# Django Admin
+# 2. Django Admin
 
 Take Project [car](./04-Django-Admin-Portal/my_car_site/) as an example, inside which apply all previous learning
 One of the MOST POWERFUL FEATURES of Django, able to automatically create an Admin interface, to have a graphical interface for interacting with data and users on the site.
@@ -203,13 +205,13 @@ python manager.py createsuperuser
 # enter username, email and password
 ```
 
-## Model admin object class
+## 2.1. Model admin object class
 
-## Resigter model in to admin
+## 2.2. Resigter model in to admin
 
-In `admin.py` of app, use `admin.site.register(model, modeladmin)` to add Model to administrator site. (ref <a href="https://docs.djangoproject.com/en/4.1/ref/contrib/admin/">Modeladmin</a>)
+In `admin.py` of app, use `admin.site.register(model, modeladmin)` to add Model to administrator site. (ref <a href="https://docs.djangoproject.com/en/4.2/ref/contrib/admin/">Modeladmin</a>)
 
-## ModelAdmin Class example
+## 2.3. ModelAdmin Class example
 
 ```python
 class CarAdmin(admin.ModelAdmin):
@@ -230,11 +232,11 @@ class CarAdmin(admin.ModelAdmin):
     )
 ```
 
-# Django Form
+# 3. Django Form
 
 Django comes with a built-in Forms class which can be used with Django and python to create forms and send to the tempalte through `{{form}}`
 
-## Reivew - Form
+## 3.1. Reivew - Form
 
 1. GET, POST, and CSRD review
 2. Django Form Class Bascis
@@ -242,11 +244,11 @@ Django comes with a built-in Forms class which can be used with Django and pytho
 4. Form Widgets and CSS Styling
 5. ModelForms
 
-## HTTP (Hyptertext Transfer Protocol)
+## 3.2. HTTP (Hyptertext Transfer Protocol)
 
 foundation for the method of **sending** and **receiving** data over the world wide web.
 
-## GET, POST, and CSRD review
+## 3.3. GET, POST, and CSRD review
 
 `GET` and `POST` methods are the key methods for http interaction (sending and receiving data)
 
@@ -254,10 +256,10 @@ foundation for the method of **sending** and **receiving** data over the world w
 -   `POST`: Request to send data to a server to create/update a resource, normaly raised by submit operation
 -   CSRD can be called by `{% csrf_token %}` and it's used to make sure the information `POST` or `GET` are legitimate （请求向网页服务器上发送数据（更新/添加/删除））
 
-## Django Form Class Bascis
+## 3.4. Django Form Class Bascis
 
 Django `form.py` used to create a form field (class) that ends up generating a Django widget which in turn renders the actual HTML form input/label tags
-ref <a href="https://docs.djangoproject.com/en/4.1/topics/forms/">Working with Forms</a> for more.<br>
+ref <a href="https://docs.djangoproject.com/en/4.2/topics/forms/">Working with Forms</a> for more.<br>
 **Code example for Form Class**
 
 ```python
@@ -342,9 +344,9 @@ PS: Render 是渲染的意思， Django 创建的 from 用来渲染 HTML
 </div>
 ```
 
-## Form widget and styling - widget attributes
+## 3.5. Form widget and styling - widget attributes
 
-To have more control over styling and presentation, we can access <a href="https://docs.djangoproject.com/en/4.1/ref/forms/widgets/">widget</a> attributes.
+To have more control over styling and presentation, we can access <a href="https://docs.djangoproject.com/en/4.2/ref/forms/widgets/">widget</a> attributes.
 Linking a **static files** directory to hold our custom css files:
 
 -   Create app/static/app/custom.css file
@@ -378,7 +380,7 @@ class ReivewForm(forms.Form):
     review = forms.CharField(label='Please write your review here', widget=forms.Textarea(attrs={'class':'myform', 'rows': '2', 'cols': '2'}))
 ```
 
-## ModelForm
+## 3.6. ModelForm
 
 `ModelForm` class automatically creates a Form with fields connected to each model field.
 自动创建 instance 来保存前端数据，并连接保存到 modelfield 中？
@@ -405,7 +407,7 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
--   <a href="https://docs.djangoproject.com/en/4.1/topics/forms/modelforms/">Creating form from models</a>
+-   <a href="https://docs.djangoproject.com/en/4.2/topics/forms/modelforms/">Creating form from models</a>
     See doc for more information about specify form style
 
 ```python
@@ -438,9 +440,9 @@ else:
 return render(request, 'cars/rental_review.html', context={'form': form})
 ```
 
-## ModelForms Customizaton
+## 3.7. ModelForms Customizaton
 
-1. Customize Error Message of `Interge Field` refer Built-in Field classes in <a href="https://docs.djangoproject.com/en/4.1/ref/forms/fields/">Field Class</a><br>
+1. Customize Error Message of `Interge Field` refer Built-in Field classes in <a href="https://docs.djangoproject.com/en/4.2/ref/forms/fields/">Field Class</a><br>
    **Example:** in `forms.py`
 
 ```python
@@ -463,7 +465,7 @@ class ReviewForm(ModelForm):
         }
 ```
 
-# <a href="https://docs.djangoproject.com/en/4.1/topics/class-based-views/">Class-Based Views(CBVs)</a>
+# 4. <a href="https://docs.djangoproject.com/en/4.2/topics/class-based-views/">Class-Based Views(CBVs)</a>
 
 Django privodes an entrie View class system that is very powerful for quickly rendering commonly used views.
 Django CBVs come with many pre-build generic class views for common tasks, such as listing all the values for a particular model in a database (ListView) or creating a new instance of a model object (CreateView).
@@ -474,9 +476,7 @@ Django CBVs come with many pre-build generic class views for common tasks, such 
 -   UpdateView
 -   DeleteView
 
-## TemplateView
-
-in `views.py`
+## 4.1. TemplateView
 
 ```python
 from django.views.generic import TemplateView
@@ -493,7 +493,7 @@ urlpatterns = [
 ]
 ```
 
-## FormView
+## 4.2. FormView
 
 -   Create a form in `forms.py`
 -   import form in `views.py`
@@ -528,15 +528,15 @@ class ContactFormView(FormView):
     # cleaned_data is a dictionary
 ```
 
-### `cleaned_data()`
+### 4.2.1. `cleaned_data()`
 
 The clean() method on a Field subclass is responsible for running to_python(), validate(), and run_validators() in the correct order and propagating their errors. If, at any time, any of the methods raise ValidationError, the validation stops and that error is raised. This method returns the clean data, which is then inserted into the cleaned_data dictionary of the form.
 
-## Model based CBVs (Class Based Views)
+## 4.3. Model based CBVs (Class Based Views)
 
 There are a few operations with models
 
-### CreateView
+### 4.3.1. CreateView
 
 Django provodes CBVs that automatically create the appropriate views, forms, and context objects for predefined template names by simply being connected to a model(database)<br>
 These classes require just a few attributes and automatically do the work for you !<br>
@@ -544,7 +544,7 @@ These classes require just a few attributes and automatically do the work for yo
 -   model_form.html - teacher_form.html
     <br>
 
-#### **Important Note**
+#### 4.3.1.1. **Important Note**
 
 Because the classes are designed to be simple, these views require a template name to follow specific pattern. (`templatename`\_form.html)
 
@@ -569,7 +569,7 @@ once defined `model = Teacher` to connect to model, django will create a `form` 
 </form>
 ```
 
-### ListView
+### 4.3.2. ListView
 
 `ListView` used to list all the instances for a particular model.
 A `ListView` will do a query request for all the objects inside the model look for the template named `modelname_list.html`
@@ -593,7 +593,7 @@ class TeacherListView(ListView):
 </ul>
 ```
 
-### DetailView
+### 4.3.3. DetailView
 
 The main purpose of the `DetailView` is to view a single instance of (PK) a particular entry inside a model.A `DetailView` will look fort he template named `modelname_detail.html`
 
@@ -625,7 +625,7 @@ Then we need to set up the link in a way on template side of things so that we c
 </ul>
 ```
 
-### UpdateView
+### 4.3.4. UpdateView
 
 `UpdateView` is kind of like a mix between a `CreateView` and a `DetailView`, it's kind of like a `CreateView` because you will be filling out a form to up the information. but it's also kind of like a `DetailView` because when you're talking about updating, you're talking aoubt a specific entry with a unique primary key.<br>
 The intention of `UpdateView`, it's to SHARE the `model_form.html` from HTML template that `CreateView` also uses, and it looks a lot like create view as far as attributes concerned, but we can limit the field upon updating.<br>
@@ -667,7 +667,7 @@ HTML will be (using `teacher_list.html`)
 </ul>
 ```
 
-### DeleteView
+### 4.3.5. DeleteView
 
 Used to pointed to a primary key and delete a particular instance of the model<br>
 `DeleteView` is technically a form, it sends back a form that just has a single confirmed deleted button.<br>
@@ -730,7 +730,7 @@ class TeacherDeleteView(DeleteView):
 
 After submit button is clicked, it's will go ahead and execute the deletion.
 
-### HOME Page
+### 4.3.6. HOME Page
 
 ```html
 <h1>Welcome to home.html</h1>
@@ -750,7 +750,7 @@ After submit button is clicked, it's will go ahead and execute the deletion.
 </ul>
 ```
 
-# <a href="https://releases.jquery.com/">jQuery</a>
+# 5. <a href="https://releases.jquery.com/">jQuery</a>
 
 jQuery is a `javascript` library (a large single `.js` file) that has many pre-built methods and objects that simplify workflow, specifucally when you interacting with the DOM and making HTTP requests (AJAX)<br>
 One of its main features is the use of `$`.
@@ -759,10 +759,10 @@ One of its main features is the use of `$`.
 
 ```js
 // jQuery
-let divs = $("div");
+let divs = $('div');
 
 // Vanilla
-let divs = documents.querySelectorAll("div");
+let divs = documents.querySelectorAll('div');
 ```
 
 In situation we actullay want to edit the **styling** of a certain variable called `el`.
@@ -771,19 +771,19 @@ In situation we actullay want to edit the **styling** of a certain variable call
 
 ```js
 // jQuery
-$(el).css("border-width", "20px");
+$(el).css('border-width', '20px');
 
 // Vanilla
-el.style.borderWidth = "20px";
+el.style.borderWidth = '20px';
 
 // Styling element with css style object
 const newCss = {
-    color: "white",
-    background: "green",
-    border: "20px solid red",
+    color: 'white',
+    background: 'green',
+    border: '20px solid red',
 };
 
-let list = $("h1");
+let list = $('h1');
 list.css(newCss);
 ```
 
@@ -795,15 +795,15 @@ $(document).ready(function () {});
 
 // Vanilla
 function ready(fn) {
-    if (document.readyState != "loading") {
+    if (document.readyState != 'loading') {
         fn();
     } else {
-        document.addEventListener("DOMConetentLoaded", fn);
+        document.addEventListener('DOMConetentLoaded', fn);
     }
 }
 ```
 
-## Basics
+## 5.1. Basics
 
 ```html
 <!DOCTYPE html>
@@ -866,79 +866,79 @@ function ready(fn) {
 </html>
 ```
 
-### Styling element with object
+### 5.1.1. Styling element with object
 
 ```js
 // Styling element with css style object
 const newCss = {
-    color: "white",
-    background: "green",
-    border: "20px solid red",
+    color: 'white',
+    background: 'green',
+    border: '20px solid red',
 };
 
-let list = $("h1");
+let list = $('h1');
 list.css(newCss);
 ```
 
-### Styling element in list
+### 5.1.2. Styling element in list
 
 ```js
-var listItems = $("li");
+var listItems = $('li');
 // use .eq to index element in list
-listItems.eq(0).css("color", "orange");
+listItems.eq(0).css('color', 'orange');
 
 // negative index for last elemnt
-listItems.eq(-1).css("color", "orange");
+listItems.eq(-1).css('color', 'orange');
 ```
 
-### Grap content using jQuery
+### 5.1.3. Grap content using jQuery
 
 The JQuery `html()` and `text()` methods are two methods that you can use to get or set the contents of an HTML element. The difference between them is stated below: <br>
 `html()` is used to return or change the **html** and **text** content of an element. `text()` can only return or change the text content of an element.
 
 ```js
-$("h1").text();
+$('h1').text();
 // Change text in page (temporatry)
-$("h1").text("Brand New Text");
+$('h1').text('Brand New Text');
 // Actullay change html
-$("h1").html("<em>New</em>");
+$('h1').html('<em>New</em>');
 ```
 
-### Change attribute
+### 5.1.4. Change attribute
 
 ```js
 // change attribute 'type' from 'submit' to 'checkbox'
-$("input").eq(1).attr("type", "checkbox");
+$('input').eq(1).attr('type', 'checkbox');
 // change attribute 'value'
-$("input").eq(0).val("new value");
+$('input').eq(0).val('new value');
 ```
 
-### Add `css` class into `html`
+### 5.1.5. Add `css` class into `html`
 
 We add add the pre-defined `css` class in to element using `addClass()`, and use `removeClass()` to remove the class. We can also toggle to class in elemnt using `toggleClass()`
 
 ```js
 // add class
-$("h1").addClass("turnRed");
+$('h1').addClass('turnRed');
 // remove class
-$("h1").removeClass("turnRed");
+$('h1').removeClass('turnRed');
 // toggle class
-$("h1").toggleClass("turnBlue");
+$('h1').toggleClass('turnBlue');
 ```
 
-### [Events](https://api.jquery.com/category/events/)
+### 5.1.6. [Events](https://api.jquery.com/category/events/)
 
 -   Event `click()`
 
 ```js
 // Event 'Click'
-$("h1").click(function (e) {
-    console.log("There was a click!");
+$('h1').click(function (e) {
+    console.log('There was a click!');
 });
 
 // Grap multiple event
-$("li").click(function (e) {
-    console.log("any li was clicked!");
+$('li').click(function (e) {
+    console.log('any li was clicked!');
 });
 ```
 
@@ -946,9 +946,9 @@ $("li").click(function (e) {
 
 ```js
 // use 'this' key word
-$("h1").dblclick(function (e) {
+$('h1').dblclick(function (e) {
     //
-    $(this).text("Double click is triggered");
+    $(this).text('Double click is triggered');
     console.log($(this).text());
 });
 ```
@@ -957,14 +957,14 @@ $("h1").dblclick(function (e) {
 
 ```js
 // Key press
-$("input")
+$('input')
     .eq(0)
     .keypress(function (event) {
         // Each key has number code that stored in event.which()
         // 'enter' = 13
         if (event.which === 13) {
             console.log(event);
-            $("h3").toggleClass("turnBlue");
+            $('h3').toggleClass('turnBlue');
         }
     });
 ```
@@ -973,44 +973,60 @@ $("input")
 
 ```js
 // on()
-$("h1").on("dblclick", function () {
-    $(this).toggleClass("turnBlue");
+$('h1').on('dblclick', function () {
+    $(this).toggleClass('turnBlue');
 });
 
 // grap mouseEnter using on()
-$("h1").on("mouseenter", function () {
-    $(this).toggleClass("turnBlue");
+$('h1').on('mouseenter', function () {
+    $(this).toggleClass('turnBlue');
 });
 ```
 
-## Event animation ([Effects](https://api.jquery.com/category/effects/))
+## 5.2. Event animation ([Effects](https://api.jquery.com/category/effects/))
 
 ```js
 // event animation
-$("input")
+$('input')
     .eq(1)
-    .on("click", function () {
+    .on('click', function () {
         // grap every thing in the `.container` class
         // fadeOut(x), make selector disappear in x milleseconds
         // $(".container").fadeOut(1000);
         // slideUp()
-        $(".container").slideUp(1000);
+        $('.container').slideUp(1000);
     });
 ```
 
-# Appendix
+# 6. Appendix
 
-## Extensions
+## 6.1. Extensions
 
 1. <a href="">Git History (git log)</a>
 2. <a href="https://marketplace.visualstudio.com/items?itemName=alefragnani.project-manager">project-manager</a>
 3. <a href="https://marketplace.visualstudio.com/items?itemName=codezombiech.gitignore">gitignore</a>
 4. <a href="https://marketplace.visualstudio.com/items?itemName=ziyasal.vscode-open-in-github">open in github</a>
 
-## Git plugs
+## 6.2. Git plugs
 
 1. <a href="https://github.com/git-ecosystem/git-credential-manager">git credential manager</a>
 
-```
+# Django Project -SCGA
 
-```
+## Data Structure
+
+-   Cert 1
+    -   Load 1
+        -   Process 1
+            -   Module 1 (file)
+                -   Function 1
+                -   Function 2
+                -   ...
+            -   Module 2
+            -   ...
+        -   Process 2
+        -   ...
+    -   Load 2
+    -   ...
+-   Cert 2
+-   ...
