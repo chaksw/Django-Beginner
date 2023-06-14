@@ -1016,7 +1016,6 @@ $('input')
 ## Data Structure
 
 -   Project 1(F6)
--   Cert 1
     -   Function 1(GGF)
         -   Load 1 (Configuration ID <- Dilivery Letter)
             -   Process 1
@@ -1035,5 +1034,5 @@ $('input')
         -   ...
     -   Function 2(MWF)
     -   ...
--   Cert 2
+-   Project 2
 -   ...
