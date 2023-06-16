@@ -8,7 +8,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 class Project(models.Model):
     project = models.CharField(verbose_name="Project", max_length=50)
-    projectID = models.IntegerField(unique=True, primary_key=True)
+    # projectID = models.IntegerField(unique=True, primary_key=True)
 
     def __str__(self) -> str:
         return self.project
@@ -26,24 +26,24 @@ class Project(models.Model):
 
 class Functionality(models.Model):
     func = models.CharField(verbose_name="Function", max_length=10)
-    funcID = models.IntegerField(unique=True, primary_key=True)
+    # funcID = models.IntegerField(unique=True, primary_key=True)
     # Certification = models.ForeignKey(
     #     'Certification', on_delete=models.CASCADE, db_column='Cert')
     Project = models.ForeignKey(
         'Project', on_delete=models.CASCADE, db_column='Project')
 
     def __str__(self) -> str:
-        return f"{self.func} <- {self.Project}"
+        return f"{self.func}"
 
 
 class Load(models.Model):
     load = models.CharField(verbose_name="Load", max_length=50)
-    loadID = models.IntegerField(unique=True, primary_key=True)
+    # loadID = models.IntegerField(unique=True, primary_key=True)
     Func = models.ForeignKey(
         'Functionality', on_delete=models.CASCADE, db_column='Functionality')
 
     def __str__(self) -> str:
-        return f"{self.load} <- {self.Func}"
+        return f"{self.load}"
 # A Date group of SCGA result of a specific load <- Functionality <- Certification <- Project
 
 # Test Plan and Test Expection (A|B|C)of a specific Process <- Load
@@ -59,8 +59,8 @@ class TestException(models.Model):
     note = models.CharField(verbose_name="Note", max_length=50)
     module = models.CharField(verbose_name="Module", max_length=50)
     function = models.CharField(verbose_name="Function", max_length=50)
-    line = models.CharField(verbose_name="Line", max_length=100)
-    reqTag = models.CharField(verbose_name="Requirement Tag", max_length=50)
+    line = models.CharField(verbose_name="Line", max_length=500)
+    reqTag = models.CharField(verbose_name="Requirement Tag", max_length=500)
     analyst = models.CharField(verbose_name="Analyst", max_length=50)
 
     CLASS_OPTIONS = (('IT', 'Incomplete Test'),
@@ -74,11 +74,11 @@ class TestException(models.Model):
                      )
     # UnCovered Category
     ucClassification = models.CharField(verbose_name="Class",
-                                        max_length=50, choices=CLASS_OPTIONS, default=' ')
+                                        max_length=100, choices=CLASS_OPTIONS, default=' ')
     analysisSummary = models.CharField(
-        verbose_name="Analysis Summary", max_length=50)
+        verbose_name="Analysis Summary", max_length=1000, null=True, blank=True)
     correctiveAction = models.CharField(
-        verbose_name="Corrective Action", max_length=50, default='')
+        verbose_name="Corrective Action", max_length=300, default='No corrective action required.', null=True, blank=True)
     Y_OR_N = (
         ('Y', 'Yes'),
         ('N', 'No'),
@@ -90,10 +90,10 @@ class TestException(models.Model):
     PAR_OR_CR = (
         ('PAR', 'PAR'),
         ('CR', 'CR'),
-        (' ', ' '),
+        ('N/A', 'N/A'),
     )
     applicable = models.CharField(
-        verbose_name="Applicable", max_length=10, choices=PAR_OR_CR, default=' ')
+        verbose_name="Applicable", max_length=10, choices=PAR_OR_CR, default='N/A')
 
 
 class TestPlan(models.Model):
@@ -104,15 +104,13 @@ class TestPlan(models.Model):
         ('C', 'C'),
     }
     level = models.CharField(verbose_name="Level",
-                             max_length=50, choices=LEVEL_OPT, default='', null=True, blank=True)
+                             max_length=2, choices=LEVEL_OPT, default='A', null=True, blank=True)
     # Process like (GgfPfd Mws...)
     process = models.CharField(verbose_name="Process", max_length=50)
     # File Name(x.cpp)
     fName = models.CharField(verbose_name="File Name", max_length=50)
     # Function in file
     func = models.CharField(verbose_name="Function", max_length=50)
-    # Use this to replace the note
-    # funcID = models.IntegerField(unique=True, primary_key=True)
     # Load Number
     swLoad = models.ForeignKey(
         'Load', on_delete=models.CASCADE, db_column='Load')
@@ -142,21 +140,21 @@ class TestPlan(models.Model):
 
     # Module Structure Data (Branches and Entries/Exits)
     # Covered Decisions
-    coveredDecisions = models.IntegerField(verbose_name="Decisions")
+    coveredDecisions = models.IntegerField(verbose_name="Covered Decisions")
     # Covered Conditions
-    coveredConditons = models.IntegerField(verbose_name="Conditions")
+    coveredConditons = models.IntegerField(verbose_name="Covered Conditions")
     # Covered Cases
-    coveredCases = models.IntegerField(verbose_name="Cases")
+    coveredCases = models.IntegerField(verbose_name="Covered Cases")
     # Covered Events
-    coveredEvents = models.IntegerField(verbose_name="Events")
+    coveredEvents = models.IntegerField(verbose_name="Covered Events")
     # Total Decisions
-    totalDecisions = models.IntegerField(verbose_name="Decisions")
+    totalDecisions = models.IntegerField(verbose_name="Total Decisions")
     # Total Conditions
-    totalConditions = models.IntegerField(verbose_name="Conditions")
+    totalConditions = models.IntegerField(verbose_name="Total Conditions")
     # Total Cases
-    totalCases = models.IntegerField(verbose_name="Cases")
+    totalCases = models.IntegerField(verbose_name="Total Cases")
     # Total Events
-    totalEvents = models.IntegerField(verbose_name="Events")
+    totalEvents = models.IntegerField(verbose_name="Total Events")
 
     # OverSight
     YorN = (
@@ -167,7 +165,9 @@ class TestPlan(models.Model):
     overSight = models.CharField(max_length=1, choices=YorN, default=' ')
 
     # Defect Classification
-    tech = models.CharField(verbose_name="Tech", max_length=50)
-    nonTech = models.CharField(verbose_name="Non-Tech", max_length=50)
+    tech = models.CharField(verbose_name="Tech",
+                            max_length=50, null=True, blank=True)
+    nonTech = models.CharField(
+        verbose_name="Non-Tech", max_length=50, null=True, blank=True)
     processDefect = models.CharField(
-        verbose_name="Process Defect", max_length=50)
+        verbose_name="Process Defect", max_length=50, null=True, blank=True)

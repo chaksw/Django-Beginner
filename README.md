@@ -1,58 +1,60 @@
 **Table of Contents** _generated with [DocToc](https://github.com/thlorenz/doctoc)_
 
--   [1. Django Learnning](#1-django-learnning)
-    -   [1.1. Basic](#11-basic)
-        -   [1.1.1. Start project](#111-start-project)
-        -   [1.1.2. Views Routing URLs](#112-views-routing-urls)
-    -   [1.2. Template and Django template language](#12-template-and-django-template-language)
-    -   [1.3. Migration](#13-migration)
-        -   [1.3.1. Base commands](#131-base-commands)
-        -   [1.3.2. Steps for migrations](#132-steps-for-migrations)
-    -   [1.4. Data Interaction (CRUD)](#14-data-interaction-crud)
-        -   [1.4.1. ADD/INSERT data](#141-addinsert-data)
-            -   [1.4.1.1. Relative Function](#1411-relative-function)
-        -   [1.4.2. READ data](#142-read-data)
-            -   [1.4.2.1. Relative Function](#1421-relative-function)
-        -   [1.4.3. Updating Models, Entries (add | delete)](#143-updating-models-entries-add--delete)
-    -   [1.5. Connecting Tempaltes and Database Models](#15-connecting-tempaltes-and-database-models)
--   [2. Django Admin](#2-django-admin)
-    -   [2.1. Model admin object class](#21-model-admin-object-class)
-    -   [2.2. Resigter model in to admin](#22-resigter-model-in-to-admin)
-    -   [2.3. ModelAdmin Class example](#23-modeladmin-class-example)
--   [3. Django Form](#3-django-form)
-    -   [3.1. Reivew - Form](#31-reivew---form)
-    -   [3.2. HTTP (Hyptertext Transfer Protocol)](#32-http-hyptertext-transfer-protocol)
-    -   [3.3. GET, POST, and CSRD review](#33-get-post-and-csrd-review)
-    -   [3.4. Django Form Class Bascis](#34-django-form-class-bascis)
-    -   [3.5. Form widget and styling - widget attributes](#35-form-widget-and-styling---widget-attributes)
-    -   [3.6. ModelForm](#36-modelform)
-    -   [3.7. ModelForms Customizaton](#37-modelforms-customizaton)
--   [4. Class-Based Views(CBVs)](#4-class-based-viewscbvs)
-    -   [4.1. TemplateView](#41-templateview)
-    -   [4.2. FormView](#42-formview)
-        -   [4.2.1. `cleaned_data()`](#421-cleaned_data)
-    -   [4.3. Model based CBVs (Class Based Views)](#43-model-based-cbvs-class-based-views)
-        -   [4.3.1. CreateView](#431-createview)
-            -   [4.3.1.1. **Important Note**](#4311-important-note)
-        -   [4.3.2. ListView](#432-listview)
-        -   [4.3.3. DetailView](#433-detailview)
-        -   [4.3.4. UpdateView](#434-updateview)
-        -   [4.3.5. DeleteView](#435-deleteview)
-        -   [4.3.6. HOME Page](#436-home-page)
--   [5. jQuery](#5-jquery)
-    -   [5.1. Basics](#51-basics)
-        -   [5.1.1. Styling element with object](#511-styling-element-with-object)
-        -   [5.1.2. Styling element in list](#512-styling-element-in-list)
-        -   [5.1.3. Grap content using jQuery](#513-grap-content-using-jquery)
-        -   [5.1.4. Change attribute](#514-change-attribute)
-        -   [5.1.5. Add `css` class into `html`](#515-add-css-class-into-html)
-        -   [5.1.6. Events](#516-events)
-    -   [5.2. Event animation (Effects)](#52-event-animation-effects)
--   [6. Appendix](#6-appendix)
-    -   [6.1. Extensions](#61-extensions)
-    -   [6.2. Git plugs](#62-git-plugs)
--   [Django Project -SCGA](#django-project--scga)
-    -   [Data Structure](#data-structure)
+- [1. Django Learnning](#1-django-learnning)
+  - [1.1. Basic](#11-basic)
+    - [1.1.1. Start project](#111-start-project)
+    - [1.1.2. Views Routing URLs](#112-views-routing-urls)
+  - [1.2. Template and Django template language](#12-template-and-django-template-language)
+  - [1.3. Migration](#13-migration)
+    - [1.3.1. Base commands](#131-base-commands)
+    - [1.3.2. Steps for migrations](#132-steps-for-migrations)
+  - [1.4. Data Interaction (CRUD)](#14-data-interaction-crud)
+    - [1.4.1. ADD/INSERT data](#141-addinsert-data)
+      - [1.4.1.1. Relative Function](#1411-relative-function)
+    - [1.4.2. READ data](#142-read-data)
+      - [1.4.2.1. Relative Function](#1421-relative-function)
+    - [1.4.3. Updating Models, Entries (add | delete)](#143-updating-models-entries-add--delete)
+  - [1.5. Connecting Tempaltes and Database Models](#15-connecting-tempaltes-and-database-models)
+- [2. Django Admin](#2-django-admin)
+  - [2.1. Model admin object class](#21-model-admin-object-class)
+  - [2.2. Resigter model in to admin](#22-resigter-model-in-to-admin)
+  - [2.3. ModelAdmin Class example](#23-modeladmin-class-example)
+- [3. Django Form](#3-django-form)
+  - [3.1. Reivew - Form](#31-reivew---form)
+  - [3.2. HTTP (Hyptertext Transfer Protocol)](#32-http-hyptertext-transfer-protocol)
+  - [3.3. GET, POST, and CSRD review](#33-get-post-and-csrd-review)
+  - [3.4. Django Form Class Bascis](#34-django-form-class-bascis)
+  - [3.5. Form widget and styling - widget attributes](#35-form-widget-and-styling---widget-attributes)
+  - [3.6. ModelForm](#36-modelform)
+  - [3.7. ModelForms Customizaton](#37-modelforms-customizaton)
+- [4. Class-Based Views(CBVs)](#4-class-based-viewscbvs)
+  - [4.1. TemplateView](#41-templateview)
+  - [4.2. FormView](#42-formview)
+    - [4.2.1. `cleaned_data()`](#421-cleaned_data)
+  - [4.3. Model based CBVs (Class Based Views)](#43-model-based-cbvs-class-based-views)
+    - [4.3.1. CreateView](#431-createview)
+      - [4.3.1.1. **Important Note**](#4311-important-note)
+    - [4.3.2. ListView](#432-listview)
+    - [4.3.3. DetailView](#433-detailview)
+    - [4.3.4. UpdateView](#434-updateview)
+    - [4.3.5. DeleteView](#435-deleteview)
+    - [4.3.6. HOME Page](#436-home-page)
+- [5. jQuery](#5-jquery)
+  - [5.1. Basics](#51-basics)
+    - [5.1.1. Styling element with object](#511-styling-element-with-object)
+    - [5.1.2. Styling element in list](#512-styling-element-in-list)
+    - [5.1.3. Grap content using jQuery](#513-grap-content-using-jquery)
+    - [5.1.4. Change attribute](#514-change-attribute)
+    - [5.1.5. Add `css` class into `html`](#515-add-css-class-into-html)
+    - [5.1.6. Events](#516-events)
+  - [5.2. Event animation (Effects)](#52-event-animation-effects)
+- [6. Appendix](#6-appendix)
+  - [6.1. Extensions](#61-extensions)
+  - [6.2. Git plugs](#62-git-plugs)
+- [Django Project -SCGA](#django-project--scga)
+  - [Data Structure](#data-structure)
+- [Data Management](#data-management)
+  - [INLINE](#inline)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -69,18 +71,18 @@ django-admin startapp app
 
 ### 1.1.2. Views Routing URLs
 
--   View
-    View dictate what information is being shown to the client (html to render in function)
--   URLs
-    URLs dictate where that information is shown on the website (function in view.py)
+- View
+  View dictate what information is being shown to the client (html to render in function)
+- URLs
+  URLs dictate where that information is shown on the website (function in view.py)
 
 There work in concert so you can think of each View/URL pairing as a web page on the website.
 In project level or app level, we need to define in urls.py the connection of routes in a list variable called urlpatterns using path() and include() Django functions
 
 Likes:
 
--   html file define the content of page
--   view file define which html file will be sent to client (with certain logic) using
+- html file define the content of page
+- view file define which html file will be sent to client (with certain logic) using
 
 ```python
  - render()
@@ -91,7 +93,7 @@ Likes:
 
 refer [view.py](/01_Django-Views-Routing-URLs/my_site/first_app/views.py) to see the example
 
--   urls file define where (urls path) a view should be displayed by using path() in urlpatterns[] list
+- urls file define where (urls path) a view should be displayed by using path() in urlpatterns[] list
 
 ## 1.2. Template and Django template language
 
@@ -113,9 +115,9 @@ python manage.py makemigrations app
 
 Create the set of instructions(code) that will **apply changes to the database**, the migration files will be created under:
 
--   app
-    -   migrations
-        -   0001_initial.py
+- app
+  - migrations
+    - 0001_initial.py
 
 ```bash
 python manage.py migrate
@@ -153,9 +155,9 @@ MyModel.objects.objects.create() # CREATE AND SAVE
 MyModel.objects.bulk_create() # CREATE a bulk data
 ```
 
--   Inserting new data into a SQL table by create a new instance of the class(models) and call `.save()` method to create an `INSERT` call to the SQL database <br>
--   Alternatively, usign the built-in `.objects.create()` method to both **create** and **save** the new data entry in a single line.
--   In instances where want to create multiple new data entries in bulk(庞大的), you can use the `.object.bulk_create()` methode to pass in a likst of newly created objects.
+- Inserting new data into a SQL table by create a new instance of the class(models) and call `.save()` method to create an `INSERT` call to the SQL database <br>
+- Alternatively, usign the built-in `.objects.create()` method to both **create** and **save** the new data entry in a single line.
+- In instances where want to create multiple new data entries in bulk(庞大的), you can use the `.object.bulk_create()` methode to pass in a likst of newly created objects.
 
 ### 1.4.2. READ data
 
@@ -176,22 +178,22 @@ keys:
 5. ...
 ```
 
--   for more method aoubt database oprations, check <a href='https://docs.djangoproject.com/en/4.2/ref/models/querysets/'>QuerySet API</a>
--   for more keys of lookups, see <a href='https://docs.djangoproject.com/en/4.2/ref/models/querysets/#id4'>lookups list</a>
+- for more method aoubt database oprations, check <a href='https://docs.djangoproject.com/en/4.2/ref/models/querysets/'>QuerySet API</a>
+- for more keys of lookups, see <a href='https://docs.djangoproject.com/en/4.2/ref/models/querysets/#id4'>lookups list</a>
 
 Operators are also available in Django (`& |`) by referring `Q()` object class
 
 ### 1.4.3. Updating Models, Entries (add | delete)
 
--   Entries updated can be done by overwriting attribute of existing data entry and call `.save()` to save the changes.
--   Similarly, use `.delete()` to delete an object.
+- Entries updated can be done by overwriting attribute of existing data entry and call `.save()` to save the changes.
+- Similarly, use `.delete()` to delete an object.
 
 ## 1.5. Connecting Tempaltes and Database Models
 
--   In **project urls**, add **app** as routing
--   In **app urls**, create routing and connect to method in **views**
--   In **views**, import models to use database models as variable and use as context of render() so that we built **connection of template and database models**
--   In **html**, use django templates language to call context define in **views**
+- In **project urls**, add **app** as routing
+- In **app urls**, create routing and connect to method in **views**
+- In **views**, import models to use database models as variable and use as context of render() so that we built **connection of template and database models**
+- In **html**, use django templates language to call context define in **views**
 
 # 2. Django Admin
 
@@ -252,9 +254,9 @@ foundation for the method of **sending** and **receiving** data over the world w
 
 `GET` and `POST` methods are the key methods for http interaction (sending and receiving data)
 
--   `GET`: request data from a specified resource (local | remote form, model, etc..). not used to update/create information (请求从网页服务器上接受数据)
--   `POST`: Request to send data to a server to create/update a resource, normaly raised by submit operation
--   CSRD can be called by `{% csrf_token %}` and it's used to make sure the information `POST` or `GET` are legitimate （请求向网页服务器上发送数据（更新/添加/删除））
+- `GET`: request data from a specified resource (local | remote form, model, etc..). not used to update/create information (请求从网页服务器上接受数据)
+- `POST`: Request to send data to a server to create/update a resource, normaly raised by submit operation
+- CSRD can be called by `{% csrf_token %}` and it's used to make sure the information `POST` or `GET` are legitimate （请求向网页服务器上发送数据（更新/添加/删除））
 
 ## 3.4. Django Form Class Bascis
 
@@ -302,45 +304,45 @@ PS: Render 是渲染的意思， Django 创建的 from 用来渲染 HTML
 
 ```html
 <div class="container">
-    <form action="" method="POST">
-        {% csrf_token %}
-        <div>
-            <h2>Dispaly as paragraph</h2>
-            <!-- Display as paragraph-->
-            {{form.as_p}}
-        </div>
-        <div>
-            <h2>Dispaly as list</h2>
-            <!-- Display as list -->
-            {{form.as_ul}}
-        </div>
-        <div>
-            <h2>Dispaly as table</h2>
-            <!-- Display as table -->
-            {{form.as_table}}
-        </div>
-        <div>
-            <h2>Pass attribute</h2>
-            <!-- passing only label-->
-            {{ form.first_name.label_tag }}
-            <!-- passing only field-->
-            {{ form.first_name }}
-            <p></p>
-            <!-- passing only label-->
-            {{ form.last_name.label_tag }}
-            <!-- passing only field-->
-            {{ form.last_name }}
-        </div>
+  <form action="" method="POST">
+    {% csrf_token %}
+    <div>
+      <h2>Dispaly as paragraph</h2>
+      <!-- Display as paragraph-->
+      {{form.as_p}}
+    </div>
+    <div>
+      <h2>Dispaly as list</h2>
+      <!-- Display as list -->
+      {{form.as_ul}}
+    </div>
+    <div>
+      <h2>Dispaly as table</h2>
+      <!-- Display as table -->
+      {{form.as_table}}
+    </div>
+    <div>
+      <h2>Pass attribute</h2>
+      <!-- passing only label-->
+      {{ form.first_name.label_tag }}
+      <!-- passing only field-->
+      {{ form.first_name }}
+      <p></p>
+      <!-- passing only label-->
+      {{ form.last_name.label_tag }}
+      <!-- passing only field-->
+      {{ form.last_name }}
+    </div>
 
-        <div>
-            <h2>Loop the form</h2>
-            {% for field in form %}
-            <div class="mb-3">{{ field.label_tag }}</div>
-            {{ field }} {% endfor %}
-        </div>
+    <div>
+      <h2>Loop the form</h2>
+      {% for field in form %}
+      <div class="mb-3">{{ field.label_tag }}</div>
+      {{ field }} {% endfor %}
+    </div>
 
-        <input type="submit" />
-    </form>
+    <input type="submit" />
+  </form>
 </div>
 ```
 
@@ -349,20 +351,20 @@ PS: Render 是渲染的意思， Django 创建的 from 用来渲染 HTML
 To have more control over styling and presentation, we can access <a href="https://docs.djangoproject.com/en/4.2/ref/forms/widgets/">widget</a> attributes.
 Linking a **static files** directory to hold our custom css files:
 
--   Create app/static/app/custom.css file
--   Load static directory in .html
+- Create app/static/app/custom.css file
+- Load static directory in .html
 
 ```django-html
 {% load static %}
 ```
 
--   Link static CSS file connection
+- Link static CSS file connection
 
 ```html
 <link rel="stylesheet" href="{% static 'appname/cssfile.css' %}" />
 ```
 
--   Run migrate to load new app in setting.py file
+- Run migrate to load new app in setting.py file
 
 **Example:**
 
@@ -385,7 +387,7 @@ class ReivewForm(forms.Form):
 `ModelForm` class automatically creates a Form with fields connected to each model field.
 自动创建 instance 来保存前端数据，并连接保存到 modelfield 中？
 
--   Create ModelForm in `models.py`
+- Create ModelForm in `models.py`
 
 ```python
 from django.db import models
@@ -397,18 +399,18 @@ class Review(models.Model):
     stars = models.IntegerField()
 ```
 
--   Register Model in `admin.py` <br>
-    `admin.site.register(Review)`
+- Register Model in `admin.py` <br>
+  `admin.site.register(Review)`
 
--   Make migration to apply model <br>
+- Make migration to apply model <br>
 
 ```bash
 python manage.py makemigrations
 python manage.py migrate
 ```
 
--   <a href="https://docs.djangoproject.com/en/4.2/topics/forms/modelforms/">Creating form from models</a>
-    See doc for more information about specify form style
+- <a href="https://docs.djangoproject.com/en/4.2/topics/forms/modelforms/">Creating form from models</a>
+  See doc for more information about specify form style
 
 ```python
 from django import forms
@@ -422,7 +424,7 @@ class ReviewForm(ModelForm):
         fields = ['first_name', 'last_name', 'stars']
 ```
 
--   In `view.py`, save data create POST from user
+- In `view.py`, save data create POST from user
 
 ```python
 if request.method == 'POST':
@@ -470,11 +472,11 @@ class ReviewForm(ModelForm):
 Django privodes an entrie View class system that is very powerful for quickly rendering commonly used views.
 Django CBVs come with many pre-build generic class views for common tasks, such as listing all the values for a particular model in a database (ListView) or creating a new instance of a model object (CreateView).
 
--   Templateview
--   Formview
--   Listview
--   UpdateView
--   DeleteView
+- Templateview
+- Formview
+- Listview
+- UpdateView
+- DeleteView
 
 ## 4.1. TemplateView
 
@@ -495,9 +497,9 @@ urlpatterns = [
 
 ## 4.2. FormView
 
--   Create a form in `forms.py`
--   import form in `views.py`
--   Create a form view class in `views.py`
+- Create a form in `forms.py`
+- import form in `views.py`
+- Create a form view class in `views.py`
 
 ```python
 from django import forms
@@ -541,8 +543,8 @@ There are a few operations with models
 Django provodes CBVs that automatically create the appropriate views, forms, and context objects for predefined template names by simply being connected to a model(database)<br>
 These classes require just a few attributes and automatically do the work for you !<br>
 
--   model_form.html - teacher_form.html
-    <br>
+- model_form.html - teacher_form.html
+  <br>
 
 #### 4.3.1.1. **Important Note**
 
@@ -564,8 +566,8 @@ once defined `model = Teacher` to connect to model, django will create a `form` 
 ```html
 <h1>Teacher Form</h1>
 <form action="" method="POST">
-    {% csrf_token %} {{ form.as_p }}
-    <input type="submit" value="Submit" />
+  {% csrf_token %} {{ form.as_p }}
+  <input type="submit" value="Submit" />
 </form>
 ```
 
@@ -587,9 +589,9 @@ class TeacherListView(ListView):
 ```html
 <h1>List of Teachers (ListView)</h1>
 <ul>
-    {% for teacher in teacher_list %}
-    <li>{{ teacher.first_name}} {{ teacher.last_name }}</li>
-    {% endfor %}
+  {% for teacher in teacher_list %}
+  <li>{{ teacher.first_name}} {{ teacher.last_name }}</li>
+  {% endfor %}
 </ul>
 ```
 
@@ -615,13 +617,13 @@ Then we need to set up the link in a way on template side of things so that we c
 ```html
 <h1>List of Teachers (ListView)</h1>
 <ul>
-    {% for teacher in teacher_list %}
-    <li>
-        <a href="/classroom/teacher_detail/{{teacher.id}}"
-            >{{ teacher.first_name}} {{ teacher.last_name }}</a
-        >
-    </li>
-    {% endfor %}
+  {% for teacher in teacher_list %}
+  <li>
+    <a href="/classroom/teacher_detail/{{teacher.id}}"
+      >{{ teacher.first_name}} {{ teacher.last_name }}</a
+    >
+  </li>
+  {% endfor %}
 </ul>
 ```
 
@@ -650,20 +652,20 @@ HTML will be (using `teacher_list.html`)
 ```html
 <h1>List of Teachers (ListView)</h1>
 <ul>
-    {% for teacher in teacher_list %}
-    <li>
-        <a href="/classroom/teacher_detail/{{teacher.id}}"
-            >{{ teacher.first_name}} {{ teacher.last_name }}</a
+  {% for teacher in teacher_list %}
+  <li>
+    <a href="/classroom/teacher_detail/{{teacher.id}}"
+      >{{ teacher.first_name}} {{ teacher.last_name }}</a
+    >
+    <ul>
+      <li>
+        <a href="/classroom/update_teacher/{{teacher.id}}"
+          >Update Information for {{ teacher.first_name }}</a
         >
-        <ul>
-            <li>
-                <a href="/classroom/update_teacher/{{teacher.id}}"
-                    >Update Information for {{ teacher.first_name }}</a
-                >
-            </li>
-        </ul>
-    </li>
-    {% endfor %}
+      </li>
+    </ul>
+  </li>
+  {% endfor %}
 </ul>
 ```
 
@@ -677,37 +679,37 @@ In `ListView` we have link button links to the particular primary key.<br>
 ```html
 <h1>List of Teachers (ListView)</h1>
 <ul>
-    {% for teacher in teacher_list %}
-    <li>
-        <a href="/classroom/teacher_detail/{{teacher.id}}"
-            >{{ teacher.first_name}} {{ teacher.last_name }}</a
+  {% for teacher in teacher_list %}
+  <li>
+    <a href="/classroom/teacher_detail/{{teacher.id}}"
+      >{{ teacher.first_name}} {{ teacher.last_name }}</a
+    >
+    <ul>
+      <li>
+        <a href="/classroom/update_teacher/{{teacher.id}}"
+          >Update Information for {{ teacher.first_name }}</a
         >
-        <ul>
-            <li>
-                <a href="/classroom/update_teacher/{{teacher.id}}"
-                    >Update Information for {{ teacher.first_name }}</a
-                >
-            </li>
-            <li>
-                <a href="/classroom/delete_teacher/{{teacher.id}}"
-                    >DELETE {{ teacher.first_name }}</a
-                >
-            </li>
-        </ul>
-    </li>
-    {% endfor %}
+      </li>
+      <li>
+        <a href="/classroom/delete_teacher/{{teacher.id}}"
+          >DELETE {{ teacher.first_name }}</a
+        >
+      </li>
+    </ul>
+  </li>
+  {% endfor %}
 </ul>
 ```
 
 Once link is cliked, it's will go head and go to the `delete_theacher` url (refer to `urls.py`), and brings back to the `DeleteView`, which connects to the teacher model and renders(calls) the `teacher_confirm_delete.html`.<br>
 
--   **URLs**
+- **URLs**
 
 ```python
 path('delete_teacher/<int:pk>', TeacherDeleteView.as_view(), name='delete_teacher')
 ```
 
--   `DeleteView`
+- `DeleteView`
 
 ```python
 class TeacherDeleteView(DeleteView):
@@ -717,14 +719,14 @@ class TeacherDeleteView(DeleteView):
     success_url = reverse_lazy('classroom:list_teacher')
 ```
 
--   `teacher_confirm_delete.html`
+- `teacher_confirm_delete.html`
 
 ```html
 <h1>Are you sure you want to delete this teacher?</h1>
 <h2>{{ teahcer }}</h2>
 <form action="" method="post">
-    {% csrf_token %}
-    <input type="submit" name="" id="" value="Confirm Delete" />
+  {% csrf_token %}
+  <input type="submit" name="" id="" value="Confirm Delete" />
 </form>
 ```
 
@@ -755,7 +757,7 @@ After submit button is clicked, it's will go ahead and execute the deletion.
 jQuery is a `javascript` library (a large single `.js` file) that has many pre-built methods and objects that simplify workflow, specifucally when you interacting with the DOM and making HTTP requests (AJAX)<br>
 One of its main features is the use of `$`.
 
--   Grap attribute
+- Grap attribute
 
 ```js
 // jQuery
@@ -767,7 +769,7 @@ let divs = documents.querySelectorAll('div');
 
 In situation we actullay want to edit the **styling** of a certain variable called `el`.
 
--   Styling
+- Styling
 
 ```js
 // jQuery
@@ -778,16 +780,16 @@ el.style.borderWidth = '20px';
 
 // Styling element with css style object
 const newCss = {
-    color: 'white',
-    background: 'green',
-    border: '20px solid red',
+  color: 'white',
+  background: 'green',
+  border: '20px solid red',
 };
 
 let list = $('h1');
 list.css(newCss);
 ```
 
--   Function called
+- Function called
 
 ```js
 // jQuery
@@ -795,11 +797,11 @@ $(document).ready(function () {});
 
 // Vanilla
 function ready(fn) {
-    if (document.readyState != 'loading') {
-        fn();
-    } else {
-        document.addEventListener('DOMConetentLoaded', fn);
-    }
+  if (document.readyState != 'loading') {
+    fn();
+  } else {
+    document.addEventListener('DOMConetentLoaded', fn);
+  }
 }
 ```
 
@@ -808,61 +810,61 @@ function ready(fn) {
 ```html
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>jQuery</title>
-        <style>
-            .turnBlue {
-                color: white;
-                background: blue;
-            }
-            .turnRed {
-                color: white;
-                background: red;
-            }
-        </style>
-        <!-- Get Bootstrap -->
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
-            crossorigin="anonymous" />
-        <!-- Get jQuery -->
-        <script
-            src="https://code.jquery.com/jquery-3.6.4.js"
-            integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
-            crossorigin="anonymous"></script>
-    </head>
-    <body>
-        <h1>Selection with jQuery</h1>
-        <p>
-            You can use the $ to select elements from the DOM, it will fell a
-            lot like selection using querySelectorAll()
-        </p>
-        <p>For example:</p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jQuery</title>
+    <style>
+      .turnBlue {
+        color: white;
+        background: blue;
+      }
+      .turnRed {
+        color: white;
+        background: red;
+      }
+    </style>
+    <!-- Get Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+      crossorigin="anonymous" />
+    <!-- Get jQuery -->
+    <script
+      src="https://code.jquery.com/jquery-3.6.4.js"
+      integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
+      crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <h1>Selection with jQuery</h1>
+    <p>
+      You can use the $ to select elements from the DOM, it will fell a lot like
+      selection using querySelectorAll()
+    </p>
+    <p>For example:</p>
+    <ul>
+      <li>
+        Selecting all 'a' Tags:
         <ul>
-            <li>
-                Selecting all 'a' Tags:
-                <ul>
-                    <li>$('a')</li>
-                </ul>
-            </li>
-            <li>
-                Selecting all element from the class "container":
-                <ul>
-                    <li>$('.container')</li>
-                </ul>
-            </li>
-            <li>
-                Selecting all elements with id "special":
-                <ul>
-                    <li>$('#special')</li>
-                </ul>
-            </li>
+          <li>$('a')</li>
         </ul>
-    </body>
+      </li>
+      <li>
+        Selecting all element from the class "container":
+        <ul>
+          <li>$('.container')</li>
+        </ul>
+      </li>
+      <li>
+        Selecting all elements with id "special":
+        <ul>
+          <li>$('#special')</li>
+        </ul>
+      </li>
+    </ul>
+  </body>
 </html>
 ```
 
@@ -871,9 +873,9 @@ function ready(fn) {
 ```js
 // Styling element with css style object
 const newCss = {
-    color: 'white',
-    background: 'green',
-    border: '20px solid red',
+  color: 'white',
+  background: 'green',
+  border: '20px solid red',
 };
 
 let list = $('h1');
@@ -928,58 +930,58 @@ $('h1').toggleClass('turnBlue');
 
 ### 5.1.6. [Events](https://api.jquery.com/category/events/)
 
--   Event `click()`
+- Event `click()`
 
 ```js
 // Event 'Click'
 $('h1').click(function (e) {
-    console.log('There was a click!');
+  console.log('There was a click!');
 });
 
 // Grap multiple event
 $('li').click(function (e) {
-    console.log('any li was clicked!');
+  console.log('any li was clicked!');
 });
 ```
 
--   `this` key word: `this` means any object we selected, here is 'h1'
+- `this` key word: `this` means any object we selected, here is 'h1'
 
 ```js
 // use 'this' key word
 $('h1').dblclick(function (e) {
-    //
-    $(this).text('Double click is triggered');
-    console.log($(this).text());
+  //
+  $(this).text('Double click is triggered');
+  console.log($(this).text());
 });
 ```
 
--   Event `keypress()` : Each key has number code that stored in event.which()
+- Event `keypress()` : Each key has number code that stored in event.which()
 
 ```js
 // Key press
 $('input')
-    .eq(0)
-    .keypress(function (event) {
-        // Each key has number code that stored in event.which()
-        // 'enter' = 13
-        if (event.which === 13) {
-            console.log(event);
-            $('h3').toggleClass('turnBlue');
-        }
-    });
+  .eq(0)
+  .keypress(function (event) {
+    // Each key has number code that stored in event.which()
+    // 'enter' = 13
+    if (event.which === 13) {
+      console.log(event);
+      $('h3').toggleClass('turnBlue');
+    }
+  });
 ```
 
--   `on()` : `on()` method essentially act like addEventListener
+- `on()` : `on()` method essentially act like addEventListener
 
 ```js
 // on()
 $('h1').on('dblclick', function () {
-    $(this).toggleClass('turnBlue');
+  $(this).toggleClass('turnBlue');
 });
 
 // grap mouseEnter using on()
 $('h1').on('mouseenter', function () {
-    $(this).toggleClass('turnBlue');
+  $(this).toggleClass('turnBlue');
 });
 ```
 
@@ -988,14 +990,14 @@ $('h1').on('mouseenter', function () {
 ```js
 // event animation
 $('input')
-    .eq(1)
-    .on('click', function () {
-        // grap every thing in the `.container` class
-        // fadeOut(x), make selector disappear in x milleseconds
-        // $(".container").fadeOut(1000);
-        // slideUp()
-        $('.container').slideUp(1000);
-    });
+  .eq(1)
+  .on('click', function () {
+    // grap every thing in the `.container` class
+    // fadeOut(x), make selector disappear in x milleseconds
+    // $(".container").fadeOut(1000);
+    // slideUp()
+    $('.container').slideUp(1000);
+  });
 ```
 
 # 6. Appendix
@@ -1015,24 +1017,40 @@ $('input')
 
 ## Data Structure
 
--   Project 1(F6)
-    -   Function 1(GGF)
-        -   Load 1 (Configuration ID <- Dilivery Letter)
-            -   Process 1
-                -   Module 1 (file.cpp)
-                    -   Methode 1
-                        -   Code Line Number 1
-                        -   Code Line Number 2
-                        -   ...
-                    -   Methode 2
-                    -   ...
-                -   Module 2
-                -   ...
-            -   Process 2
-            -   ...
-        -   Load 2
-        -   ...
-    -   Function 2(MWF)
-    -   ...
--   Project 2
--   ...
+- Project 1(F6)
+  - Function 1(GGF)
+    - Load 1 (Configuration ID <- Dilivery Letter)
+      - Process 1
+        - Module 1 (file.cpp)
+          - Methode 1
+            - Code Line Number 1
+            - Code Line Number 2
+            - ...
+          - Methode 2
+          - ...
+        - Module 2
+        - ...
+      - Process 2
+      - ...
+    - Load 2
+    - ...
+  - Function 2(MWF)
+  - ...
+- Project 2
+- ...
+
+# Data Management
+
+> ### Dev Notes
+>
+> 定义 SCGA work flow 过程中需要用到的数据，以及他们之间的关系后（数据结构），我们需要定义从各个数据的数据源导入数据到后台(admin)的方法，由于这种交互是在后台进行的，我需要 Django `admin.model` 的各项特性，以便调用或定义各项数据。
+>
+> 从目前的理解来看， `admin.model` 可以为`model`定义的数据在交互，显示方面提供一些定制化的手段，那在基本的数据结构已经定义好的情况下，应该通过定义`admin.class` 解决下面几个问题：
+>
+> - [ ] 用过内联(`inline`)来表现出数据之间的从属关系
+> - [ ] 修改单个数据的显示方案
+> - [ ] 定义导入数据的方法 (`Import`)
+> - [ ] 定义数据过滤的方法(`Filter`)
+> - [ ] 定义查询数据方法 (`Search`)
+
+## INLINE
