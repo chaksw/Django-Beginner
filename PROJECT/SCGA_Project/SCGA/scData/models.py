@@ -7,6 +7,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 class Project(models.Model):
+    id = models.AutoField(primary_key=True, unique=True)
     project = models.CharField(verbose_name="Project", max_length=50)
     # projectID = models.IntegerField(unique=True, primary_key=True)
 
@@ -25,6 +26,7 @@ class Project(models.Model):
 
 
 class Functionality(models.Model):
+    id = models.AutoField(primary_key=True, unique=True)
     func = models.CharField(verbose_name="Function", max_length=10)
     # funcID = models.IntegerField(unique=True, primary_key=True)
     # Certification = models.ForeignKey(
@@ -33,10 +35,11 @@ class Functionality(models.Model):
         'Project', on_delete=models.CASCADE, db_column='Project')
 
     def __str__(self) -> str:
-        return f"{self.func}"
+        return f"{self.func}({self.Project})"
 
 
 class Load(models.Model):
+    id = models.AutoField(primary_key=True, unique=True)
     load = models.CharField(verbose_name="Load", max_length=50)
     # loadID = models.IntegerField(unique=True, primary_key=True)
     Func = models.ForeignKey(
@@ -52,17 +55,98 @@ class Load(models.Model):
 # Each row of Test Plan a coverage of MC/DC and Event of a specific function
 # for those functions that are not covered according to SCGA, we can use Test Exception to record the reason
 
+class TestPlan(models.Model):
+    # Function in file
+    func = models.CharField(verbose_name="Function", max_length=100, primary_key=True, unique=True)
+    LEVEL_OPT = {
+        ('A', 'A'),
+        ('B', 'B'),
+        ('C', 'C'),
+    }
+    level = models.CharField(verbose_name="Level",
+                             max_length=2, choices=LEVEL_OPT, default='A')
+    # Process like (GgfPfd Mws...)
+    process = models.CharField(verbose_name="Process", max_length=50)
+    # File Name(x.cpp)
+    fName = models.CharField(verbose_name="File Name", max_length=50)
+   
+    # Load Number
+    swLoad = models.ForeignKey(
+        'Load', on_delete=models.CASCADE, db_column='Load')
+    # Analyst
+    analyst = models.CharField(verbose_name="Analyst", max_length=50)
+    SITE_OPT = {
+        ('Beijing', 'Beijing(EDS)'),
+        ('Shanghai', 'Shanghai(EDS)'),
+        ('Hyderabad', 'Hyderabad(EDS)'),
+        ('Bangalire', 'Bangalire(EDS)'),
+        ('Madurai', 'Madurai(EDS)'),
+        ('Moscow', 'BARS-Moscow(All Avionics)'),
+        ('Kursk', 'BARS-Kursk(All Avionics)'),
+        ('Taganrog', 'BARS-Taganrog(EDS)'),
+        ('Kaluga', 'BARS-Kaluga(EDS)'),
+        ('Tambov', 'BARS-Tambov'),
+        ('Puetro Rico', 'Puetro Rico'),
+        ('Info-Tech', 'Info-Tech'),
+    }
+    # Work Site of Analyst
+    site = models.CharField(verbose_name="Site", max_length=100, choices=SITE_OPT)
+    # Date of Test
+    startDate = models.DateTimeField(verbose_name="Start Date")
+    # Data field that recored the precentage of coverage of test
+    PRECENTAGE_VALIDATOR = [MinValueValidator(0.0), MaxValueValidator(100.0)]
+    mcdcCoverage = models.DecimalField(
+        verbose_name="MC/DC Coverage", max_digits=4, decimal_places=4, validators=PRECENTAGE_VALIDATOR)
+    analysisCoverage = models.DecimalField(
+        verbose_name="Analysis Coverage", max_digits=4, decimal_places=4, validators=PRECENTAGE_VALIDATOR)
+    totalScCoverage = models.DecimalField(
+        verbose_name="Total SC Coverage", max_digits=4, decimal_places=4, validators=PRECENTAGE_VALIDATOR)
+
+    # Module Structure Data (Branches and Entries/Exits)
+    # Covered Branches
+    coveredBranches = models.IntegerField(verbose_name="Covered Branches")
+    # Covered Pairs
+    coveredPairs = models.IntegerField(verbose_name="Covered Pairs")
+    # Covered Statements
+    coveredStatements = models.IntegerField(verbose_name="Covered Statements")
+    # Total Branches
+    totalBranches = models.IntegerField(verbose_name="Total Branches")
+    # Total Pairs
+    totalPairs = models.IntegerField(verbose_name="Total Pairs")
+    # Total Statements
+    totalStatements = models.IntegerField(verbose_name="Total Statements")
+    
+
+    # OverSight
+    YorN = (
+        ('Y', 'Yes'),
+        ('N', 'No'),
+        (' ', ' '),
+    )
+    overSight = models.CharField(max_length=3, choices=YorN, default=' ')
+
+    # Defect Classification
+    tech = models.CharField(verbose_name="Tech",
+                            max_length=50, null=True, blank=True)
+    nonTech = models.CharField(
+        verbose_name="Non-Tech", max_length=50, null=True, blank=True)
+    processDefect = models.CharField(
+        verbose_name="Process Defect", max_length=50, null=True, blank=True)
+
 # Test Exception recored the reason why a specific function is not covered according to SCGA
 class TestException(models.Model):
+    id = models.AutoField(primary_key=True, unique=True)
     # create fields with data named as: note_, module_, function_ line_ reqTag_ analyst_ class_
     # analysisSummary_, correctiveAction_, issue_ with 'Y/N' choices, applicable_ with 'PAR/CR'
-    note = models.CharField(verbose_name="Note", max_length=50)
+    # note = models.CharField(verbose_name="Note", max_length=50)
     module = models.CharField(verbose_name="Module", max_length=50)
     function = models.CharField(verbose_name="Function", max_length=50)
-    line = models.CharField(verbose_name="Line", max_length=500)
+    SWline = models.CharField(verbose_name="Uncoverd SW Line", max_length=50)
+    InsSWline = models.TextField(verbose_name="Uncoverd Instrumented SW Line", max_length=500)
     reqTag = models.CharField(verbose_name="Requirement Tag", max_length=500)
     analyst = models.CharField(verbose_name="Analyst", max_length=50)
-
+    testPlan = models.ForeignKey(
+        'TestPlan', on_delete=models.CASCADE, db_column='TestPlan')
     CLASS_OPTIONS = (('IT', 'Incomplete Test'),
                      ('RCM', 'Requirement-Code Mismatch'),
                      ('DeactCode', 'Deactivated Code'),
@@ -75,9 +159,9 @@ class TestException(models.Model):
     # UnCovered Category
     ucClassification = models.CharField(verbose_name="Class",
                                         max_length=100, choices=CLASS_OPTIONS, default=' ')
-    analysisSummary = models.CharField(
+    analysisSummary = models.TextField(
         verbose_name="Analysis Summary", max_length=1000, null=True, blank=True)
-    correctiveAction = models.CharField(
+    correctiveAction = models.TextField(
         verbose_name="Corrective Action", max_length=300, default='No corrective action required.', null=True, blank=True)
     Y_OR_N = (
         ('Y', 'Yes'),
@@ -85,7 +169,7 @@ class TestException(models.Model):
         (' ', ' '),
     )
     issue = models.CharField(
-        verbose_name="Issue", choices=Y_OR_N, max_length=10, default='No corrective action required.')
+        verbose_name="Issue", choices=Y_OR_N, max_length=10, default=' ')
 
     PAR_OR_CR = (
         ('PAR', 'PAR'),
@@ -94,80 +178,3 @@ class TestException(models.Model):
     )
     applicable = models.CharField(
         verbose_name="Applicable", max_length=10, choices=PAR_OR_CR, default='N/A')
-
-
-class TestPlan(models.Model):
-    # create choices with A|B|C
-    LEVEL_OPT = {
-        ('A', 'A'),
-        ('B', 'B'),
-        ('C', 'C'),
-    }
-    level = models.CharField(verbose_name="Level",
-                             max_length=2, choices=LEVEL_OPT, default='A', null=True, blank=True)
-    # Process like (GgfPfd Mws...)
-    process = models.CharField(verbose_name="Process", max_length=50)
-    # File Name(x.cpp)
-    fName = models.CharField(verbose_name="File Name", max_length=50)
-    # Function in file
-    func = models.CharField(verbose_name="Function", max_length=50)
-    # Load Number
-    swLoad = models.ForeignKey(
-        'Load', on_delete=models.CASCADE, db_column='Load')
-    # Analyst
-    analyst = models.CharField(verbose_name="Analyst", max_length=50)
-    # Work Site of Analyst
-    site = models.CharField(verbose_name="Site", max_length=50)
-    # Date of Test
-    startDate = models.DateTimeField(verbose_name="Start Date")
-    # Data field that recored the precentage of coverage of test
-    PRECENTAGE_VALIDATOR = [MinValueValidator(0.0), MaxValueValidator(100.0)]
-    mcdcCoverage = models.DecimalField(
-        verbose_name="MC/DC Coverage", max_digits=4, decimal_places=2, validators=PRECENTAGE_VALIDATOR)
-    eventCoverage = models.DecimalField(
-        verbose_name="Event Coverage", max_digits=4, decimal_places=2, validators=PRECENTAGE_VALIDATOR)
-    analysisCoverage = models.DecimalField(
-        verbose_name="Analysis Coverage", max_digits=4, decimal_places=2, validators=PRECENTAGE_VALIDATOR)
-    totalScCoverage = models.DecimalField(
-        verbose_name="Total SC Coverage", max_digits=4, decimal_places=2, validators=PRECENTAGE_VALIDATOR)
-    # execution Statue
-    branches = models.IntegerField(verbose_name="Branches")
-    events = models.IntegerField(verbose_name="Events")
-    note = models.CharField(verbose_name="Note", max_length=50)
-    testException = models.OneToOneField(
-        TestException, on_delete=models.CASCADE, null=True, blank=True, verbose_name="Test Exception")
-    # note = models.OneToOneField(TestException, on_delete=models.CASCADE)
-
-    # Module Structure Data (Branches and Entries/Exits)
-    # Covered Decisions
-    coveredDecisions = models.IntegerField(verbose_name="Covered Decisions")
-    # Covered Conditions
-    coveredConditons = models.IntegerField(verbose_name="Covered Conditions")
-    # Covered Cases
-    coveredCases = models.IntegerField(verbose_name="Covered Cases")
-    # Covered Events
-    coveredEvents = models.IntegerField(verbose_name="Covered Events")
-    # Total Decisions
-    totalDecisions = models.IntegerField(verbose_name="Total Decisions")
-    # Total Conditions
-    totalConditions = models.IntegerField(verbose_name="Total Conditions")
-    # Total Cases
-    totalCases = models.IntegerField(verbose_name="Total Cases")
-    # Total Events
-    totalEvents = models.IntegerField(verbose_name="Total Events")
-
-    # OverSight
-    YorN = (
-        ('Y', 'Yes'),
-        ('N', 'No'),
-        (' ', ' '),
-    )
-    overSight = models.CharField(max_length=1, choices=YorN, default=' ')
-
-    # Defect Classification
-    tech = models.CharField(verbose_name="Tech",
-                            max_length=50, null=True, blank=True)
-    nonTech = models.CharField(
-        verbose_name="Non-Tech", max_length=50, null=True, blank=True)
-    processDefect = models.CharField(
-        verbose_name="Process Defect", max_length=50, null=True, blank=True)

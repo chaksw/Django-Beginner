@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',  # jazzmin app
     'scData.apps.ScdataConfig',  # scData app
     'django.contrib.admin',  # administartor site
     'django.contrib.auth',  # authentication system
@@ -122,3 +123,8 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Jazzmin settings
+JAZZMIN_SETTINGS = {
+    "welcome_sign": "Welcome to SCGA Admin Panel",
+}
