@@ -54,7 +54,7 @@
 - [Django Project -SCGA](#django-project--scga)
   - [Data Structure](#data-structure)
 - [Data Management](#data-management)
-  - [INLINE](#inline)
+  - [Admin Site](#admin-site)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -1053,4 +1053,9 @@ $('input')
 > - [ ] 定义数据过滤的方法(`Filter`)
 > - [ ] 定义查询数据方法 (`Search`)
 
-## INLINE
+## Admin Site
+
+Thrid Party Plugin
+
+1. <a href="https://django-jazzmin.readthedocs.io/">Jazzmin<a>
+2. <a href="https://github.com/crccheck/django-object-actions">Django-object-actions</a> To-be-used

@@ -71,8 +71,8 @@ class TestPlan(models.Model):
     fName = models.CharField(verbose_name="File Name", max_length=50)
    
     # Load Number
-    swLoad = models.ForeignKey(
-        'Load', on_delete=models.CASCADE, db_column='Load')
+    swLoad = models.ForeignKey(verbose_name= "Software Load",
+        to = 'Load', on_delete=models.CASCADE, db_column='Load')
     # Analyst
     analyst = models.CharField(verbose_name="Analyst", max_length=50)
     SITE_OPT = {
@@ -132,6 +132,11 @@ class TestPlan(models.Model):
         verbose_name="Non-Tech", max_length=50, null=True, blank=True)
     processDefect = models.CharField(
         verbose_name="Process Defect", max_length=50, null=True, blank=True)
+    
+    
+    def __str__(self):
+        return f"[{self.level}]-{self.func}"
+    
 
 # Test Exception recored the reason why a specific function is not covered according to SCGA
 class TestException(models.Model):
@@ -178,3 +183,6 @@ class TestException(models.Model):
     )
     applicable = models.CharField(
         verbose_name="Applicable", max_length=10, choices=PAR_OR_CR, default='N/A')
+    
+    def __str__(self) -> str:
+        return f"<{self.function}> \n {self.reqTag}"

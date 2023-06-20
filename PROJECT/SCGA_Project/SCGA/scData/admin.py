@@ -3,6 +3,8 @@ from .models import Project, Functionality, Load, TestPlan, TestException
 # Register your models here.
 admin.site.site_header = 'SCGA Admin Panel'
 
+# add reset password
+
 
 
 class FunctionalityInline(admin.TabularInline):
@@ -54,7 +56,7 @@ class TestPlanAdmin(admin.ModelAdmin):
     fieldsets = [
         ('Test Plan', {'fields': ['func','level', 'process', 'fName',
                             'swLoad', 'analyst', 'site', 'startDate']}),
-        ("Advanced options", {
+        ("Coverage Result", {
             "classes":["collapse"],
             "fields": ["mcdcCoverage", "analysisCoverage", "totalScCoverage", "coveredBranches", "coveredPairs", "coveredStatements", "totalBranches", "totalPairs", "totalStatements",
                        "overSight", "tech", "nonTech", "processDefect"]},)      
@@ -72,10 +74,11 @@ class TestExceptionAdmin(admin.ModelAdmin):
                     'reqTag', 'analyst', 'ucClassification', 'testPlan')
     fieldsets = [
         ('Test Exception', {'fields': ['module', 'function', 'SWline', 'InsSWline', 'reqTag', 'analyst', 'ucClassification', 'testPlan']}),
-        ("Advanced options", {
+        ("Analysis Fields", {
             "classes": ["collapse"],
             "fields": ["analysisSummary", "correctiveAction", "issue", "applicable"]},),
     ]
+    list_display_links = ["function"]
     
     
 
