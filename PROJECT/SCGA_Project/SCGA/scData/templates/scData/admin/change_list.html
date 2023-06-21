@@ -1,0 +1,8 @@
+{% {% extends 'admin/change_list.html' %}} {% load i18n static %} {% block
+object-tools-items %} {{block.super}} {% comment %} add 'import' button {%
+endcomment %}
+<li>
+  <a href="{% url 'admin:index' %}" class="addlink">Import</a>
+</li>
+
+{% endblock %}

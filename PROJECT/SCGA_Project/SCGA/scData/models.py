@@ -5,7 +5,44 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 # Base One-Many Relationship: Project -> Certification -> Functionality -> Load
 
+# Options
+Y_OR_N = {
+    ('Y', 'Yes'),
+    ('N', 'No'),
+    (' ', ' '),
+}
 
+LEVEL_OPT = {
+    ('A', 'A'),
+    ('B', 'B'),
+    ('C', 'C'),
+}
+
+CLASS_OPTIONS = {
+    ('IT', 'Incomplete Test'),
+    ('RCM', 'Requirement-Code Mismatch'),
+    ('DeactCode', 'Deactivated Code'),
+    ('DefenCode', 'Defensive Code'),
+    ('TEL', 'Test Environment Limitation'),
+    ('PAS', 'Previously Analyzed Software'),
+    ('other', 'Other'),
+    (' ', ' ')
+}
+
+SITE_OPT = {
+    ('Beijing', 'Beijing(EDS)'),
+    ('Shanghai', 'Shanghai(EDS)'),
+    ('Hyderabad', 'Hyderabad(EDS)'),
+    ('Bangalire', 'Bangalire(EDS)'),
+    ('Madurai', 'Madurai(EDS)'),
+    ('Moscow', 'BARS-Moscow(All Avionics)'),
+    ('Kursk', 'BARS-Kursk(All Avionics)'),
+    ('Taganrog', 'BARS-Taganrog(EDS)'),
+    ('Kaluga', 'BARS-Kaluga(EDS)'),
+    ('Tambov', 'BARS-Tambov'),
+    ('Puetro Rico', 'Puetro Rico'),
+    ('Info-Tech', 'Info-Tech'),
+}
 class Project(models.Model):
     id = models.AutoField(primary_key=True, unique=True)
     project = models.CharField(verbose_name="Project", max_length=50)
@@ -58,11 +95,7 @@ class Load(models.Model):
 class TestPlan(models.Model):
     # Function in file
     func = models.CharField(verbose_name="Function", max_length=100, primary_key=True, unique=True)
-    LEVEL_OPT = {
-        ('A', 'A'),
-        ('B', 'B'),
-        ('C', 'C'),
-    }
+    
     level = models.CharField(verbose_name="Level",
                              max_length=2, choices=LEVEL_OPT, default='A')
     # Process like (GgfPfd Mws...)
@@ -75,20 +108,7 @@ class TestPlan(models.Model):
         to = 'Load', on_delete=models.CASCADE, db_column='Load')
     # Analyst
     analyst = models.CharField(verbose_name="Analyst", max_length=50)
-    SITE_OPT = {
-        ('Beijing', 'Beijing(EDS)'),
-        ('Shanghai', 'Shanghai(EDS)'),
-        ('Hyderabad', 'Hyderabad(EDS)'),
-        ('Bangalire', 'Bangalire(EDS)'),
-        ('Madurai', 'Madurai(EDS)'),
-        ('Moscow', 'BARS-Moscow(All Avionics)'),
-        ('Kursk', 'BARS-Kursk(All Avionics)'),
-        ('Taganrog', 'BARS-Taganrog(EDS)'),
-        ('Kaluga', 'BARS-Kaluga(EDS)'),
-        ('Tambov', 'BARS-Tambov'),
-        ('Puetro Rico', 'Puetro Rico'),
-        ('Info-Tech', 'Info-Tech'),
-    }
+    
     # Work Site of Analyst
     site = models.CharField(verbose_name="Site", max_length=100, choices=SITE_OPT)
     # Date of Test
@@ -117,13 +137,7 @@ class TestPlan(models.Model):
     totalStatements = models.IntegerField(verbose_name="Total Statements")
     
 
-    # OverSight
-    YorN = (
-        ('Y', 'Yes'),
-        ('N', 'No'),
-        (' ', ' '),
-    )
-    overSight = models.CharField(max_length=3, choices=YorN, default=' ')
+    overSight = models.CharField(max_length=3, choices=Y_OR_N, default=' ')
 
     # Defect Classification
     tech = models.CharField(verbose_name="Tech",
@@ -143,7 +157,6 @@ class TestException(models.Model):
     id = models.AutoField(primary_key=True, unique=True)
     # create fields with data named as: note_, module_, function_ line_ reqTag_ analyst_ class_
     # analysisSummary_, correctiveAction_, issue_ with 'Y/N' choices, applicable_ with 'PAR/CR'
-    # note = models.CharField(verbose_name="Note", max_length=50)
     module = models.CharField(verbose_name="Module", max_length=50)
     function = models.CharField(verbose_name="Function", max_length=50)
     SWline = models.CharField(verbose_name="Uncoverd SW Line", max_length=50)
@@ -152,15 +165,7 @@ class TestException(models.Model):
     analyst = models.CharField(verbose_name="Analyst", max_length=50)
     testPlan = models.ForeignKey(
         'TestPlan', on_delete=models.CASCADE, db_column='TestPlan')
-    CLASS_OPTIONS = (('IT', 'Incomplete Test'),
-                     ('RCM', 'Requirement-Code Mismatch'),
-                     ('DeactCode', 'Deactivated Code'),
-                     ('DefenCode', 'Defensive Code'),
-                     ('TEL', 'Test Environment Limitation'),
-                     ('PAS', 'Previously Analyzed Software'),
-                     ('other', 'Other'),
-                     (' ', ' ')
-                     )
+    
     # UnCovered Category
     ucClassification = models.CharField(verbose_name="Class",
                                         max_length=100, choices=CLASS_OPTIONS, default=' ')
@@ -168,11 +173,7 @@ class TestException(models.Model):
         verbose_name="Analysis Summary", max_length=1000, null=True, blank=True)
     correctiveAction = models.TextField(
         verbose_name="Corrective Action", max_length=300, default='No corrective action required.', null=True, blank=True)
-    Y_OR_N = (
-        ('Y', 'Yes'),
-        ('N', 'No'),
-        (' ', ' '),
-    )
+    
     issue = models.CharField(
         verbose_name="Issue", choices=Y_OR_N, max_length=10, default=' ')
 

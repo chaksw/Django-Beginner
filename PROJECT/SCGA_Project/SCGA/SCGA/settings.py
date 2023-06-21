@@ -31,8 +31,10 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'jazzmin',  # jazzmin app
+    # 'jazzmin',  # jazzmin app
     'scData.apps.ScdataConfig',  # scData app
+    'django_object_actions',
+    'admin_extra_buttons',
     'django.contrib.admin',  # administartor site
     'django.contrib.auth',  # authentication system
     'django.contrib.contenttypes',  # content type system
