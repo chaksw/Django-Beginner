@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
 from pathlib import Path
+# import admin_tools
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,10 +32,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    # 'jazzmin',  # jazzmin app
+    'jazzmin',  # jazzmin app
     'scData.apps.ScdataConfig',  # scData app
-    'django_object_actions',
-    'admin_extra_buttons',
     'django.contrib.admin',  # administartor site
     'django.contrib.auth',  # authentication system
     'django.contrib.contenttypes',  # content type system
@@ -67,6 +66,12 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            # 'loaders':[
+            #     'admin_tools.template_loaders.Loader',
+            #     ('django.template.loaders.cached.Loader', [
+            #         'django.template.loaders.filesystem.Loader',
+            #         'django.template.loaders.app_directories.Loader',]),
+            # ]
         },
     },
 ]
