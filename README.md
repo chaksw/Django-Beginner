@@ -51,10 +51,13 @@
 - [6. Appendix](#6-appendix)
   - [6.1. Extensions](#61-extensions)
   - [6.2. Git plugs](#62-git-plugs)
-- [Django Project -SCGA](#django-project--scga)
-  - [Data Structure](#data-structure)
-- [Data Management](#data-management)
-  - [Admin Site](#admin-site)
+- [7. Django Project -SCGA](#7-django-project--scga)
+  - [7.1. Data Structure](#71-data-structure)
+- [8. Data Management](#8-data-management)
+  - [8.1. Admin Site (Override admin template)](#81-admin-site-override-admin-template)
+    - [Override admin tempalte](#override-admin-tempalte)
+    - [CSS Override](#css-override)
+    - [Thrid Party Plugins](#thrid-party-plugins)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -761,10 +764,10 @@ One of its main features is the use of `$`.
 
 ```js
 // jQuery
-let divs = $('div');
+let divs = $("div");
 
 // Vanilla
-let divs = documents.querySelectorAll('div');
+let divs = documents.querySelectorAll("div");
 ```
 
 In situation we actullay want to edit the **styling** of a certain variable called `el`.
@@ -773,19 +776,19 @@ In situation we actullay want to edit the **styling** of a certain variable call
 
 ```js
 // jQuery
-$(el).css('border-width', '20px');
+$(el).css("border-width", "20px");
 
 // Vanilla
-el.style.borderWidth = '20px';
+el.style.borderWidth = "20px";
 
 // Styling element with css style object
 const newCss = {
-  color: 'white',
-  background: 'green',
-  border: '20px solid red',
+  color: "white",
+  background: "green",
+  border: "20px solid red",
 };
 
-let list = $('h1');
+let list = $("h1");
 list.css(newCss);
 ```
 
@@ -797,10 +800,10 @@ $(document).ready(function () {});
 
 // Vanilla
 function ready(fn) {
-  if (document.readyState != 'loading') {
+  if (document.readyState != "loading") {
     fn();
   } else {
-    document.addEventListener('DOMConetentLoaded', fn);
+    document.addEventListener("DOMConetentLoaded", fn);
   }
 }
 ```
@@ -873,24 +876,24 @@ function ready(fn) {
 ```js
 // Styling element with css style object
 const newCss = {
-  color: 'white',
-  background: 'green',
-  border: '20px solid red',
+  color: "white",
+  background: "green",
+  border: "20px solid red",
 };
 
-let list = $('h1');
+let list = $("h1");
 list.css(newCss);
 ```
 
 ### 5.1.2. Styling element in list
 
 ```js
-var listItems = $('li');
+var listItems = $("li");
 // use .eq to index element in list
-listItems.eq(0).css('color', 'orange');
+listItems.eq(0).css("color", "orange");
 
 // negative index for last elemnt
-listItems.eq(-1).css('color', 'orange');
+listItems.eq(-1).css("color", "orange");
 ```
 
 ### 5.1.3. Grap content using jQuery
@@ -899,20 +902,20 @@ The JQuery `html()` and `text()` methods are two methods that you can use to get
 `html()` is used to return or change the **html** and **text** content of an element. `text()` can only return or change the text content of an element.
 
 ```js
-$('h1').text();
+$("h1").text();
 // Change text in page (temporatry)
-$('h1').text('Brand New Text');
+$("h1").text("Brand New Text");
 // Actullay change html
-$('h1').html('<em>New</em>');
+$("h1").html("<em>New</em>");
 ```
 
 ### 5.1.4. Change attribute
 
 ```js
 // change attribute 'type' from 'submit' to 'checkbox'
-$('input').eq(1).attr('type', 'checkbox');
+$("input").eq(1).attr("type", "checkbox");
 // change attribute 'value'
-$('input').eq(0).val('new value');
+$("input").eq(0).val("new value");
 ```
 
 ### 5.1.5. Add `css` class into `html`
@@ -921,11 +924,11 @@ We add add the pre-defined `css` class in to element using `addClass()`, and use
 
 ```js
 // add class
-$('h1').addClass('turnRed');
+$("h1").addClass("turnRed");
 // remove class
-$('h1').removeClass('turnRed');
+$("h1").removeClass("turnRed");
 // toggle class
-$('h1').toggleClass('turnBlue');
+$("h1").toggleClass("turnBlue");
 ```
 
 ### 5.1.6. [Events](https://api.jquery.com/category/events/)
@@ -934,13 +937,13 @@ $('h1').toggleClass('turnBlue');
 
 ```js
 // Event 'Click'
-$('h1').click(function (e) {
-  console.log('There was a click!');
+$("h1").click(function (e) {
+  console.log("There was a click!");
 });
 
 // Grap multiple event
-$('li').click(function (e) {
-  console.log('any li was clicked!');
+$("li").click(function (e) {
+  console.log("any li was clicked!");
 });
 ```
 
@@ -948,9 +951,9 @@ $('li').click(function (e) {
 
 ```js
 // use 'this' key word
-$('h1').dblclick(function (e) {
+$("h1").dblclick(function (e) {
   //
-  $(this).text('Double click is triggered');
+  $(this).text("Double click is triggered");
   console.log($(this).text());
 });
 ```
@@ -959,14 +962,14 @@ $('h1').dblclick(function (e) {
 
 ```js
 // Key press
-$('input')
+$("input")
   .eq(0)
   .keypress(function (event) {
     // Each key has number code that stored in event.which()
     // 'enter' = 13
     if (event.which === 13) {
       console.log(event);
-      $('h3').toggleClass('turnBlue');
+      $("h3").toggleClass("turnBlue");
     }
   });
 ```
@@ -975,13 +978,13 @@ $('input')
 
 ```js
 // on()
-$('h1').on('dblclick', function () {
-  $(this).toggleClass('turnBlue');
+$("h1").on("dblclick", function () {
+  $(this).toggleClass("turnBlue");
 });
 
 // grap mouseEnter using on()
-$('h1').on('mouseenter', function () {
-  $(this).toggleClass('turnBlue');
+$("h1").on("mouseenter", function () {
+  $(this).toggleClass("turnBlue");
 });
 ```
 
@@ -989,14 +992,14 @@ $('h1').on('mouseenter', function () {
 
 ```js
 // event animation
-$('input')
+$("input")
   .eq(1)
-  .on('click', function () {
+  .on("click", function () {
     // grap every thing in the `.container` class
     // fadeOut(x), make selector disappear in x milleseconds
     // $(".container").fadeOut(1000);
     // slideUp()
-    $('.container').slideUp(1000);
+    $(".container").slideUp(1000);
   });
 ```
 
@@ -1013,9 +1016,9 @@ $('input')
 
 1. <a href="https://github.com/git-ecosystem/git-credential-manager">git credential manager</a>
 
-# Django Project -SCGA
+# 7. Django Project -SCGA
 
-## Data Structure
+## 7.1. Data Structure
 
 - Project 1(F6)
   - Function 1(GGF)
@@ -1039,7 +1042,7 @@ $('input')
 - Project 2
 - ...
 
-# Data Management
+# 8. Data Management
 
 > ### Dev Notes
 >
@@ -1053,9 +1056,44 @@ $('input')
 > - [ ] 定义数据过滤的方法(`Filter`)
 > - [ ] 定义查询数据方法 (`Search`)
 
-## Admin Site
+## 8.1. Admin Site (Override admin template)
 
-Thrid Party Plugin
+The build-in Admin template of Django is located in _site-packages/django/contrib/admin/templates_ (use `tree /f` to see the structure).
+
+- `base.html`: main page of admin site (Create override in here)
+
+### Override admin tempalte
+
+1. create `templates` folder in project (same level as `mamage.py`)
+2. set up directory for template in `setting.py` (as below)
+
+```python
+import os
+...
+TEMPLATES = [
+    {
+        ...
+        'DIRS': [os.path.join(BASE_DIR,'templates/')],
+        ...
+    },
+]
+```
+
+3. add `admin` folder (`templates/admin`)
+4. create admin template files in admin folder replicate with _site-packages/django/contrib/admin/templates/admin/_
+
+With actions above the template we create will override the default template file.
+
+### CSS Override
+
+CSS style is located in _site-packages/django/contrib/admin/static/admin/css_, to override we will do the similar thing as well as we did for template
+
+1. create `static` folder in porject (same level as `manage.py`)
+2. create `admin` folder under `static`
+3. create `css` folder under `admin` (this 3 steps is to be replicate with _site-packages/django/contrib/admin/static/admin/css_)
+4. create corresponding css file (example: `base.css`)
+
+### Thrid Party Plugins
 
 1. <a href="https://django-jazzmin.readthedocs.io/">Jazzmin<a>
 2. <a href="https://github.com/crccheck/django-object-actions">Django-object-actions</a> To-be-used
