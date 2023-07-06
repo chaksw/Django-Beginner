@@ -57,7 +57,7 @@
   - [8.1. Admin Site (Override admin template)](#81-admin-site-override-admin-template)
     - [Override admin tempalte](#override-admin-tempalte)
     - [CSS Override](#css-override)
-    - [Thrid Party Plugins](#thrid-party-plugins)
+      - [Configuration Bootstrap into project](#configuration-bootstrap-into-project)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -1093,7 +1093,17 @@ CSS style is located in _site-packages/django/contrib/admin/static/admin/css_, t
 3. create `css` folder under `admin` (this 3 steps is to be replicate with _site-packages/django/contrib/admin/static/admin/css_)
 4. create corresponding css file (example: `base.css`)
 
-### Thrid Party Plugins
+#### Configuration Bootstrap into project
 
-1. <a href="https://django-jazzmin.readthedocs.io/">Jazzmin<a>
-2. <a href="https://github.com/crccheck/django-object-actions">Django-object-actions</a> To-be-used
+```html
+{% block extrastyle %}
+<link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+  integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+  crossorigin="anonymous" />
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css" />
+{% endblock extrastyle %}
+```

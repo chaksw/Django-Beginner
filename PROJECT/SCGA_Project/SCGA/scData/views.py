@@ -4,4 +4,5 @@ from django.views.generic import TemplateView, ListView, DetailView, CreateView,
 
 
 # Create your views here.
-
+class HomeView(TemplateView):
+    template_name = 'scData/index.html'
