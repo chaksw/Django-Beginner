@@ -1,10 +1,12 @@
+from typing import List
+from django.urls.resolvers import URLPattern
 from .models import Project, Functionality, Load, TestPlan, TestException
 from django.contrib import admin
+from django.urls import path
+from django.shortcuts import render
 
 # Register your models here.
 admin.site.site_header = 'SCGA Admin Panel'
-
-
 
 
 class FunctionalityInline(admin.TabularInline):
@@ -89,6 +91,14 @@ class TestExceptionAdmin(admin.ModelAdmin):
             "fields": ["analysisSummary", "correctiveAction", "issue", "applicable"]},),
     ]
     list_display_links = ["function"]
+
+    def get_urls(self):
+        urls = super().get_urls()
+        import_urls = [path('import-data/', self.import_data),]
+        return import_urls + urls
+
+    def import_data(self, request):
+        return render(request, 'admin/data-import.html')
 
 
 # register all models imported from models using admin.site.register()
