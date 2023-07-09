@@ -49,24 +49,43 @@
                     </div>
                     <div class="modal-body">
                         <form>
-                            <div class="mb-3">
+                            <div class="mb-2">
+                                <label for="project-name" class="col-form-label"
+                                    >Project Name:
+                                </label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="project-name" />
+                            </div>
+                            <div class="mb-2">
                                 <label
-                                    for="recipient-name"
+                                    for="function-name"
                                     class="col-form-label"
-                                    >Recipient:</label
+                                    >Function Name:
+                                </label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="unction-name" />
+                            </div>
+                            <div class="mb-2">
+                                <label for="load-id" class="col-form-label"
+                                    >Load Number:</label
                                 >
                                 <input
                                     type="text"
                                     class="form-control"
-                                    id="recipient-name" />
+                                    id="load-id" />
                             </div>
                             <div class="mb-3">
-                                <label for="message-text" class="col-form-label"
-                                    >Message:</label
+                                <label for="SCGA-file" class="form-label"
+                                    >Select SCGA file...</label
                                 >
-                                <textarea
+                                <input
+                                    type="file"
                                     class="form-control"
-                                    id="message-text"></textarea>
+                                    id="SCGA-file" />
                             </div>
                         </form>
                     </div>
@@ -78,7 +97,7 @@
                             Close
                         </button>
                         <button type="button" class="btn btn-primary">
-                            Send message
+                            Import
                         </button>
                     </div>
                 </div>
