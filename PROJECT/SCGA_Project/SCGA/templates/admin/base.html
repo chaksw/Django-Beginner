@@ -54,7 +54,8 @@
                             aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form action="" method="POST">
+                            {% csrf_token %}
                             <div class="mb-2">
                                 <label for="project-name" class="col-form-label"
                                     >Project Name:
