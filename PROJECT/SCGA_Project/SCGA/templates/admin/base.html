@@ -57,7 +57,14 @@
                         <form action="" method="POST">
                             {% csrf_token %}
                             <div class="mb-2">
-                                <label for="project-name" class="col-form-label"
+                                {% comment %} <label for="{{ projectForm.project.id_for_label }}" class="col-form-label"
+                                    >Project Name:
+                                </label> 
+                                {{ projectForm.project.label_tag }}
+                                {{ projectForm.project }} {% endcomment %}
+                                <label
+                                    for="project-name"
+                                    class="col-form-label"
                                     >Project Name:
                                 </label>
                                 <input
@@ -74,7 +81,7 @@
                                 <input
                                     type="text"
                                     class="form-control"
-                                    id="unction-name" />
+                                    id="function-name" />
                             </div>
                             <div class="mb-2">
                                 <label for="load-id" class="col-form-label"
