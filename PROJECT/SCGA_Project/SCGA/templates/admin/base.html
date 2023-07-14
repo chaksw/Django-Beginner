@@ -6,7 +6,8 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>{% block title %}{% endblock title %}</title>
-        {% load i18n static %} {% block extrastyle %}
+        {% load i18n static %} 
+        {% block extrastyle %}
         <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
             rel="stylesheet"
@@ -15,23 +16,28 @@
         <link
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css" />
+        
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+            crossorigin="anonymous"></script>  
+        <script 
+            src="https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js"></script>
+        <script 
+            src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+        
         {% endblock extrastyle %}
     </head>
     <body>
         {% block usertools %}
         <div class="my-1 ms-lg-auto">
             <a
+                id="importBtn"
                 type="button"
                 class="btn btn-sm btn-outline-light"
                 data-bs-toggle="modal"
                 data-bs-target="#importModal">
                 IMPORT DATA
-            </a>
-            <a
-                href="import-data/"
-                type="button"
-                class="btn btn-sm btn-outline-light">
-                LINK
             </a>
         </div>
 
@@ -54,14 +60,9 @@
                             aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="" method="POST">
+                        <form method='post'>
                             {% csrf_token %}
                             <div class="mb-2">
-                                {% comment %} <label for="{{ projectForm.project.id_for_label }}" class="col-form-label"
-                                    >Project Name:
-                                </label> 
-                                {{ projectForm.project.label_tag }}
-                                {{ projectForm.project }} {% endcomment %}
                                 <label
                                     for="project-name"
                                     class="col-form-label"
@@ -70,7 +71,8 @@
                                 <input
                                     type="text"
                                     class="form-control"
-                                    id="project-name" />
+                                    id="project-name"
+                                    placeholder="CA22, F6X" />
                             </div>
                             <div class="mb-2">
                                 <label
@@ -81,7 +83,8 @@
                                 <input
                                     type="text"
                                     class="form-control"
-                                    id="function-name" />
+                                    id="function-name"
+                                    placeholder="GGF, MWF" />
                             </div>
                             <div class="mb-2">
                                 <label for="load-id" class="col-form-label"
@@ -90,7 +93,8 @@
                                 <input
                                     type="text"
                                     class="form-control"
-                                    id="load-id" />
+                                    id="load-id"
+                                    placeholder="xx_xxx(15_001)" />
                             </div>
                             <div class="mb-3">
                                 <label for="SCGA-file" class="form-label"
@@ -110,19 +114,16 @@
                             data-bs-dismiss="modal">
                             Close
                         </button>
-                        <button type="button" class="btn btn-primary">
-                            Import
+                        <button id="submitBtn" type="button" class="btn btn-primary">
+                            Submit
                         </button>
                     </div>
                 </div>
             </div>
         </div>
+        <script src="{% static 'js/base.js'' %}"></script>
         {{ block.super }}
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-            crossorigin="anonymous"></script>
-        <script src="{% static 'js/script.js'' %}"></script>
+        
         {% endblock %} {% block content_title %}
         <h3>SCGA Admin</h3>
 

@@ -1,24 +1,24 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
-from .forms import projectModalForm, functionalityModalForm, loadModalForm
+from .models import Project, Functionality, Load, TestPlan, TestException
 
 # Create your views here.
-class HomeView(TemplateView):
-    template_name = 'scData/index.html'
+def index(request):
+    projects = Project.objects.all()
+    functions = Functionality.objects.all()
+    loads = Load.objects.all()
+    testPlans = TestPlan.objects.all()
+    testExceptions = TestException.objects.all()
+    return render(request, 'index.html')
 
 
-def import_view(request):
-    if request.method == 'POST':
-        projectForm = projectModalForm(request.POST, prefix='projectModal')
-        funcForm = functionalityModalForm(request.POST, prefix='functionalityModal')
-        loadForm = loadModalForm(request.POST, prefix='loadModal')
-        if projectForm.is_valid() and funcForm.is_valid() and loadForm.is_valid():
-            projectForm.save()
-            print(projectForm.cleaned_data)
-    else:
-        projectForm = projectModalForm(prefix='projectModal')
-        funcForm = functionalityModalForm(prefix='functionalityModal')
-        loadForm = loadModalForm(prefix='loadModal')
+def importData(request):
+    projects = Project(proejct=request.POST['project'])
+    functions = Functionality(func=request.POST['function'])
+    loads = Load(load=request.POST['load'])
+    projects.save()
+    functions.save()
+    loads.save()
         
-    return render(request, 'admin/base.html', context={'projectForm':projectForm, 'funcForm':funcForm, 'loadForm':loadForm})
+    return redirect('admin/base.html')
