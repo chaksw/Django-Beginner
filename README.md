@@ -59,6 +59,7 @@
         -   [Override admin tempalte](#override-admin-tempalte)
         -   [CSS Override](#css-override)
             -   [Configuration Bootstrap into project](#configuration-bootstrap-into-project)
+    -   [SCGA Page Structure](#scga-page-structure)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -1134,3 +1135,11 @@ CSS style is located in _site-packages/django/contrib/admin/static/admin/css_, t
     href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css" />
 {% endblock extrastyle %}
 ```
+
+## SCGA Page Structure
+
+主页位于 project 的 template 下，有 3 个次分页,在 sidebar 中展示：
+
+1. workspace: 用于进行 SCGA 分析工作
+2. assigned SCGA: 用于展示导入的当前 load 的 SC 结果(RA, SC report, SCGA) (index.html)
+3. legacy SCGA: 用于展示相关的 Legacy load 的 SCGA

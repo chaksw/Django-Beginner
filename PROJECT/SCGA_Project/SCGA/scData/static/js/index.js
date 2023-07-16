@@ -1,28 +1,9 @@
 "strict";
-// get csrftoken
-// const getCookie = function (name) {
-//     let cookieValue = null;
-//     if (document.cookie && document.cookie != "") {
-//         let cookies = document.cookie.split(";");
-//         for (let i = 0; i < cookies.length; i++) {
-//             let cookie = jQuery.trim(cookies[i]);
-//             // Does this cookie string begin with the name we want?
-//             if (cookie.substring(0, name.length + 1) == name + "=") {
-//                 cookieValue = decodeURIComponent(
-//                     cookie.substring(name.length + 1)
-//                 );
-//                 break;
-//             }
-//         }
-//     }
-//     return cookieValue;
-// };
 
-// let csrftoken = getCookie("csrftoken");
+console.log("loaded");
 // get cookie using jQuery <js.cookie.min.js>
 const csrftoken = Cookies.get("csrftoken");
 console.log(csrftoken);
-// console.log("loaded");
 console.log($("input[name=csrfmiddlewaretoken]").val());
 
 // Ajax call
@@ -40,7 +21,6 @@ $.ajaxSetup({
     },
 });
 
-const importBtn = $("#importBtn");
 const submitBtn = $("#submitBtn");
 const submitForm = function () {
     // fetch form data
@@ -54,16 +34,18 @@ const submitForm = function () {
             function: $func,
             load: $load,
             csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
+            // csrfmiddlewaretoken: csrftoken,
         };
         // send AJAX request
         $.ajax({
-            url: "insert", // url that send request
+            url: "importData", // url that send request
             type: "POST", // type of request （GET|POST|PUT|DELETE)
             data: JSON.stringify(data), // data that request to send to server
             contentType: "application/json", // content that request, set 'application/json' if using json data
             // dataType: "json", // data type that server response
             success: function () {
                 alert("Data saved !");
+                console.log(data);
                 $("#project-name").val("");
                 $("#function-name").val("");
                 $("#load-id").val("");
@@ -83,5 +65,7 @@ const submitForm = function () {
 //     console.log("Form submit");
 // });
 $(document).ready(function () {
+    $("#scTable1").DataTable();
+    $("#scTable2").DataTable();
     submitBtn.on("click", submitForm);
 });

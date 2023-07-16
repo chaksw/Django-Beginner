@@ -17,21 +17,21 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include  # include added for scData.urls
 from django.contrib.auth import views as auth_views
-from scData import views
+from scData import views as scDataViews
 
 urlpatterns = [
+    # path('', views.home, name='home'),
+    # path('', scDataViews.index, name='index'),
+    path('', include('scData.urls')),
+    path('importData', scDataViews.importData, name='importData'),
     path('admin/', admin.site.urls),
+    # path('insert', views.insert),
     path('admin/password_reset/', auth_views.PasswordResetView.as_view(),
          name='admin_password_reset'),
     path('admin/password_reset/done/',
          auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
-    path('admin/', admin.site.urls),
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(),
          name='password_reset_confirm'),
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(),
          name='password_reset_complete'),
-    # indicate the created scData.urls file with name as 'scData'
-    # path('scData/', include('scData.urls')),
-    path("", views.index, name="index"),
-    path('importData/', views.importData, name='importData'),
 ]

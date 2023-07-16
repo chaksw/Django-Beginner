@@ -1,0 +1,66 @@
+{% extends "base.html" %} {% load static %} {% block scDataTable %}
+<div class="table-responsive m-4">
+    <table id="scTable2" class="table table-light table-hover table-bordered">
+        <caption class="caption-top">
+            Level C Test Exception
+        </caption>
+        <thead class="text-center align-items-start th-fs">
+            <tr>
+                <th scope="col" rowspan="2">#</th>
+                <th scope="col" colspan="2">EDS_GGF_GVII_01_006</th>
+                <th scope="col" colspan="7">Level # Coverage</th>
+                <th scope="col" rowspan="1" colspan="1">Issue</th>
+                <th scope="col" rowspan="1" colspan="1">Applicable</th>
+            </tr>
+            <tr>
+                <th scope="col">Note#</th>
+                <th scope="col">Module</th>
+                <th scope="col">Function</th>
+                <th scope="col">Line</th>
+                <th scope="col">Requirement Tag</th>
+                <th scope="col">Analyst</th>
+                <th scope="col"><a href="">Class</a></th>
+                <th scope="col">Analysis Summary</th>
+                <th scope="col">Corrective Action Summary</th>
+                <th scope="col">Y/T</th>
+                <th scope="col">PAR/CR #</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider tb-fs text-center align-middle">
+            <tr>
+                <th scope="row">1</th>
+                <td>GgfTcasS1</td>
+                <td>GgfTcasDspG.cpp</td>
+                <td>GgfTcasDspDraw</td>
+                <td>
+                    <p>
+                        962 to 964 977 to 979 992 to 994 995 to 1001 1001 to1009
+                        1012 to 1028
+                    </p>
+                </td>
+                <td>DDD A TCAS DRAW 05</td>
+                <td>Arun Behera</td>
+                <td>
+                    <a href="">Test Environment Limitations</a>
+                </td>
+                <td>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur, adipisicing
+                        elit. Magni architecto,
+                    </p>
+                </td>
+                <td>
+                    <p>
+                        Test By Inspection done in G7G_D03A_0004.tbi; Available
+                        at GVII\TEST\RFS_RESULTS under the WORKSET
+                        "EDS_GGF:_WORK_MAIN".
+                    </p>
+                </td>
+                <td></td>
+                <td>N/A</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+{% endblock scDataTable %}

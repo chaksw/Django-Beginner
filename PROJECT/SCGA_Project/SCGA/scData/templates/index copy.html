@@ -1,0 +1,469 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+            crossorigin="anonymous" />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css" />
+        <!-- Custom styles for this template -->
+        {% comment %}
+        <link href="../../static/css/style.css" rel="stylesheet" />
+        {% endcomment %}
+        <link href="{% static '/styles/style.css' %}" rel="stylesheet" />
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg bg-light fixed-top">
+            <div class="container-fluid flex-nowrap">
+                <div class="navbar-brand ms-2">
+                    <a href="/" class="link-body-emphasis text-decoration-none">
+                        <i class="bi bi-file-earmark-bar-graph fs-5"></i>
+                        <span class="fs-5">SCGA</span>
+                    </a>
+                </div>
+
+                <div class="bd-search">
+                    <div class="input-group btn-search" role="search">
+                        <input
+                            class="form-control flex-input"
+                            type="search"
+                            placeholder="Search for function"
+                            aria-label="Search" />
+                        <button class="btn btn-primary" type="submit">
+                            Search
+                        </button>
+                    </div>
+                </div>
+
+                <div>
+                    <button
+                        class="navbar-toggler fs-6 me-2"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarNav"
+                        aria-controls="navbarNav"
+                        aria-expanded="false"
+                        aria-label="Toggle Navigation">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="18"
+                            height="18"
+                            fill="currentColor"
+                            class="bi bi-three-dots"
+                            viewBox="0 0 16 16">
+                            <path
+                                d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="collapse navbar-collapse me-2" id="navbarNav">
+                    <ul class="navbar-nav flex-row flex-nowrap ms-md-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" title="Notification"
+                                ><svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="18"
+                                    height="18"
+                                    fill="currentColor"
+                                    class="bi bi-bell"
+                                    viewBox="0 0 16 16">
+                                    <path
+                                        d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" /></svg
+                            ></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" title="Setting"
+                                ><svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="18"
+                                    height="18"
+                                    fill="currentColor"
+                                    class="bi bi-gear"
+                                    viewBox="0 0 16 16">
+                                    <path
+                                        d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z" />
+                                    <path
+                                        d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z" /></svg
+                            ></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" title="Export"
+                                ><svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="18"
+                                    height="18"
+                                    fill="currentColor"
+                                    class="bi bi-download"
+                                    viewBox="0 0 16 16">
+                                    <path
+                                        d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                    <path
+                                        d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" /></svg
+                            ></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" title="Feedback"
+                                ><svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="18"
+                                    height="18"
+                                    fill="currentColor"
+                                    class="bi bi-patch-question"
+                                    viewBox="0 0 16 16">
+                                    <path
+                                        d="M8.05 9.6c.336 0 .504-.24.554-.627.04-.534.198-.815.847-1.26.673-.475 1.049-1.09 1.049-1.986 0-1.325-.92-2.227-2.262-2.227-1.02 0-1.792.492-2.1 1.29A1.71 1.71 0 0 0 6 5.48c0 .393.203.64.545.64.272 0 .455-.147.564-.51.158-.592.525-.915 1.074-.915.61 0 1.03.446 1.03 1.084 0 .563-.208.885-.822 1.325-.619.433-.926.914-.926 1.64v.111c0 .428.208.745.585.745z" />
+                                    <path
+                                        d="m10.273 2.513-.921-.944.715-.698.622.637.89-.011a2.89 2.89 0 0 1 2.924 2.924l-.01.89.636.622a2.89 2.89 0 0 1 0 4.134l-.637.622.011.89a2.89 2.89 0 0 1-2.924 2.924l-.89-.01-.622.636a2.89 2.89 0 0 1-4.134 0l-.622-.637-.89.011a2.89 2.89 0 0 1-2.924-2.924l.01-.89-.636-.622a2.89 2.89 0 0 1 0-4.134l.637-.622-.011-.89a2.89 2.89 0 0 1 2.924-2.924l.89.01.622-.636a2.89 2.89 0 0 1 4.134 0l-.715.698a1.89 1.89 0 0 0-2.704 0l-.92.944-1.32-.016a1.89 1.89 0 0 0-1.911 1.912l.016 1.318-.944.921a1.89 1.89 0 0 0 0 2.704l.944.92-.016 1.32a1.89 1.89 0 0 0 1.912 1.911l1.318-.016.921.944a1.89 1.89 0 0 0 2.704 0l.92-.944 1.32.016a1.89 1.89 0 0 0 1.911-1.912l-.016-1.318.944-.921a1.89 1.89 0 0 0 0-2.704l-.944-.92.016-1.32a1.89 1.89 0 0 0-1.912-1.911l-1.318.016z" />
+                                    <path
+                                        d="M7.001 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0z" /></svg
+                            ></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="d-flex row">
+            <div class="col-1 bg-light">
+                <div class="row flex-nowrap">
+                    <ul
+                        class="nav nav-pills flex-column mt-4 align-items-center">
+                        <li class="nav-item sidebar-fs">
+                            <a
+                                href="#"
+                                class="nav-link text-black"
+                                aria-current="page"
+                                ><span class="ms-2 d-none d-sm-inline"
+                                    >Dashboard</span
+                                ></a
+                            >
+                        </li>
+                        <li class="nav-item sidebar-fs">
+                            <a
+                                href="#"
+                                class="nav-link text-black"
+                                aria-current="page"
+                                ><span class="ms-2 d-none d-sm-inline"
+                                    >Home</span
+                                ></a
+                            >
+                        </li>
+                        <li class="nav-item sidebar-fs">
+                            <a
+                                href="#"
+                                class="nav-link text-black"
+                                aria-current="page"
+                                ><span class="ms-2 d-none d-sm-inline"
+                                    >Articles</span
+                                ></a
+                            >
+                        </li>
+                        <li class="nav-item sidebar-fs">
+                            <a
+                                href="#"
+                                class="nav-link text-black"
+                                aria-current="page"
+                                ><span class="ms-2 d-none d-sm-inline"
+                                    >Orders</span
+                                ></a
+                            >
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="container-fluid col-11">
+                <div class="py-2 table-responsive m-5">
+                    <table class="table table-light table-hover table-bordered">
+                        <caption class="caption-top">
+                            Level C Test Exception
+                        </caption>
+                        <thead class="text-center align-items-start th-fs">
+                            <tr>
+                                <th scope="col" rowspan="2">#</th>
+                                <th scope="col" colspan="2">
+                                    EDS_GGF_GVII_01_006
+                                </th>
+                                <th scope="col" colspan="7">
+                                    Level # Coverage
+                                </th>
+                                <th scope="col" rowspan="1" colspan="1">
+                                    Issue
+                                </th>
+                                <th scope="col" rowspan="1" colspan="1">
+                                    Applicable
+                                </th>
+                            </tr>
+                            <tr>
+                                <th scope="col">Note#</th>
+                                <th scope="col">Module</th>
+                                <th scope="col">Function</th>
+                                <th scope="col">Line</th>
+                                <th scope="col">Requirement Tag</th>
+                                <th scope="col">Analyst</th>
+                                <th scope="col"><a href="">Class</a></th>
+                                <th scope="col">
+                                    <a href="">Analysis Summary</a>
+                                </th>
+                                <th scope="col">
+                                    <a href="">Corrective Action Summary</a>
+                                </th>
+                                <th scope="col">Y/T</th>
+                                <th scope="col">PAR/CR #</th>
+                            </tr>
+                        </thead>
+                        <tbody
+                            class="table-group-divider tb-fs text-center align-middle">
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>GgfTcasS1</td>
+                                <td>GgfTcasDspG.cpp</td>
+                                <td>GgfTcasDspDraw</td>
+                                <td>
+                                    <p>
+                                        962 to 964 977 to 979 992 to 994 995 to
+                                        1001 1001 to1009 1012 to 1028
+                                    </p>
+                                </td>
+                                <td>DDD A TCAS DRAW 05</td>
+                                <td>Arun Behera</td>
+                                <td>
+                                    <a href="">Test Environment Limitations</a>
+                                </td>
+                                <td>
+                                    <p>
+                                        1. The specific test environment
+                                        limitation: TCAS window processes the
+                                        data Front to Back and HSI processes the
+                                        data Back to front. Intruder rendering
+                                        order is controlled by TCAS or HSI
+                                        process so it is not possible to control
+                                        or change through test hence analysis
+                                        has been used to verify the requirement.
+                                        2. The conditions that would cause the
+                                        code to be executed: if(Back_To_Front)
+                                        is set to true 3. The results of the
+                                        code being executed:
+                                        GgfTcasDspDrawSymbol
+                                        (gGgfTcasData.Intruder[i]), which draws
+                                        TCAS symbols from back to front ordering
+                                        from 31-0.
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        Test By Inspection done in
+                                        G7G_D03A_0004.tbi; Available at
+                                        GVII\TEST\RFS_RESULTS under the WORKSET
+                                        "EDS_GGF:_WORK_MAIN".
+                                    </p>
+                                </td>
+                                <td></td>
+                                <td>N/A</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>GgfTcasS1</td>
+                                <td>GgfTcasDspG.cpp</td>
+                                <td>GgfTcasDspDraw</td>
+                                <td>
+                                    <p>
+                                        962 to 964 977 to 979 992 to 994 995 to
+                                        1001 1001 to1009 1012 to 1028
+                                    </p>
+                                </td>
+                                <td>DDD A TCAS DRAW 05</td>
+                                <td>Arun Behera</td>
+                                <td>
+                                    <a href="">Test Environment Limitations</a>
+                                </td>
+                                <td>
+                                    <p>
+                                        1. The specific test environment
+                                        limitation: TCAS window processes the
+                                        data Front to Back and HSI processes the
+                                        data Back to front. Intruder rendering
+                                        order is controlled by TCAS or HSI
+                                        process so it is not possible to control
+                                        or change through test hence analysis
+                                        has been used to verify the requirement.
+                                        2. The conditions that would cause the
+                                        code to be executed: if(Back_To_Front)
+                                        is set to true 3. The results of the
+                                        code being executed:
+                                        GgfTcasDspDrawSymbol
+                                        (gGgfTcasData.Intruder[i]), which draws
+                                        TCAS symbols from back to front ordering
+                                        from 31-0.
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        Test By Inspection done in
+                                        G7G_D03A_0004.tbi; Available at
+                                        GVII\TEST\RFS_RESULTS under the WORKSET
+                                        "EDS_GGF:_WORK_MAIN".
+                                    </p>
+                                </td>
+                                <td></td>
+                                <td>N/A</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>GgfTcasS1</td>
+                                <td>GgfTcasDspG.cpp</td>
+                                <td>GgfTcasDspDraw</td>
+                                <td>
+                                    <p>
+                                        962 to 964 977 to 979 992 to 994 995 to
+                                        1001 1001 to1009 1012 to 1028
+                                    </p>
+                                </td>
+                                <td>DDD A TCAS DRAW 05</td>
+                                <td>Arun Behera</td>
+                                <td>
+                                    <a href="">Test Environment Limitations</a>
+                                </td>
+                                <td>
+                                    <p>
+                                        1. The specific test environment
+                                        limitation: TCAS window processes the
+                                        data Front to Back and HSI processes the
+                                        data Back to front. Intruder rendering
+                                        order is controlled by TCAS or HSI
+                                        process so it is not possible to control
+                                        or change through test hence analysis
+                                        has been used to verify the requirement.
+                                        2. The conditions that would cause the
+                                        code to be executed: if(Back_To_Front)
+                                        is set to true 3. The results of the
+                                        code being executed:
+                                        GgfTcasDspDrawSymbol
+                                        (gGgfTcasData.Intruder[i]), which draws
+                                        TCAS symbols from back to front ordering
+                                        from 31-0.
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        Test By Inspection done in
+                                        G7G_D03A_0004.tbi; Available at
+                                        GVII\TEST\RFS_RESULTS under the WORKSET
+                                        "EDS_GGF:_WORK_MAIN".
+                                    </p>
+                                </td>
+                                <td></td>
+                                <td>N/A</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">4</th>
+                                <td>GgfTcasS1</td>
+                                <td>GgfTcasDspG.cpp</td>
+                                <td>GgfTcasDspDraw</td>
+                                <td>
+                                    <p>
+                                        962 to 964 977 to 979 992 to 994 995 to
+                                        1001 1001 to1009 1012 to 1028
+                                    </p>
+                                </td>
+                                <td>DDD A TCAS DRAW 05</td>
+                                <td>Arun Behera</td>
+                                <td>
+                                    <a href="">Test Environment Limitations</a>
+                                </td>
+                                <td>
+                                    <p>
+                                        1. The specific test environment
+                                        limitation: TCAS window processes the
+                                        data Front to Back and HSI processes the
+                                        data Back to front. Intruder rendering
+                                        order is controlled by TCAS or HSI
+                                        process so it is not possible to control
+                                        or change through test hence analysis
+                                        has been used to verify the requirement.
+                                        2. The conditions that would cause the
+                                        code to be executed: if(Back_To_Front)
+                                        is set to true 3. The results of the
+                                        code being executed:
+                                        GgfTcasDspDrawSymbol
+                                        (gGgfTcasData.Intruder[i]), which draws
+                                        TCAS symbols from back to front ordering
+                                        from 31-0.
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        Test By Inspection done in
+                                        G7G_D03A_0004.tbi; Available at
+                                        GVII\TEST\RFS_RESULTS under the WORKSET
+                                        "EDS_GGF:_WORK_MAIN".
+                                    </p>
+                                </td>
+                                <td></td>
+                                <td>N/A</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">5</th>
+                                <td>GgfTcasS1</td>
+                                <td>GgfTcasDspG.cpp</td>
+                                <td>GgfTcasDspDraw</td>
+                                <td>
+                                    <p>
+                                        962 to 964 977 to 979 992 to 994 995 to
+                                        1001 1001 to1009 1012 to 1028
+                                    </p>
+                                </td>
+                                <td>DDD A TCAS DRAW 05</td>
+                                <td>Arun Behera</td>
+                                <td>
+                                    <a href="">Test Environment Limitations</a>
+                                </td>
+                                <td>
+                                    <p>
+                                        1. The specific test environment
+                                        limitation: TCAS window processes the
+                                        data Front to Back and HSI processes the
+                                        data Back to front. Intruder rendering
+                                        order is controlled by TCAS or HSI
+                                        process so it is not possible to control
+                                        or change through test hence analysis
+                                        has been used to verify the requirement.
+                                        2. The conditions that would cause the
+                                        code to be executed: if(Back_To_Front)
+                                        is set to true 3. The results of the
+                                        code being executed:
+                                        GgfTcasDspDrawSymbol
+                                        (gGgfTcasData.Intruder[i]), which draws
+                                        TCAS symbols from back to front ordering
+                                        from 31-0.
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        Test By Inspection done in
+                                        G7G_D03A_0004.tbi; Available at
+                                        GVII\TEST\RFS_RESULTS under the WORKSET
+                                        "EDS_GGF:_WORK_MAIN".
+                                    </p>
+                                </td>
+                                <td></td>
+                                <td>N/A</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+            crossorigin="anonymous"></script>
+    </body>
+</html>
