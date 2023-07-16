@@ -53,7 +53,7 @@ const submitForm = function () {
             project: $project,
             function: $func,
             load: $load,
-            csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
+            // csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
         };
         // send AJAX request
         $.ajax({

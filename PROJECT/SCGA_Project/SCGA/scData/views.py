@@ -27,12 +27,11 @@ def importData(request):
     print('request is running')
     if request.method == "POST":
         print("request: " + str(request.POST))
-        # projects = Project(id=2, proejct=request.POST['project'])
-        # # functions = Functionality(func=request.POST['function'])
-        # loads = Load(id=2, load=request.POST['load'])
-        # projects.save()
-        # # functions.save()
-        # print(loads)
-        # loads.save()
+        projects = Project(project=request.POST.get('project'))
+        functions = Functionality(func=request.POST.get('function'))
+        loads = Load(load=request.POST.get('load'))
+        projects.save()
+        functions.save()
+        loads.save()
 
     return redirect('table/')

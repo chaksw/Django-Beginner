@@ -1143,3 +1143,36 @@ CSS style is located in _site-packages/django/contrib/admin/static/admin/css_, t
 1. workspace: 用于进行 SCGA 分析工作
 2. assigned SCGA: 用于展示导入的当前 load 的 SC 结果(RA, SC report, SCGA) (index.html)
 3. legacy SCGA: 用于展示相关的 Legacy load 的 SCGA
+
+目前总结&问题：
+
+1. 用过 ajax 实现的 submit button 在与 django 交互是需要留意 crsf 的验证，如果没有下面的代码，会产生 403 forbiden 的情况
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+```
+
+```js
+const crsfSafeMethod = function (method) {
+    // there HTTP methods do not require CSRF protection
+    return /^(GET|HEAD|OPTIONS|TRACE)$/.test(method);
+};
+
+$.ajaxSetup({
+    crossDomain: false, // obviates need for sameOrigin test
+    beforeSend: function (xhr, settings) {
+        if (!crsfSafeMethod(settings.type)) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    },
+});
+
+...
+data = {
+    // csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
+    // 不知道为啥网上说要加中间件的 csrf 其实不需要加
+}
+```
+
+2. 虽然通过 ajax 能够顺利获取 client 端输入的数据，但是传递到`Django`中`request`的数据为空
+3. 一定要先打通创建数据的流程（搞清楚 `html`-`ajax`-`views`-`urls`之间的交互关系）
