@@ -52,7 +52,7 @@ npm run **build**
 npm test
 ```
 
-## React Project Structure
+## React based FontEnd Structure
 
 The main working space is `src` folder, and inside this folder:
 
@@ -274,13 +274,22 @@ function Counter() {
 export default Counter;
 ```
 
-## Connecting Back-End(Django) to Front-End(React) using [Axios](https://axios-http.com/docs/intro)
+## Development based on `Django` (backend) and `React` （frontend)
 
-Connect backend server which will be written in django framework to our front-end which will be written in React.
-
-### Requirements
+### Virtual Env
 
 1. Use `pipenv`
+
+Use `pipenv shell` in project folder to launch (create) virtual env, which allows us to install dependencies and packages only inside the project
+
+also use `exit` to exit virtual env anything we need.
+
+```bash
+pipenv shell
+```
+
+### Back-End
+
 2. Install Django Rest Framework (a toolkit to build api)
 
 ```bash
@@ -293,25 +302,69 @@ pipenv install djangorestframework
 pipenv install django-cors-headers
 ```
 
-## Project Structure
+4. `serializer`
 
 To create api in django project we need to create a `serializer.py` file, which a used to convert complex data to nactive python data types, then be easily rendered into json.
 
-1. A django project represente back-end
+### Front-End
+
+5. React app
 
 ```bash
-django-admin createproject project
-...
+npx create-react-app frontend #name of application
 ```
 
-2. A React app represente front-end
+6. `reactstrap` & `bootstrap`
+   In fontend folder
 
-```bash
-npx create-react-app frontend
+```
+npm install reactstrap bootstrap
 ```
 
-3. A Axios installed for front-end to connect back-end and front-end
+### Connecting Back-End(Django) to Front-End(React) using [Axios](https://axios-http.com/docs/intro)
+
+A Axios installed in frontend folder to connect back-end and front-end
 
 ```bash
 npm install axios # install for react (in fontend folder)
 ```
+
+### Setting for interaction between Django and React
+
+Connect backend server which will be written in django framework to our front-end which will be written in React.
+
+In `setting.py`, we need to add some variable as configuration to allow interaction between `django` and `react`:
+
+```py
+# Application definition
+
+INSTALLED_APPS = [
+    ...
+    'corsheaders',
+    'rest_framework'
+]
+
+MIDDLEWARE = [
+    ...
+    'corsheaders.middleware.CorsMiddleware',
+]
+...
+
+REST_FRAMEWORK = {'DEFAULT_PERMISSION_CLASSES': [
+   'rest_framework.permissions.AllowAny',
+]}
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+# WhiteListing React port
+CORS_ORIGIN_WHITELIST = ('http://localhost:3000')
+```
+
+In django app, we need to create `serializer.py` which is to convert the model instances (define in `models.py`) to `json` data (**`json` is the standard for data interchange on the web**)
+
+## Practice - Task Manager
+
+### Project Structure
+
+1. **Back-End:** Django + pipenv packages (django rest framework + django cors headers)
+2. **Front-End:** React + npm packages (reactstrap + boostrap + axios)
