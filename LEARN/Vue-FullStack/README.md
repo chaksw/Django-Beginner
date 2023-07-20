@@ -108,6 +108,8 @@ export default {
 
 ## Project structure
 
+![Structure](image.png)
+
 ### VueJs based front-end
 
 From a design architecture perspective, each folder in the created project can be considered that has it's role, building togetoher the component tree of frontend.

@@ -1,14 +1,14 @@
 import { createStore } from "vuex";
 
 export default createStore({
-    // define global state variables
+    // define global state variables for each page
     state: {
         isLoading: false,
         isAuthenticated: false,
         token: "",
     },
     getters: {},
-    // define opetions to change states
+    // define operations to change states
     mutations: {
         initializeStore(state) {
             if (localStorage.getItem("token")) {
