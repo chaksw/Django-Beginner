@@ -161,3 +161,63 @@ From a design architecture perspective, each folder in the created project can b
 pipenv shell
 pip install django djangorestframework django-cors-headers djoser
 ```
+
+### Interaction
+
+#### `@submit.prevent`
+
+> `@submit.prevent` 是 `Vue.js` 模板中用于监听表单提交事件的指令。它结合了` @submit` 和 `.prevent` 两个指令的功能。
+> ` @submit`：这是 `Vue.js` 中的事件监听指令之一，用于监听表单提交事件。当表单提交时，会触发绑定的方法。
+> `.prevent`：这是 `Vue.js` 中的事件修饰符之一，用于阻止默认事件的发生。在表单提交的情况下，`.prevent` 可以阻止浏览器默认地提交表单，从而避免页面刷新。
+
+`@submit.prevent` 所对应的 `method` 在对应 component 的`export defaut{methods:{}}` 中实现或部署，以实现`submit`的对应逻辑
+
+```js
+<script>
+export default {
+    name: "SignUp",
+    methods: {
+        submitForm() {
+            alert("Submit Form");
+        },
+    },
+};
+</script>
+```
+
+#### `v-model`
+
+> `v-model` 是 `Vue.js` 中用于实现双向数据绑定的指令。它用于在模板中将表单元素和 Vue 实例的数据进行双向绑定，使得数据的变化可以自动同步到视图，以及用户输入的变化可以自动更新到数据。双向绑定指的是数据的改变能够影响视图，而视图的改变也能够反过来影响数据。这使得开发者不需要显式地监听输入事件和手动更新数据，简化了表单交互和数据处理的过程。
+
+```js
+<input v-model="dataProperty">
+```
+
+> 在上面的示例中，`v-model` 绑定在一个 <input> 元素上，它会将 <input> 元素的值与 Vue 实例中的 `dataProperty` 数据属性进行双向绑定。
+> 在 `data()` 中定义
+
+```js
+export default {
+    data() {
+        return {
+            dataProperty: "",
+        };
+    },
+};
+```
+
+`data()` 是` Vue.js` 组件选项对象中的一个函数，用于定义组件的初始数据。它的作用是返回一个对象，其中包含了组件需要**响应式追踪的数据**。
+具体来说，`data()` 函数中返回的对象中的属性会成为 Vue 组件的响应式数据。这意味着当这些数据发生变化时，相关的视图会自动更新。
+
+> `而后，当用户在输入框中输入内容时，dataProperty` 数据会自动更新为输入的值。同样地，当 `dataProperty` 数据发生变化时，输入框中的值也会随之更新。
+
+#### `v-if` `v-for` `v-bind`
+
+> 当使用 `Vue.js` 开发应用时，`v-if`、`v-for` 和 `v-bind` 是常用的 `Vue.js` 模板指令，用于实现动态的条件渲染、列表渲染和属性绑定。
+
+1. `v-if`：
+   `v-if` 是 `Vue.js` 中的条件渲染指令，用于根据表达式的真假条件来决定是否渲染元素或组件。当表达式为真时，元素或组件会被渲染；当表达式为假时，元素或组件会被移除或隐藏。`v-if` 的特点是在每次条件切换时，元素或组件的创建和销毁都会触发，适用于需要频繁切换的情况。
+2. `v-for`：
+   `v-for` 是 `Vue.js` 中的列表渲染指令，用于遍历数组或对象，并将其内容渲染多次。通过 `v-for`，你可以遍历数组中的每一项，或者遍历对象的属性，然后使用当前项的值来渲染相应的元素或组件。你可以使用特定的语法形式来指定当前项的别名和索引，以及提供 `key` 属性来帮助 `Vue.js` 更高效地更新列表。
+3. `v-bind`：
+   `v-bind` 是 `Vue.js` 中的属性绑定指令，用于动态地将 `Vue` 实例中的数据绑定到 `HTML` 元素的属性上。通过 `v-bind`，你可以将 `Vue` 实例中的数据动态地绑定到元素的属性上，例如将变量绑定到元素的 `class`, `style` 或其他属性上。你可以使用简化的 `:attr` 形式来代替 `v-bind:attr`，使得模板更加简洁易读。
