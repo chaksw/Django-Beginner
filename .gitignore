@@ -1,11 +1,10 @@
 PROJECT/Data/*
 PROJECT/SCGA_Project/*
 !PROJECT/SCGA_Project/SCGA
+Pipfile
+Pipfile.lock
 # do not trace any __pychache__ files
 __pycache__/
 *.pyc
 *.DS_Store
 *.sqlite3
-Pipfile/
-Pipfile.lock/
-.prettierrc
