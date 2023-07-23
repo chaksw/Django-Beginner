@@ -5,7 +5,7 @@
 ### Installation and Creation
 
 ```bash
-npm install @vue/cli
+npm install -g @vue/cli
 ```
 
 Check vue version after installation
@@ -20,7 +20,7 @@ Create project (name： ganarcrm_vue)
 vue create ganarcrm_vue
 ```
 
-### Dependencies & Libraries
+### Dependencies & Libraries (local)
 
 1. bulma (css framework)
    In project folder
