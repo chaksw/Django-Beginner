@@ -159,7 +159,7 @@ From a design architecture perspective, each folder in the created project can b
 
 ```bash
 pipenv shell
-pip install django djangorestframework django-cors-headers djoser
+pipenv install django djangorestframework django-cors-headers djoser # install packages and generate dependencies description file (Pipfile.lock)
 ```
 
 ### Interaction
