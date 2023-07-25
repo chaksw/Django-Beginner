@@ -27,13 +27,22 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-CORS_ALLOW_ORIGIN = [
+CORS_ALLOWED_ORIGINS = [
     "http://localhost:8080",
 ]
-CORS_ORIGIN_ALLOW_ALL = True
-REST_FRAMEWORK = {'DEFAULT_PERMISSION_CLASSES': [
-   'rest_framework.permissions.AllowAny',
-]}
+# CORS_ORIGIN_ALLOW_ALL = True
+REST_FRAMEWORK = {
+    # 'DEFAULT_AUTHENTICATION_CLASSES': (
+    #     'rest_framework.authentication.TokenAuthentication'
+    # ),
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ], 
+}
 
 
 # Application definition
@@ -49,6 +58,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'corsheaders',
     'djoser',
+    # 'lead.apps.LeadConfig',
+    'lead'
 ]
 
 MIDDLEWARE = [

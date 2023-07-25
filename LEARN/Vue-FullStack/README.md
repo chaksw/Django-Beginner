@@ -162,6 +162,8 @@ pipenv shell
 pipenv install django djangorestframework django-cors-headers djoser # install packages and generate dependencies description file (Pipfile.lock)
 ```
 
+> PS: djoser 是一个用于 Django 的插件，它简化了用户认证和授权的处理。它提供了一组 RESTful API，用于处理用户注册、登录、密码重置等功能。使用 djoser，你可以轻松地设置和管理用户身份验证。
+
 ### Interaction
 
 #### `@submit.prevent`
