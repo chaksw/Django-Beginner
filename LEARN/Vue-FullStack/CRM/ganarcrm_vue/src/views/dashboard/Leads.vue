@@ -1,8 +1,37 @@
 <template>
     <div class="container">
-        <div class="culumns is-multiline">
+        <div class="columns is-multiline">
             <div class="column is-12">
                 <h1 class="title">Leads</h1>
+                <router-link to="/dashboard/leads/add">Add Lead</router-link>
+            </div>
+            <div class="column is-12">
+                <table class="table is-fullwidth">
+                    <thead>
+                        <tr>
+                            <th>Company</th>
+                            <th>Contact Person</th>
+                            <th>Status</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="lead in leads" v-bind:key="lead.id">
+                            <td>{{ lead.company }}</td>
+                            <td>{{ lead.contact_person }}</td>
+                            <td>{{ lead.status }}</td>
+                            <td>
+                                <router-link
+                                    :to="{
+                                        name: 'Lead',
+                                        params: { id: lead.id },
+                                    }">
+                                    Detail
+                                </router-link>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -27,9 +56,7 @@ export default {
             axios
                 .get("/api/v1/leads/")
                 .then((response) => {
-                    console.log(response.data);
                     this.leads = response.data;
-                    console.log(this.leads);
                 })
                 .catch((error) => {
                     console.log(error);

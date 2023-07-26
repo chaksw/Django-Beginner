@@ -25,7 +25,7 @@ class Lead(models.Model):
     )
     company = models.CharField(max_length=255)
     contact_person = models.CharField(max_length=255)
-    eamil = models.EmailField()
+    email = models.EmailField()
     phone = models.CharField(max_length=255)
     website = models.CharField(max_length=255, blank=True, null=True)
     confidence = models.IntegerField(blank=True, null=True)

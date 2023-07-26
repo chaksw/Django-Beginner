@@ -1,3 +1,21 @@
+-   [VueJS-based full stack CRM Project](#vuejs-based-full-stack-crm-project)
+    -   [Start](#start)
+        -   [Installation and Creation](#installation-and-creation)
+        -   [Dependencies \& Libraries (local)](#dependencies--libraries-local)
+        -   [Django Rest Framework Authentication (Token)](#django-rest-framework-authentication-token)
+    -   [Project setup \& execution](#project-setup--execution)
+    -   [Project structure](#project-structure)
+        -   [VueJs based front-end](#vuejs-based-front-end)
+        -   [`this.$`](#this)
+        -   [Django](#django)
+            -   [Dependencies](#dependencies)
+        -   [Djoser](#djoser)
+        -   [Configuration of Token Based Authentication](#configuration-of-token-based-authentication)
+        -   [Interaction](#interaction)
+            -   [`@submit.prevent`](#submitprevent)
+            -   [`v-model`](#v-model)
+            -   [`v-if` `v-for` `v-bind`](#v-if-v-for-v-bind)
+
 # [VueJS](https://vuejs.org/)-based full stack CRM Project
 
 ## Start
@@ -40,6 +58,8 @@ npm install bulma-toast
 ```bash
 npm install axios
 ```
+
+### Django Rest Framework Authentication (Token)
 
 ## Project setup & execution
 
@@ -162,7 +182,51 @@ pipenv shell
 pipenv install django djangorestframework django-cors-headers djoser # install packages and generate dependencies description file (Pipfile.lock)
 ```
 
+### [Djoser](https://djoser.readthedocs.io/en/latest/)
+
 > PS: djoser 是一个用于 Django 的插件，它简化了用户认证和授权的处理。它提供了一组 RESTful API，用于处理用户注册、登录、密码重置等功能。使用 djoser，你可以轻松地设置和管理用户身份验证。
+
+### Configuration of Token Based Authentication
+
+1. Add `rest_framework.authtoken` to `INSTALLED_APPS`:
+
+```py
+INSTALLED_APPS = [
+    'django.contrib.auth',
+    (...),
+    'rest_framework',
+    'rest_framework.authtoken',
+    'djoser',
+    (...),
+]
+```
+
+2. Configure `urls.py.` Pay attention to `djoser.url.authtoken` module path:
+
+```py
+urlpatterns = [
+    (...),
+    url(r'^auth/', include('djoser.urls')),
+    url(r'^auth/', include('djoser.urls.authtoken')),
+]
+```
+
+3. Add `rest_framework.authentication.TokenAuthentication` to Django REST Framework authentication strategies tuple:
+
+```py
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        (...)
+    ),
+}
+```
+
+4. Run migrations - this step will create tables for `auth` and `authtoken` apps:
+
+```py
+python ./manage.py migrate
+```
 
 ### Interaction
 
@@ -223,4 +287,3 @@ export default {
    `v-for` 是 `Vue.js` 中的列表渲染指令，用于遍历数组或对象，并将其内容渲染多次。通过 `v-for`，你可以遍历数组中的每一项，或者遍历对象的属性，然后使用当前项的值来渲染相应的元素或组件。你可以使用特定的语法形式来指定当前项的别名和索引，以及提供 `key` 属性来帮助 `Vue.js` 更高效地更新列表。
 3. `v-bind`：
    `v-bind` 是 `Vue.js` 中的属性绑定指令，用于动态地将 `Vue` 实例中的数据绑定到 `HTML` 元素的属性上。通过 `v-bind`，你可以将 `Vue` 实例中的数据动态地绑定到元素的属性上，例如将变量绑定到元素的 `class`, `style` 或其他属性上。你可以使用简化的 `:attr` 形式来代替 `v-bind:attr`，使得模板更加简洁易读。
-4.
