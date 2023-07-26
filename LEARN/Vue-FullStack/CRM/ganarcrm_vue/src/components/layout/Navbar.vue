@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar is-gray">
+    <nav class="navbar is-black">
         <div class="navbar-brand">
             <router-link to="/" class="navbar-item">
                 <strong>Ganr CRM</strong>
