@@ -3,7 +3,11 @@
         <div class="columns is-multiline">
             <div class="column is-12">
                 <h1 class="title">Leads</h1>
-                <router-link to="/dashboard/leads/add">Add Lead</router-link>
+                <router-link
+                    :to="{ name: 'AddLead' }"
+                    class="button is-primary">
+                    Add Lead
+                </router-link>
             </div>
             <div class="column is-12">
                 <table class="table is-fullwidth">

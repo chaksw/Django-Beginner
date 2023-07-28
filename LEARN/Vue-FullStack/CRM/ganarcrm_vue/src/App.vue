@@ -22,8 +22,8 @@ export default {
     },
     beforeCreate() {
         this.$store.commit("initializeStore");
-        console.log(this.$store.state.user);
-        console.log(this.$store.state.team);
+        // console.log(this.$store.state.user);
+        // console.log(this.$store.state.team);
         if (this.$store.state.token) {
             axios.defaults.headers.common["Authorization"] =
                 "Token " + this.$store.state.token;
@@ -31,7 +31,8 @@ export default {
             axios.defaults.headers.common["Authorization"] = "";
         }
         if (!this.$store.state.team.id) {
-            this.$router.push("/dashboard/add-team");
+            // this.$router.push("/dashboard/add-team");
+            this.$router.push({ name: "AddTeam" });
         }
     },
 };

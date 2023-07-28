@@ -14,6 +14,12 @@ export default createStore({
             id: 0,
             name: "",
         },
+        member: {
+            id: 0,
+            username: "",
+            first_name: "",
+            last_name: "",
+        },
     },
     getters: {},
     // define operations to change states
@@ -56,6 +62,13 @@ export default createStore({
             state.team = team;
             localStorage.setItem("team_id", team.id);
             localStorage.setItem("team_name", team.name);
+        },
+        setMember(state, member) {
+            state.member = member;
+            localStorage.setItem("member_id", member.id);
+            localStorage.setItem("member_username", member.username);
+            localStorage.setItem("member_first_name", member.first_name);
+            localStorage.setItem("member_last_name", member.last_name);
         },
     },
     actions: {},

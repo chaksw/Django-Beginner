@@ -111,7 +111,8 @@ export default {
                     });
                     // localStorage.setItem("team_name", response.data.username);
                     // localStorage.setItem("team_id", response.data.id);
-                    this.$router.push("dashboard/my-account");
+                    // this.$router.push("dashboard/my-account");
+                    this.$router.push({ name: "MyAccount" });
                 })
                 .catch((error) => {
                     console.log(error);

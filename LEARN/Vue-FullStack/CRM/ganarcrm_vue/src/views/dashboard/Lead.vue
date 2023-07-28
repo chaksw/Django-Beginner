@@ -4,12 +4,9 @@
             <div class="column is-12">
                 <h1 class="title">{{ lead.title }}</h1>
                 <router-link
-                    :to="{
-                        name: 'EditLead',
-                        params: { id: lead.id },
-                    }"
-                    class="button is-light">
-                    Edit
+                    :to="{ name: 'EditLead', params: lead.id }"
+                    class="button is-primary">
+                    Edit Member
                 </router-link>
             </div>
             <div class="column is-6">

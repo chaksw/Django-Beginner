@@ -165,7 +165,8 @@ export default {
                         duration: 2000,
                         position: "top-right",
                     });
-                    this.$router.push("/dashboard/leads/");
+                    // this.$router.push("/dashboard/leads/");
+                    this.$router.push({ name: "Leads" });
                 })
                 .catch((error) => {
                     console.log(error);

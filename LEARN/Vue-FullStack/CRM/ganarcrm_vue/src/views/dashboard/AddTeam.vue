@@ -64,7 +64,8 @@ export default {
                         id: response.data.id,
                         name: this.name,
                     });
-                    this.$router.push("/dashboard");
+                    // this.$router.push("/dashboard");
+                    this.$router.push({ name: "Dashboard" });
                 })
                 .catch((error) => {
                     console.log(error);

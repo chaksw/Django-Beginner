@@ -1,8 +1,10 @@
 <template>
     <div class="container">
-        <div class="columns">
-            <div class="column is-4 is-offset-4">
-                <h1 class="title">Sign up</h1>
+        <div class="columns is-multiline">
+            <div class="column is-12">
+                <h1 class="title">Add Member</h1>
+            </div>
+            <div class="column is-6">
                 <form @submit.prevent="submitForm">
                     <div class="field">
                         <label for="email">Email</label>
@@ -57,7 +59,7 @@
 import axios from "axios";
 import { toast } from "bulma-toast";
 export default {
-    name: "SignUp",
+    name: "AddMember",
     data() {
         // with return an object with initial data defined below
         return {
@@ -67,6 +69,7 @@ export default {
             errors: [],
         };
     },
+
     methods: {
         async submitForm() {
             this.errors = [];
@@ -90,15 +93,35 @@ export default {
                     .post("/api/v1/users/", formData)
                     .then((response) => {
                         toast({
-                            message: "Account was created, please log in",
+                            message: "Member was added successfully",
                             type: "is-success",
                             dismissible: true,
                             pauseOnHover: true,
                             duration: 2000,
                             position: "bottom-right",
                         });
-                        // this.$router.push("/log-in");
-                        this.$router.push({ name: "LogIn" });
+                        const emailData = {
+                            email: this.username,
+                        };
+                        axios
+                            .post("/api/v1/teams/add_member/", emailData)
+                            .then((response) => {
+                                this.$router.push({ name: "Team" });
+                            })
+                            .catch((error) => {
+                                if (error.response) {
+                                    for (const property in error.response
+                                        .data) {
+                                        this.errors.push(
+                                            `${property}:${error.response.data[property]}`
+                                        );
+                                    }
+                                } else if (error.message) {
+                                    this.errors.push(
+                                        "Something went wrong. Please try again!"
+                                    );
+                                }
+                            });
                     })
                     .catch((error) => {
                         if (error.response) {
@@ -113,6 +136,7 @@ export default {
                             );
                         }
                     });
+
                 this.$store.commit("setIsLoading", false);
             }
         },

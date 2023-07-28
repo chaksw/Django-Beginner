@@ -141,14 +141,6 @@ export default {
                 .then((response) => {
                     console.log(response);
                     this.lead = response.data;
-                    // toast({
-                    //     message: "Data was updated sucessfully",
-                    //     type: "is-success",
-                    //     dismissible: true,
-                    //     pauseOnHover: true,
-                    //     duration: 2000,
-                    //     position: "top-center",
-                    // });
                 })
                 .catch((error) => {
                     console.log(error);
@@ -169,7 +161,11 @@ export default {
                         duration: 2000,
                         position: "top-right",
                     });
-                    this.$router.push(`/dashboard/leads/${leadID}/`);
+                    // this.$router.push(`/dashboard/leads/${leadID}/`);
+                    this.$router.push({
+                        name: "Lead",
+                        params: { id: leadID },
+                    });
                 })
                 .catch((error) => {
                     console.log(error);

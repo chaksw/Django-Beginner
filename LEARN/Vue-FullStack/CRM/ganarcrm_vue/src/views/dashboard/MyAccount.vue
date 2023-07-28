@@ -34,7 +34,8 @@ export default {
             localStorage.removeItem("team_name");
             localStorage.removeItem("team_id");
             this.$store.commit("removeToken");
-            this.$router.push("/");
+            // this.$router.push('/');
+            this.$router.push({ name: "home" });
         },
     },
 };
