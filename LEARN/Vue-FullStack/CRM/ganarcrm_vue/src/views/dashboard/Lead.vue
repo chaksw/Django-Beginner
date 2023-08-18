@@ -18,7 +18,6 @@
                             {{ lead.assigned_to.username }}
                         </p>
                     </template>
-
                     <p>
                         <strong>Status:</strong>
                         {{ lead.status }}
