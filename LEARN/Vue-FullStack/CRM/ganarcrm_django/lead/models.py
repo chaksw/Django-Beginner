@@ -34,6 +34,7 @@ class Lead(models.Model):
     estimated_value = models.IntegerField(blank=True, null=True)
     status = models.CharField(max_length=25, choices=CHOICES_STATUS, default=NEW)
     priority = models.CharField(max_length=25, choices=CHOICES_PRIORITY, default=MEDIUM)
+    assigned_to = models.ForeignKey(User, related_name='assgiedLeads', on_delete=models.SET_NULL, blank=True, null=True)
     created_by = models.ForeignKey(User, related_name='leads', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)

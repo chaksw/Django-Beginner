@@ -3,17 +3,24 @@
         <div class="columns is-multiline">
             <div class="column is-12">
                 <h1 class="title">{{ team.name }}</h1>
-                <router-link
-                    :to="{ name: 'AddMember' }"
-                    class="button is-primary">
-                    Add Member
-                </router-link>
+                <!-- Only team creator can add team member -->
+                <template
+                    v-if="
+                        team.created_by.id === parseInt($store.state.user.id)
+                    ">
+                    <router-link
+                        :to="{ name: 'AddMember' }"
+                        class="button is-primary">
+                        Add Member
+                    </router-link>
+                </template>
             </div>
             <div class="column is-12">
                 <h2 class="subtitle">Members</h2>
                 <table class="table is-fullwidth">
                     <thead>
                         <tr>
+                            <th>ID</th>
                             <th>Name</th>
                         </tr>
                     </thead>
@@ -21,6 +28,7 @@
                         <tr
                             v-for="member in team.members"
                             v-bind:key="member.id">
+                            <td>{{ member.id }}</td>
                             <td>{{ member.username }}</td>
                         </tr>
                     </tbody>
@@ -39,6 +47,7 @@ export default {
         return {
             team: {
                 members: [],
+                created_by: {},
             },
             errors: [],
         };

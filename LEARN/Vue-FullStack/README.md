@@ -195,7 +195,7 @@ export default {
 <input v-model="dataProperty">
 ```
 
-> 在上面的示例中，`v-model` 绑定在一个 <input> 元素上，它会将 <input> 元素的值与 Vue 实例中的 `dataProperty` 数据属性进行双向绑定。
+> 在上面的示例中，`v-model` 绑定在一个 `<input>` 元素上，它会将 `<input>` 元素的值与 Vue 实例中的 `dataProperty` 数据属性进行双向绑定。
 > 在 `data()` 中定义
 
 ```js
