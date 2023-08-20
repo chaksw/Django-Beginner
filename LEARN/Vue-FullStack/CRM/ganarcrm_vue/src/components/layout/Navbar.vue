@@ -11,6 +11,9 @@
                 <router-link :to="{ name: 'Leads' }" class="navbar-item">
                     Leads
                 </router-link>
+                <router-link :to="{ name: 'Clients' }" class="navbar-item">
+                    Clients
+                </router-link>
                 <router-link :to="{ name: 'Team' }" class="navbar-item">
                     Team
                 </router-link>

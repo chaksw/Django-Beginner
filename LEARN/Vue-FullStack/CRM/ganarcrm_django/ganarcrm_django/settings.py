@@ -37,7 +37,7 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
-    ], 
+    ],
 }
 
 
@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     # 'lead.apps.LeadConfig',
     'lead',
     'team',
+    'client',
 ]
 
 MIDDLEWARE = [

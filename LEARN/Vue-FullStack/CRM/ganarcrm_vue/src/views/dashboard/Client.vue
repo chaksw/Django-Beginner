@@ -2,46 +2,23 @@
     <div class="container">
         <div class="columns is-multiline">
             <div class="column is-12">
-                <h1 class="title">{{ lead.company }}</h1>
+                <h1 class="title">{{ client.name }}</h1>
                 <router-link
-                    :to="{ name: 'EditLead', params: lead.id }"
+                    :to="{ name: 'EditClient', params: client.id }"
                     class="button is-primary">
-                    Edit Member
+                    Edit Client
                 </router-link>
             </div>
             <div class="column is-6">
                 <div class="box">
                     <h2 class="subtitle">Detail</h2>
-                    <template v-if="lead.assigned_to">
-                        <p>
-                            <strong>Assigned to:</strong>
-                            {{ lead.assigned_to.username }}
-                        </p>
-                    </template>
-                    <p>
-                        <strong>Status:</strong>
-                        {{ lead.status }}
-                    </p>
-                    <p>
-                        <strong>Priority:</strong>
-                        {{ lead.priority }}
-                    </p>
-                    <p>
-                        <strong>Confidence:</strong>
-                        {{ lead.confidence }}
-                    </p>
-                    <p>
-                        <strong>Estimated value:</strong>
-                        {{ lead.estimated_value }}
-                    </p>
-
                     <p>
                         <strong>Created at:</strong>
-                        {{ lead.created_at }}
+                        {{ client.created_at }}
                     </p>
                     <p>
                         <strong>Modified at:</strong>
-                        {{ lead.modified_at }}
+                        {{ client.modified_at }}
                     </p>
                 </div>
             </div>
@@ -50,19 +27,19 @@
                     <h2 class="subtitle">Contact information</h2>
                     <p>
                         <strong>Contact person:</strong>
-                        {{ lead.contact_person }}
+                        {{ client.contact_person }}
                     </p>
                     <p>
                         <strong>Email:</strong>
-                        {{ lead.email }}
+                        {{ client.email }}
                     </p>
                     <p>
                         <strong>Phone:</strong>
-                        {{ lead.phone }}
+                        {{ client.phone }}
                     </p>
                     <p>
                         <strong>Website:</strong>
-                        {{ lead.website }}
+                        {{ client.website }}
                     </p>
                 </div>
             </div>
@@ -73,25 +50,25 @@
 <script>
 import axios from "axios";
 export default {
-    name: "Lead",
+    name: "Client",
     data() {
         return {
-            lead: {},
+            client: {},
         };
     },
     mounted() {
-        this.getLead();
+        this.getClient();
     },
     methods: {
-        async getLead() {
+        async getClient() {
             this.$store.commit("setIsLoading", true);
 
-            const leadID = this.$route.params.id;
+            const clientID = this.$route.params.id;
             await axios
-                .get(`api/v1/leads/${leadID}`)
+                .get(`api/v1/clients/${clientID}`)
                 .then((response) => {
                     console.log(response);
-                    this.lead = response.data;
+                    this.client = response.data;
                 })
                 .catch((error) => {
                     console.log(error);
