@@ -20,16 +20,20 @@
                 <table class="table is-fullwidth">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Name</th>
+                            <!-- <th>ID</th> -->
+                            <th>User Name</th>
+                            <th>Full Name</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr
                             v-for="member in team.members"
                             v-bind:key="member.id">
-                            <td>{{ member.id }}</td>
+                            <!-- <td>{{ member.id }}</td> -->
                             <td>{{ member.username }}</td>
+                            <td>
+                                {{ member.first_name }} {{ member.last_name }}
+                            </td>
                         </tr>
                     </tbody>
                 </table>

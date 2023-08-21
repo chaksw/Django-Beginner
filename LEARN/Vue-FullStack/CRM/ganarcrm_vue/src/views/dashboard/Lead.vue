@@ -3,11 +3,18 @@
         <div class="columns is-multiline">
             <div class="column is-12">
                 <h1 class="title">{{ lead.company }}</h1>
-                <router-link
-                    :to="{ name: 'EditLead', params: lead.id }"
-                    class="button is-primary">
-                    Edit
-                </router-link>
+                <div class="buttons">
+                    <router-link
+                        :to="{ name: 'EditLead', params: lead.id }"
+                        class="button is-primary">
+                        Edit
+                    </router-link>
+                    <button
+                        @click="convert_lead_to_client"
+                        class="button is-info">
+                        Convert to client
+                    </button>
+                </div>
             </div>
             <div class="column is-6">
                 <div class="box">
@@ -15,7 +22,8 @@
                     <template v-if="lead.assigned_to">
                         <p>
                             <strong>Assigned to:</strong>
-                            {{ lead.assigned_to.username }}
+                            {{ lead.assigned_to.first_name }}
+                            {{ lead.assigned_to.last_name }}
                         </p>
                     </template>
                     <p>
@@ -92,6 +100,24 @@ export default {
                 .then((response) => {
                     console.log(response);
                     this.lead = response.data;
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+            this.$store.commit("setIsLoading", false);
+        },
+        async convert_lead_to_client() {
+            this.$store.commit("setIsLoading", true);
+
+            const leadID = this.$route.params.id;
+            const data = {
+                lead_id: leadID,
+            };
+            await axios
+                .post(`api/v1/convert_lead_to_client/`, data)
+                .then((response) => {
+                    console.log("concerted to client");
+                    this.$router.push("/dashboard/clients");
                 })
                 .catch((error) => {
                     console.log(error);
