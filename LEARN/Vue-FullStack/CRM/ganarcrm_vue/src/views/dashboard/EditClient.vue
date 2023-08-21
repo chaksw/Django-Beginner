@@ -111,7 +111,7 @@ export default {
                         dismissible: true,
                         pauseOnHover: true,
                         duration: 2000,
-                        position: "top-right",
+                        position: "bottom-right",
                     });
                     // this.$router.push(`/dashboard/clients/${clientID}/`);
                     this.$router.push({

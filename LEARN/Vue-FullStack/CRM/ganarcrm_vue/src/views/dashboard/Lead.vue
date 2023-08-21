@@ -6,7 +6,7 @@
                 <router-link
                     :to="{ name: 'EditLead', params: lead.id }"
                     class="button is-primary">
-                    Edit Member
+                    Edit
                 </router-link>
             </div>
             <div class="column is-6">

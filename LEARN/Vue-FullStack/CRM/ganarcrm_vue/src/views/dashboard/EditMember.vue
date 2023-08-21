@@ -2,24 +2,36 @@
     <div class="container">
         <div class="columns is-multiline">
             <div class="column is-12">
-                <h1 class="title">Add team</h1>
+                <h1 class="title">Edit member</h1>
             </div>
-            <div class="column is-6">
+            <div class="column is-10">
                 <form @submit.prevent="submitForm">
                     <div class="field">
-                        <label for="name">Team Name</label>
+                        <label for="company">First Name</label>
                         <div class="contorl">
                             <input
                                 type="text"
                                 class="input"
-                                id="name"
-                                v-model="name" />
+                                id="firstname"
+                                v-model="user.first_name" />
                         </div>
                     </div>
+
+                    <div class="field">
+                        <label for="company">Last Name</label>
+                        <div class="contorl">
+                            <input
+                                type="text"
+                                class="input"
+                                id="lastname"
+                                v-model="user.last_name" />
+                        </div>
+                    </div>
+
                     <div class="field">
                         <div class="control">
                             <button class="button is-success" type="submit">
-                                Submit
+                                Update
                             </button>
                         </div>
                     </div>
@@ -33,39 +45,46 @@
 import axios from "axios";
 import { toast } from "bulma-toast";
 export default {
-    name: "AddTeam",
+    name: "EditMember",
     data() {
         return {
-            name: "",
-            // members: [],
-            errors: [],
+            user: {},
         };
     },
+    mounted() {
+        this.getUser();
+    },
     methods: {
+        async getUser() {
+            this.$store.commit("setIsLoading", true);
+            const userID = this.$route.params.id;
+            await axios
+                .get(`api/v1/teams/member/${userID}/`)
+                .then((response) => {
+                    this.user = response.data;
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+            this.$store.commit("setIsLoading", false);
+        },
         async submitForm() {
             this.$store.commit("setIsLoading", true);
-            const team = {
-                name: this.name,
-                // members: this.$store.state.user,
-            };
+            const userID = this.$route.params.id;
             await axios
-                .post("/api/v1/teams/", team)
+                .put(`/api/v1/teams/member/${userID}/`, this.user)
                 .then((response) => {
-                    console.log(response);
                     toast({
-                        message: "Team was created sucessfully",
+                        message: "The Member was updated sucessfully",
                         type: "is-success",
                         dismissible: true,
                         pauseOnHover: true,
                         duration: 2000,
                         position: "bottom-right",
                     });
-                    this.$store.commit("setTeam", {
-                        id: response.data.id,
-                        name: this.name,
+                    this.$router.push({
+                        name: "MyAccount",
                     });
-                    // this.$router.push("/dashboard");
-                    this.$router.push({ name: "Dashboard" });
                 })
                 .catch((error) => {
                     console.log(error);

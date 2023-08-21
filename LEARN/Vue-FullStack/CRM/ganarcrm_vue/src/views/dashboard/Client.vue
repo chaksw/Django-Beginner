@@ -24,7 +24,7 @@
             </div>
             <div class="column is-6">
                 <div class="box">
-                    <h2 class="subtitle">Contact information</h2>
+                    <h2 class="subtitle">Note</h2>
                     <p>
                         <strong>Contact person:</strong>
                         {{ client.contact_person }}
@@ -44,6 +44,30 @@
                 </div>
             </div>
         </div>
+        <hr />
+        <div class="column is-12">
+            <h2 class="subtitle">Notes</h2>
+            <router-link
+                :to="{
+                    name: 'AddNote',
+                    params: { id: client.id },
+                }"
+                class="button is-primary mb-3">
+                Add note
+            </router-link>
+            <div class="box" v-for="note in notes" :key="note.id">
+                <h3 class="is-size-4">{{ note.name }}</h3>
+                <p>{{ note.body }}</p>
+                <router-link
+                    :to="{
+                        name: 'EditNote',
+                        params: { id: client.id, note_id: note.id },
+                    }"
+                    class="button is-primary mt-4">
+                    Edit note
+                </router-link>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -54,6 +78,7 @@ export default {
     data() {
         return {
             client: {},
+            notes: [],
         };
     },
     mounted() {
@@ -69,6 +94,15 @@ export default {
                 .then((response) => {
                     console.log(response);
                     this.client = response.data;
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+            await axios
+                .get(`api/v1/notes/?client_id=${clientID}`)
+                .then((response) => {
+                    console.log(response);
+                    this.notes = response.data;
                 })
                 .catch((error) => {
                     console.log(error);

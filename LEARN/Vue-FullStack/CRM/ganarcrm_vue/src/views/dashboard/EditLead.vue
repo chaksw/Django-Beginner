@@ -197,7 +197,7 @@ export default {
                         dismissible: true,
                         pauseOnHover: true,
                         duration: 2000,
-                        position: "top-right",
+                        position: "bottom-right",
                     });
                     // this.$router.push(`/dashboard/leads/${leadID}/`);
                     this.$router.push({
