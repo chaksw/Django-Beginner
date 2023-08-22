@@ -5,7 +5,6 @@ from team.models import Team
 
 
 class Client(models.Model):
-
     team = models.ForeignKey(Team, related_name="clients", on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     contact_person = models.CharField(max_length=255)

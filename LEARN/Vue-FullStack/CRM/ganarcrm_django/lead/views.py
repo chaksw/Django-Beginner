@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
-from rest_framework import viewsets
+from rest_framework import viewsets, filters
 from rest_framework.views import APIView, DefaultSchema
+from rest_framework.pagination import PageNumberPagination
 from .models import Lead
 from .serializers import LeadSerializer
 from team.models import Team
@@ -9,10 +10,14 @@ from team.models import Team
 # print(type(APIView.authentication_classes))
 # print(APIView.authentication_classes)
 
+class LeadPagination(PageNumberPagination):
+    page_size = 10
 class LeadViewSet(viewsets.ModelViewSet):
     serializer_class = LeadSerializer
     queryset = Lead.objects.all()
-    
+    pagination_class = LeadPagination
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('company', 'contact_person', 'email', 'phone', 'website')
     # action when we create a lead
     def perform_create(self, serializer):
         # search the team (contain current user) (as per client creation[input])

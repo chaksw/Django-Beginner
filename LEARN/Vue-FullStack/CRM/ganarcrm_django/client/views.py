@@ -2,10 +2,11 @@ from django.shortcuts import render
 from django.http import Http404
 from django.contrib.auth.models import User
 
-from rest_framework import viewsets, status
+from rest_framework import viewsets, status, filters
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.pagination import PageNumberPagination
 
 from rest_framework import viewsets
 from .models import Client, Note
@@ -14,11 +15,16 @@ from team.models import Team
 from lead.models import Lead
 # Create your views here.
 
+class ClientPagination(PageNumberPagination):
+    page_size = 10
+
 
 class ClientViewSet(viewsets.ModelViewSet):
     serializer_class = ClientSerializer
     queryset = Client.objects.all()
-
+    pagination_class = ClientPagination
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('name', 'contact_person', 'email', 'phone', 'website')
     # action when we create a lead
     def perform_create(self, serializer):
         # search the team (contain current user) (as per client creation[input])
@@ -59,8 +65,6 @@ class NoteViewSet(viewsets.ModelViewSet):
         return self.queryset.filter(team=team).filter(client_id=client_id)
 
 # trigger when POST method raised in front-end
-
-
 @api_view(['POST'])
 def convert_lead_to_client(request):
     team = Team.objects.filter(members__in=[request.user]).first()

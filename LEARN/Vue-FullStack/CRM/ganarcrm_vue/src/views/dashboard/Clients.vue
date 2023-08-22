@@ -8,6 +8,17 @@
                     class="button is-primary">
                     Add client
                 </router-link>
+                <hr />
+                <form action="" @submit.prevent="getClients">
+                    <div class="field has-addons">
+                        <div class="control">
+                            <input type="text" class="input" v-model="query" />
+                        </div>
+                        <div class="control">
+                            <button class="button is-success">Search</button>
+                        </div>
+                    </div>
+                </form>
             </div>
             <div class="column is-12">
                 <template v-if="clients.length">
@@ -37,6 +48,20 @@
                             </tr>
                         </tbody>
                     </table>
+                    <div class="buttons">
+                        <button
+                            class="button is-light"
+                            @click="goToPreviousPage()"
+                            v-if="showPreviousButton">
+                            Previous
+                        </button>
+                        <button
+                            class="button is-light"
+                            @click="goToNextPage()"
+                            v-if="showNextButton">
+                            Next
+                        </button>
+                    </div>
                 </template>
                 <template v-else>
                     <p>You don't have any clients yets...</p>
@@ -53,19 +78,38 @@ export default {
     data() {
         return {
             clients: [],
+            showNextButton: false,
+            showPreviousButton: false,
+            currentPage: 1,
+            query: "",
         };
     },
     mounted() {
         this.getClients();
     },
     methods: {
+        goToNextPage() {
+            this.currentPage += 1;
+            this.getClients();
+        },
+        goToPreviousPage() {
+            this.currentPage -= 1;
+            this.getClients();
+        },
         async getClients() {
             this.$store.commit("setIsLoading", true);
 
             await axios
-                .get("/api/v1/clients/")
+                .get(
+                    `/api/v1/clients/?page=${this.currentPage}&search=${this.query}`
+                )
                 .then((response) => {
-                    this.clients = response.data;
+                    this.clients = response.data.results;
+                    // console.log(response.data.next);
+                    this.showNextButton = response.data.next ? true : false;
+                    this.showPreviousButton = response.data.previous
+                        ? true
+                        : false;
                 })
                 .catch((error) => {
                     console.log(error);

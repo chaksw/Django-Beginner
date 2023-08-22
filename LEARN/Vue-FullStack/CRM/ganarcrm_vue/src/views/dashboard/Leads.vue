@@ -8,6 +8,17 @@
                     class="button is-primary">
                     Add Lead
                 </router-link>
+                <hr />
+                <form action="" @submit.prevent="getLeads">
+                    <div class="field has-addons">
+                        <div class="control">
+                            <input type="text" class="input" v-model="query" />
+                        </div>
+                        <div class="control">
+                            <button class="button is-success">Search</button>
+                        </div>
+                    </div>
+                </form>
             </div>
             <div class="column is-12">
                 <table class="table is-fullwidth">
@@ -44,6 +55,20 @@
                         </tr>
                     </tbody>
                 </table>
+                <div class="buttons">
+                    <button
+                        class="button is-light"
+                        @click="goToPreviousPage()"
+                        v-if="showPreviousButton">
+                        Previous
+                    </button>
+                    <button
+                        class="button is-light"
+                        @click="goToNextPage()"
+                        v-if="showNextButton">
+                        Next
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -56,19 +81,38 @@ export default {
     data() {
         return {
             leads: [],
+            showNextButton: false,
+            showPreviousButton: false,
+            currentPage: 1,
+            query: "",
         };
     },
     mounted() {
         this.getLeads();
     },
     methods: {
+        goToNextPage() {
+            this.currentPage += 1;
+            this.getLeads();
+        },
+        goToPreviousPage() {
+            this.currentPage -= 1;
+            this.getLeads();
+        },
         async getLeads() {
             this.$store.commit("setIsLoading", true);
 
             await axios
-                .get("/api/v1/leads/")
+                .get(
+                    `/api/v1/leads/?page=${this.currentPage}&search=${this.query}`
+                )
                 .then((response) => {
-                    this.leads = response.data;
+                    console.log(response.data);
+                    this.leads = response.data.results;
+                    this.showNextButton = response.data.next ? true : false;
+                    this.showPreviousButton = response.data.previous
+                        ? true
+                        : false;
                 })
                 .catch((error) => {
                     console.log(error);
