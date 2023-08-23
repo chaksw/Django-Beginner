@@ -3,11 +3,16 @@
         <div class="columns is-multiline">
             <div class="column is-12">
                 <h1 class="title">Clients</h1>
+                <template></template>
                 <router-link
                     :to="{ name: 'AddClient' }"
+                    v-if="$store.state.team.max_clients > num_clients"
                     class="button is-primary">
                     Add client
                 </router-link>
+                <div class="notification is-danger" v-else>
+                    You have reached the top of your limitation. Please upgrade!
+                </div>
                 <hr />
                 <form action="" @submit.prevent="getClients">
                     <div class="field has-addons">
@@ -82,6 +87,7 @@ export default {
             showPreviousButton: false,
             currentPage: 1,
             query: "",
+            num_clients: 0,
         };
     },
     mounted() {
@@ -99,6 +105,9 @@ export default {
         async getClients() {
             this.$store.commit("setIsLoading", true);
 
+            await axios.get("/api/v1/clients/").then((response) => {
+                this.num_clients = response.data.count;
+            });
             await axios
                 .get(
                     `/api/v1/clients/?page=${this.currentPage}&search=${this.query}`

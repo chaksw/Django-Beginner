@@ -16,6 +16,13 @@
                     <strong>Max leads:</strong>
                     {{ $store.state.team.max_leads }}
                 </p>
+                <p>
+                    <router-link
+                        class="mt-3 button is-primary"
+                        :to="{ name: 'Plans' }">
+                        Change plan
+                    </router-link>
+                </p>
                 <hr />
                 <!-- Only team creator can add team member -->
                 <template

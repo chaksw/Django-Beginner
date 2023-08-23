@@ -5,9 +5,13 @@
                 <h1 class="title">Leads</h1>
                 <router-link
                     :to="{ name: 'AddLead' }"
+                    v-if="$store.state.team.max_leads > num_leads"
                     class="button is-primary">
                     Add Lead
                 </router-link>
+                <div class="notification is-danger" v-else>
+                    You have reached the top of your limitation. Please upgrade!
+                </div>
                 <hr />
                 <form action="" @submit.prevent="getLeads">
                     <div class="field has-addons">
@@ -85,6 +89,7 @@ export default {
             showPreviousButton: false,
             currentPage: 1,
             query: "",
+            num_leads: 0,
         };
     },
     mounted() {
@@ -101,7 +106,9 @@ export default {
         },
         async getLeads() {
             this.$store.commit("setIsLoading", true);
-
+            await axios.get("/api/v1/leads/").then((response) => {
+                this.num_leads = response.data.count;
+            });
             await axios
                 .get(
                     `/api/v1/leads/?page=${this.currentPage}&search=${this.query}`
