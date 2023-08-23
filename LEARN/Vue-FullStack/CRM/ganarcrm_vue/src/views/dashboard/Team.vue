@@ -3,6 +3,20 @@
         <div class="columns is-multiline">
             <div class="column is-12">
                 <h1 class="title">{{ team.name }}</h1>
+                <hr />
+                <p>
+                    <strong>Plan:</strong>
+                    {{ $store.state.team.plan }}
+                </p>
+                <p>
+                    <strong>Max clients:</strong>
+                    {{ $store.state.team.max_clients }}
+                </p>
+                <p>
+                    <strong>Max leads:</strong>
+                    {{ $store.state.team.max_leads }}
+                </p>
+                <hr />
                 <!-- Only team creator can add team member -->
                 <template
                     v-if="
