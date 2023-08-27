@@ -15,6 +15,7 @@ from team.models import Team
 from lead.models import Lead
 # Create your views here.
 
+
 class ClientPagination(PageNumberPagination):
     page_size = 10
 
@@ -26,6 +27,7 @@ class ClientViewSet(viewsets.ModelViewSet):
     filter_backends = (filters.SearchFilter,)
     search_fields = ('name', 'contact_person', 'email', 'phone', 'website')
     # action when we create a lead
+
     def perform_create(self, serializer):
         # search the team (contain current user) (as per client creation[input])
         team = Team.objects.filter(members__in=[self.request.user]).first()
@@ -65,6 +67,8 @@ class NoteViewSet(viewsets.ModelViewSet):
         return self.queryset.filter(team=team).filter(client_id=client_id)
 
 # trigger when POST method raised in front-end
+
+
 @api_view(['POST'])
 def convert_lead_to_client(request):
     team = Team.objects.filter(members__in=[request.user]).first()
@@ -76,3 +80,12 @@ def convert_lead_to_client(request):
     client = Client.objects.create(team=team, name=lead.company, contact_person=lead.contact_person,
                                    email=lead.email, phone=lead.phone, website=lead.website, created_by=request.user)
     return Response()
+
+
+@api_view(['POST'])
+def delete_client(request, client_id):
+    team = Team.objects.filter(members__in=[request.user]).first()
+    client = team.clients.filter(pk=client_id)
+    client.delete()
+    msg = 'The client was deleted'
+    return Response({'Message': msg})

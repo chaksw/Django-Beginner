@@ -14,6 +14,9 @@
                         class="button is-info">
                         Convert to client
                     </button>
+                    <button class="button is-danger" @click="deleteLead">
+                        Delete
+                    </button>
                 </div>
             </div>
             <div class="column is-6">
@@ -80,6 +83,7 @@
 
 <script>
 import axios from "axios";
+import { toast } from "bulma-toast";
 export default {
     name: "Lead",
     data() {
@@ -117,7 +121,31 @@ export default {
                 .post(`api/v1/convert_lead_to_client/`, data)
                 .then((response) => {
                     console.log("concerted to client");
-                    this.$router.push("/dashboard/clients");
+                    this.$router.push({ name: "Clients" });
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+            this.$store.commit("setIsLoading", false);
+        },
+        async deleteLead() {
+            this.$store.commit("setIsLoading", true);
+
+            const leadID = this.$route.params.id;
+
+            await axios
+                .post(`api/v1/leads/delete_lead/${leadID}`)
+                .then((response) => {
+                    console.log(response.data);
+                    toast({
+                        message: "The Lead was deleted",
+                        type: "is-success",
+                        dismissible: true,
+                        pauseOnHover: true,
+                        duration: 2000,
+                        position: "bottom-right",
+                    });
+                    this.$router.push({ name: "Leads" });
                 })
                 .catch((error) => {
                     console.log(error);

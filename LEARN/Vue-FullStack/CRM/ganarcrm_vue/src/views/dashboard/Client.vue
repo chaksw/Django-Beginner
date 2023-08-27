@@ -3,11 +3,16 @@
         <div class="columns is-multiline">
             <div class="column is-12">
                 <h1 class="title">{{ client.name }}</h1>
-                <router-link
-                    :to="{ name: 'EditClient', params: client.id }"
-                    class="button is-primary">
-                    Edit Client
-                </router-link>
+                <div class="buttons">
+                    <router-link
+                        :to="{ name: 'EditClient', params: client.id }"
+                        class="button is-primary">
+                        Edit Client
+                    </router-link>
+                    <button class="button is-danger" @click="deleteClient">
+                        Delete
+                    </button>
+                </div>
             </div>
             <div class="column is-6">
                 <div class="box">
@@ -73,6 +78,7 @@
 
 <script>
 import axios from "axios";
+import { toast } from "bulma-toast";
 export default {
     name: "Client",
     data() {
@@ -107,6 +113,31 @@ export default {
                 .catch((error) => {
                     console.log(error);
                 });
+            this.$store.commit("setIsLoading", false);
+        },
+        async deleteClient() {
+            this.$store.commit("setIsLoading", true);
+
+            const clientID = this.$route.params.id;
+            await axios
+                .post(`api/v1/clients/delete_client/${clientID}`)
+                .then((response) => {
+                    console.log(response.data);
+                    // this.client = response.data;
+                    toast({
+                        message: "The Client was deleted",
+                        type: "is-success",
+                        dismissible: true,
+                        pauseOnHover: true,
+                        duration: 2000,
+                        position: "bottom-right",
+                    });
+                    this.$router.push({ name: "Clients" });
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+
             this.$store.commit("setIsLoading", false);
         },
     },

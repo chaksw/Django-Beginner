@@ -16,6 +16,10 @@
                     <strong>Max leads:</strong>
                     {{ $store.state.team.max_leads }}
                 </p>
+                <p v-if="$store.state.team.plan !== 'Free'">
+                    <strong>Plan end Date:</strong>
+                    {{ team.plan_end_date }}
+                </p>
                 <p>
                     <router-link
                         class="mt-3 button is-primary"

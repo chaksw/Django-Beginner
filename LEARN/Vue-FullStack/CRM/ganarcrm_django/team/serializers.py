@@ -13,6 +13,7 @@ class UserSerializer(serializers.ModelSerializer):
             'last_name',
         )
 
+
 class PlanSerializer(serializers.ModelSerializer):
     class Meta:
         model = Plan
@@ -24,10 +25,12 @@ class PlanSerializer(serializers.ModelSerializer):
             'price',
         )
 
+
 class TeamSerializer(serializers.ModelSerializer):
     members = UserSerializer(many=True, read_only=True)
     created_by = UserSerializer(read_only=True)
     plan = PlanSerializer(read_only=True)
+
     class Meta:
         model = Team
         # read_only_fields = (
@@ -40,5 +43,5 @@ class TeamSerializer(serializers.ModelSerializer):
             'members',
             'created_by',
             'plan',
+            'plan_end_date',
         )
-       

@@ -1,7 +1,7 @@
 import json
 import stripe
 from datetime import datetime
-from django.conf import settings 
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.http import Http404, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -46,17 +46,18 @@ class UserDetail(APIView):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 @api_view(['GET'])
 def get_stripe_pub_key(request):
     pub_key = settings.STRIPE_PUB_KEY
-    return Response({'pub_key' : pub_key})
+    return Response({'pub_key': pub_key})
+
 
 @api_view(['GET'])
 def get_my_team(request):
     team = Team.objects.filter(members__in=[request.user]).first()
     serializer = TeamSerializer(team)
     return Response(serializer.data)
-
 
 
 @api_view(['POST'])
@@ -92,24 +93,43 @@ def add_member(request):
 def check_session(request):
     stripe.api_key = settings.STRIPE_SECRET_KEY
     error = ''
+    print('test')
     try:
         team = Team.objects.filter(members__in=[request.user]).first()
-        subscription = stripe.Subscription.retrieve(team.stripe_subscription_id)
+        subscription = stripe.Subscription.retrieve(
+            team.stripe_subscription_id)
         product = stripe.Product.retrieve(subscription.plan.product)
-        print("Product name: " + product.name)
         team.plan_status = Team.PLAN_ACTIVE
-        print(team.plan_status)
-        # team.plan_end_date = datetime.fromtimestamp(subscription.current_period_end)
-        # print(team.plan.plan_end_date)
+        team.plan_end_date = datetime.fromtimestamp(
+            subscription.current_period_end)
         team.plan = Plan.objects.get(name=product.name)
-        print(team.plan)
         team.save()
-        
+
         serializer = TeamSerializer(team)
         return Response(serializer.data)
     except Exception:
         error = 'There something wrong. Please try again!'
         return Response({'error': error})
+
+
+@api_view(['POST'])
+def cancel_plan(request):
+    team = Team.objects.filter(members__in=[request.user]).first()
+    plan_free = Plan.objects.get(name='Free')
+
+    team.plan = plan_free
+    team.plan_status = Team.PLAN_CANCELLED
+    team.save()
+
+    try:
+        stripe.api_key = settings.STRIPE_SECRET_KEY
+        stripe.Subscription.delete(team.stripe_subscription_id)
+    except Exception:
+        error = 'There something wrong. Please try again!'
+        return Response({'error': error})
+    serializer = TeamSerializer(team)
+    return Response(serializer.data)
+
 
 @api_view(['POST'])
 def create_checkout_session(request):
@@ -121,26 +141,27 @@ def create_checkout_session(request):
         price_id = settings.STRIPE_PRICE_ID_SMALL_TEAM
     else:
         price_id = settings.STRIPE_PRICE_ID_BIG_TEAM
-        
+
     team = Team.objects.filter(members__in=[request.user]).first()
     try:
         checkout_session = stripe.checkout.Session.create(
-            client_reference_id = team.id,
-            success_url = '%s?session_id={CHECKOUT_SESSION_ID}' % settings.FRONTEND_WEBSITE_SUCCESS_URL,
-            cancel_url = '%s' % settings.FRONTEND_WEBSITE_CANCEL_URL,
-            payment_method_types = ['card'],
-            mode = 'subscription',
-            line_items = [
+            client_reference_id=team.id,
+            success_url='%s?session_id={CHECKOUT_SESSION_ID}' % settings.FRONTEND_WEBSITE_SUCCESS_URL,
+            cancel_url='%s' % settings.FRONTEND_WEBSITE_CANCEL_URL,
+            payment_method_types=['card'],
+            mode='subscription',
+            line_items=[
                 {
                     'price': price_id,
-                    'quantity':1,
+                    'quantity': 1,
                 }
             ]
         )
-        return Response({'sessionId':checkout_session['id']})
+        return Response({'sessionId': checkout_session['id']})
     except Exception as e:
         return Response({'error': str(e)})
-    
+
+
 @csrf_exempt
 def stripe_webhook(request):
     stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -148,9 +169,9 @@ def stripe_webhook(request):
     payload = request.body
     sig_header = request.META['HTTP_STRIPE_SIGNATURE']
     event = None
-    
+
     # print('payload', payload)
-    
+
     try:
         event = stripe.Webhook.construct_event(
             payload, sig_header, webhook_key
@@ -159,12 +180,12 @@ def stripe_webhook(request):
         return HttpResponse(status=400)
     except stripe.error.SignatureVerificationError as e:
         return HttpResponse(status=400)
-    
+    # listen the subscription action and checkout action and return [stripe_customer_id, stripe_subscription_id] once checkout completed
     if event['type'] == 'checkout.session.completed':
         session = event['data']['object']
         team = Team.objects.get(pk=session.get('client_reference_id'))
         team.stripe_customer_id = session.get('customer')
         team.stripe_subscription_id = session.get('subscription')
         team.save()
-        
+
     return HttpResponse(status=200)
