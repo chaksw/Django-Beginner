@@ -90,7 +90,7 @@ vite.config.js  --- Vue配置文件
 </script>
 ```
 
-## Using JavaScript Expressions
+## Using `JavaScript` Expressions
 
 每一个绑定仅支持单一表达式，也就是一段能够被求值的`JavaScript`代码。一个简单的判断代码是是否可以合法写在`return`后面。
 
@@ -185,7 +185,7 @@ vite.config.js  --- Vue配置文件
 
 ## Dynamically Binding Multiple Attributes - 动态绑定多个值
 
-如果你有像这个一个包含多个 attribute 的 JavaScript 对象
+如果你有像这个一个包含多个 attribute 的 `JavaScript` 对象
 
 ```js
 const objectOfAttrs = {
@@ -338,7 +338,7 @@ const objectOfAttrs = {
 </script>
 ```
 
-也可以使用`of`作为分隔符来替代`in`,这更接近 JavaScript 的迭代器语法
+也可以使用`of`作为分隔符来替代`in`,这更接近 `JavaScript` 的迭代器语法
 
 ```html
 <div v-for="item of items"></div>
@@ -369,6 +369,311 @@ const objectOfAttrs = {
                     sex: "male",
                 },
             };
+        },
+    };
+</script>
+```
+
+## 通过 key 管理状态
+
+`Vue`默认按照“就地更新”的策略来更新通过`v-for`渲染的元素列表。当数据项的顺序改变时，`Vue`不会随之移动 DOM 元素的顺序，而是就地更新每个元素，确保他们在原本制定的索引位置上渲染。
+为了给`Vue`一个提示，以便它可以跟踪每个节点的标识，从而重用和重新排序现有的元素，你需要为每个元素对应的块提供一个唯一的`key` attribute:
+
+> 个人理解：key 绑定的作用就是告诉`Vue`在渲染的时候基于什么来给数据项建立索引，默认情况下是按照其定义顺序（代码顺序），这样如果代码顺序发生改变，在没有 key 的情况下，为了确保数据随之更新，`Vue`会重新渲染所有数据，并更新所有数据对应的索引（即便有些数据没有任何更新-浪费资源）。如果提供的 key，则`Vue`会根据 key 提供的 attribute 来建立索引，这样就算数据发生改变，原本顺序没有发生变化的某些数据则不会进行更新，只更新索引和 key 在更新后不匹配的部分，从而节省资源。
+
+```html
+<template>
+    <h3>v-for Status Management by key</h3>
+    <p v-for="(item, index) in names" :key="index">{{ index }}-{{ item }}</p>
+</template>
+<script>
+    export default {
+        data() {
+            return {
+                names: ["Chris", "Lyrics", "Murphy"],
+            };
+        },
+    };
+</script>
+```
+
+> **温馨提示** > `key`在这里是通过一个`v-bind`绑定的特殊 attribute
+> 推荐在任何可行的时候为`v-for`提供一个`key` attribute
+> `key`绑定的值期望是一个基础类型的值，例如字符串或者 number 类型
+
+### key 的来源
+
+在真实的应用场景中，不推荐使用`index`作为 key，要确保每一条数据的唯一索引不会发生变化(例如使用`id`)
+
+```html
+<template>
+    <h3>v-for Status Management by key</h3>
+    <div v-for="item in results" :key="item.id">
+        <p>{{ item.title }}</p>
+        <img :src="item.avator" alt="" />
+    </div>
+</template>
+<script>
+    export default {
+        data() {
+            return {
+                results: [
+                    {
+                        id: 2261677,
+                        title: "鄂尔多斯｜感受一座城市的璀璨夜景 感受一座城市，除了白日里的车水马龙，喧嚣繁华之",
+                        avator: "https://pic.qyer.com/avatar/002/25/77/30/200?v=1560226451",
+                    },
+                    {
+                        id: 2261566,
+                        title: "成都这家洞穴暗黑风咖啡厅酷毙了！！早C晚A走起☕️ 成都天气这么🔥 咖啡🌟人必备",
+                        avator: "https://pic.qyer.com/avatar/002/25/77/30/200?v=1560226451",
+                    },
+                    {
+                        id: 2261662,
+                        title: "[川西新龙-措卡湖]措卡湖吗，意为“乱世从中的黑色海水”，神秘小众 原汁原味。",
+                        avator: "https://pic.qyer.com/avatar/002/25/77/30/200?v=1560226451",
+                    },
+                ],
+            };
+        },
+    };
+</script>
+```
+
+# Event Handing - 事件处理 `@event`
+
+我们可以使用`v-on`指令（简写`@`）来监听 DOM 事件，并在实践触发时执行对应的`JavaScript`.用法：`v-on:click="methodName"`或`@click='handler'`
+事件处理器的值可以是
+
+1. 内联事件处理器： 事件被触发时执行的内联 `JavaScript` 语句（与`onclick`类似）
+2. 方法事件处理器： 一个指向组件上定义的方法的属性名或是路径
+
+## Inline Handlers - 内联事件处理器
+
+内联事件处理器通常用于简单场景
+
+```html
+<template>
+    <button @click="count++">Add 1</button>
+    <p>Count is: {{ count }}</p>
+</template>
+
+<script>
+    export default {
+        data() {
+            return {
+                count: 0,
+            };
+        },
+    };
+</script>
+```
+
+## Method Handlers - 方法事件处理器
+
+方法事件处理器自动接收原生 DOM 事件并触发执行。
+
+```html
+<template>
+    <h3>Methode event handler</h3>
+    <button @click="addCount">Add</button>
+    <p>Count is: {{ count }}</p>
+</template>
+
+<script>
+    export default {
+        data() {
+            return {
+                count: 0,
+            };
+        },
+        methods: {
+            addCount() {
+                this.count += 1;
+            },
+        },
+    };
+</script>
+```
+
+## Method vs. Inline Detection - 方式与内联事件判断
+
+模版编译器会通过检查`v-on`的值是否是合法的`JavaScript`标识符或属性访问路径来断定是何种形式的事件处理器。举例俩说，`foo`, `foo.bar` 和`foo['bar']`会被视为方法事件处理器，而`foo()`,`count++` 会被视为内联事件处理器。
+
+## 事件参数
+
+事件参数可以获取`event`对象和通过事件传递数据
+
+### 获取`event`对象
+
+```html
+<template>
+    <h3>Method event handler</h3>
+    <button @click="addCount">Add</button>
+    <p>Count is: {{ count }}</p>
+</template>
+
+<script>
+    export default {
+        data() {
+            return {
+                count: 0,
+            };
+        },
+        // All method and function placed here
+        methods: {
+            addCount(e) {
+                // using this to refer variable in data()
+                this.count++;
+                // Event object in vue is the original JS object
+                console.log((e.target.innerHTML = "Add" + this.count));
+            },
+        },
+    };
+</script>
+```
+
+## 传递参数
+
+```html
+<template>
+    <h3>Method event handler</h3>
+    <button @click="addCount('hello')">Add</button>
+    <p>Count is: {{ count }}</p>
+</template>
+
+<script>
+    export default {
+        data() {
+            return {
+                count: 0,
+            };
+        },
+        // All method and function placed here
+        methods: {
+            addCount(msg) {
+                // using this to refer variable in data()
+                this.count++;
+                console.log(msg);
+            },
+        },
+    };
+</script>
+```
+
+## 传递参数过程获取`event`
+
+```html
+<template>
+    <h3>Passing Argument in Event Handler 2</h3>
+    <p
+        @click="getNameHandler(item, $event)"
+        v-for="(item, index) in names"
+        :key="index">
+        {{ item }}
+    </p>
+</template>
+
+<script>
+    export default {
+        data() {
+            return {
+                names: ["iwen", "ime", "frank"],
+            };
+        },
+        // All method and function placed here
+        methods: {
+            getNameHandler(name, e) {
+                // using this to refer variable in data()
+                console.log(name);
+                console.log(e);
+            },
+        },
+    };
+</script>
+```
+
+# Event Modifiers - 事件修饰符
+
+在处理事件时调用`event.preventDefault()`或`event.stopPropagation()`是很常见的。尽管我们可以直接在方法内调用，但如果方法能更专注于数据逻辑而不用处理 DOM 事件的细节会更好。
+为解决这一问题，Vue 为`v-on`提供了事件修饰符。
+
+## 补充知识：`event.preventDefault()` 与 `event.stopPropagation()`
+
+事件处理程序分三个阶段：捕获阶段，“处于目标”阶段, 冒泡阶段。
+
+![processEvent](image-1.png)
+
+在所有 DOM 节点中都包含事件监听`addEventListener()` 和 `removeEventListener()` 这两个方法，并且它们都接受 3 个参数：要处理的事情名（eventnName），作为事件处理程序的函数(function) 和一个布尔值 (true|false)。如果布尔值是 true，则在捕获阶段调用事件处理程序；如果是 false，表示在冒泡阶段调用事件处理程序。默认为冒泡阶段调用事件处理程序(false)，即事件触发是从目标组件开始自下而上。(div->body)
+
+基于此，`event.preventDefault()` 方法的作用是：取消事件的默认行为，即在捕获(当布尔值为 true)或冒泡(false)阶段不调用默认的事件处理程序。
+
+> 使用场景如：当鼠标右键按下的时候会出现默认菜单，如果此时你想定义自己的方法就可以使用 `event.preventDefault()`;
+
+而 `event.stopPropagation()` 则是取消事件的进一步捕获(当布尔值为 true)或冒泡(false)。
+
+> 使用场景如（布尔值为 false）：div 和 body 同时添加 click 事件，当点击 div 时，不触发 body 的事件，只要在 div 执行语句之后使用 `event.stopPropagation()`即可不触发 body 的事件。
+
+修饰符是用`.`表示的指令后缀，包含以下这些：
+
+-   `.stop`: 相当于调用`event.stopPropagation()`
+-   `.prevent`: 相当于调用`event.preventDefault()`
+-   `.self`: 类似于`event.stopPropagation()`，只当事件是从事件绑定的元素本身触发时才触发回调。
+-   `.capture`，相当于将布尔值设为 true, 即事件从捕获阶段开始触发，添加的该后缀的事件触发为自上而下(body->div)
+-   `.once`: 元素绑定的事件只能触发一次。
+-   `.passive`:当我们在监听元素滚动事件的时候，会一直触发`onscroll`事件，在移动端，会让我们的网页变卡，因此我们使用这个修饰符的时候，相当于给`onscroll`事件整了一个`.lazy`修饰符.
+-   `native`: `Vue`组件绑定的事件一般是不会触发的，添加`native`可以理解为该修饰符的作用就是把一个 `vue` 组件转化为一个普通的 HTML 标签，使得事件可以触发。
+
+```html
+<!-- 单击事件将停止传递（进一步捕获或冒泡） -->
+<a @click.stop="doThis"></a>
+
+<!-- 阻止默认事件 -->
+<form @submit.prevent="onSubmit"></form>
+
+<!-- 修饰语可以使用链式书写，但要注意顺序 -->
+<a @click.stop.prevent="doThat"></a>
+
+<!-- 也可以只有修饰符 -->
+<form @submit.prevent></form>
+
+<!-- 仅当 event。target 是元素本身时才会触发事件处理器 -->
+<!-- 例如：事件处理器不来自子元素 -->
+<div @click.self="doThat">...</div>
+```
+
+[修饰符详解](https://segmentfault.com/a/1190000016786254) - 包含表单｜事件｜按键修饰符
+
+## Examples
+
+### `.prevent` 阻止默认事件 & `stop` 阻止事件进一步捕获或冒泡
+
+```html
+<template>
+    <h3>Evnet Modifiers</h3>
+    <a @click.prevent="clickHandle" href="http://www.google.com">Google</a>
+    <div @click="clickDiv">
+        <p @click.stop="clickP">测试冒泡</p>
+    </div>
+</template>
+
+<script>
+    export default {
+        data() {
+            return {};
+        },
+        methods: {
+            clickHandle(e) {
+                // 阻止默认事件
+                // e.preventDefault();
+                console.log("Clicked");
+            },
+            clickDiv() {
+                console.log("DIV clicked");
+            },
+            clickP() {
+                console.log("P clicked");
+            },
         },
     };
 </script>
