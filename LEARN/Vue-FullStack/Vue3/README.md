@@ -66,11 +66,11 @@ README.md       --- 项目描述文件
 vite.config.js  --- Vue配置文件
 ```
 
-# `Template` Syntax - 模版语法
+# 4. `Template` Syntax - 模版语法
 
 > Vue 使用一种基于`HTML`的模版语法，使我们能够声明式地将其组件实例的数据绑定到呈现的 DOM 上，所有的`Vue`模版都是语法层面合法的`HTML`，可以被符合规范的浏览器和`HTML`解析器解析
 
-## Text Interpolation - 文本插值
+## 4.1. Text Interpolation - 文本插值
 
 最基本的数据绑定形式时文本差值（Text Interpolation， 它使用的是 "Mustache" 语法（即双大括号 `{{ }}`）：
 
@@ -90,7 +90,7 @@ vite.config.js  --- Vue配置文件
 </script>
 ```
 
-## Using `JavaScript` Expressions
+## 4.2. Using `JavaScript` Expressions
 
 每一个绑定仅支持单一表达式，也就是一段能够被求值的`JavaScript`代码。一个简单的判断代码是是否可以合法写在`return`后面。
 
@@ -114,7 +114,7 @@ vite.config.js  --- Vue配置文件
 </script>
 ```
 
-## 原始`HTML`
+## 4.3. 原始`HTML`
 
 双大括号将会将数据插值为纯文本，而不是`HTML`。若想插入`HTML`，则需要使用`v-html`指令
 
@@ -137,7 +137,7 @@ vite.config.js  --- Vue配置文件
 </script>
 ```
 
-# Attribute Bindings - 属性绑定
+# 5. Attribute Bindings - 属性绑定
 
 文本差值`{{}}`不能用在`HTML` attributes 中。想要响应式地绑定一个 attribute,应该使用`v-bind`指令
 
@@ -167,7 +167,7 @@ vite.config.js  --- Vue配置文件
 
 `v-bind`指令指示 Vue 将元素的`id`attribute 与组件的`dynamicId`属性保持一致。如果绑定的值是`null`或者`undefined`，那么该 attribute 将会从渲染的元素上移除
 
-### Shorthand - 简写
+### 5.0.1. Shorthand - 简写
 
 因为`v-bind`非常常用，我们提供了特定的简写语法
 
@@ -175,7 +175,7 @@ vite.config.js  --- Vue配置文件
 <div :id="dynamicId" :class="dynamicClass"></div>
 ```
 
-## Boolean Attributes - 布尔型 Attribute
+## 5.1. Boolean Attributes - 布尔型 Attribute
 
 布尔型 attribute 依据 true/false 值来决定 attribute 是否应该存在于该元素上，`disabled`就是最常见的例子之一
 
@@ -183,7 +183,7 @@ vite.config.js  --- Vue配置文件
 <button :disabled="isButtonDisabled">Button</button>
 ```
 
-## Dynamically Binding Multiple Attributes - 动态绑定多个值
+## 5.2. Dynamically Binding Multiple Attributes - 动态绑定多个值
 
 如果你有像这个一个包含多个 attribute 的 `JavaScript` 对象
 
@@ -194,30 +194,30 @@ const objectOfAttrs = {
 };
 ```
 
-# Conditional Rendering - 条件渲染
+# 6. Conditional Rendering - 条件渲染
 
 -   `v-if`
 -   `v-else`
 -   `v-else-if`
 -   `v-show`
 
-## `v-if`
+## 6.1. `v-if`
 
 `v-if` 指令用于条件性地渲染一块内容。这块内容只会在指令的表达式返回真值时才被渲染
 
-## `v-else`
+## 6.2. `v-else`
 
 也可以使用`v-else`为`v-if`添加一个“else 区块“
 
 > 一个元素`v-else`必须跟在一个`v-if`或者`v-else-if`元素后面，否则它将不会被识别。
 
-## `v-else-if`
+## 6.3. `v-else-if`
 
 顾名思义，`v-else-if` 提供的是相应于`v-if`的"else if 区块“。它可以连续多次重复使用
 
 > 和`v-else`类似，一个使用`v-else-if`的元素必须紧跟在一个`v-if`或一个`v-else-if`元素后面
 
-## `v-show`
+## 6.4. `v-show`
 
 另一个可以用来按条件显示一个元素的指令是`v-show`。其用法基本一样：
 
@@ -225,7 +225,7 @@ const objectOfAttrs = {
 
 `v-show` 不支持在`<template>`元素上使用，也不能和`v-else`搭配使用。
 
-## `v-if` VS `v-show`
+## 6.5. `v-if` VS `v-show`
 
 `v-if` 是"真实的"按条件渲染，因为它确保了在切换时，条件区块内的条件监听器和子组件都会被销毁与重建。
 `v-if` 也是**惰性**的：如果在初次渲染时条件值为 false，则不会做任何事。条件区块只有当条件首次变为 true 时才被渲染。‘
@@ -256,7 +256,7 @@ const objectOfAttrs = {
 </script>
 ```
 
-# List Rendering - 列表渲染
+# 7. List Rendering - 列表渲染
 
 我们可以使用`v-for`指令基于一个数组来渲染一个列表。`v-for`指令的值需要使用`item in items`形式的特殊语法，其中`items`是源数据的数组，`item`是迭代项的别名.
 在`v-for`快中可以完整地访问父作用域内的数据和变量。`v-for`也支持可选的第二个参数表示当前项的位置索引。
@@ -278,7 +278,7 @@ const objectOfAttrs = {
 </script>
 ```
 
-## 复杂数据
+## 7.1. 复杂数据
 
 大多数情况，我们渲染的数据源来源于网络请求，也就是`JSON`格式
 
@@ -344,7 +344,7 @@ const objectOfAttrs = {
 <div v-for="item of items"></div>
 ```
 
-## `v-for`对象
+## 7.2. `v-for`对象
 
 也可以使用`v-for`来遍历一个对象的所有属性
 
@@ -374,7 +374,7 @@ const objectOfAttrs = {
 </script>
 ```
 
-## 通过 key 管理状态
+## 7.3. 通过 key 管理状态
 
 `Vue`默认按照“就地更新”的策略来更新通过`v-for`渲染的元素列表。当数据项的顺序改变时，`Vue`不会随之移动 DOM 元素的顺序，而是就地更新每个元素，确保他们在原本制定的索引位置上渲染。
 为了给`Vue`一个提示，以便它可以跟踪每个节点的标识，从而重用和重新排序现有的元素，你需要为每个元素对应的块提供一个唯一的`key` attribute:
@@ -401,7 +401,7 @@ const objectOfAttrs = {
 > 推荐在任何可行的时候为`v-for`提供一个`key` attribute
 > `key`绑定的值期望是一个基础类型的值，例如字符串或者 number 类型
 
-### key 的来源
+### 7.3.1. key 的来源
 
 在真实的应用场景中，不推荐使用`index`作为 key，要确保每一条数据的唯一索引不会发生变化(例如使用`id`)
 
@@ -440,7 +440,7 @@ const objectOfAttrs = {
 </script>
 ```
 
-# Event Handing - 事件处理 `@event`
+# 8. Event Handing - 事件处理 `@event`
 
 我们可以使用`v-on`指令（简写`@`）来监听 DOM 事件，并在实践触发时执行对应的`JavaScript`.用法：`v-on:click="methodName"`或`@click='handler'`
 事件处理器的值可以是
@@ -448,7 +448,7 @@ const objectOfAttrs = {
 1. 内联事件处理器： 事件被触发时执行的内联 `JavaScript` 语句（与`onclick`类似）
 2. 方法事件处理器： 一个指向组件上定义的方法的属性名或是路径
 
-## Inline Handlers - 内联事件处理器
+## 8.1. Inline Handlers - 内联事件处理器
 
 内联事件处理器通常用于简单场景
 
@@ -469,7 +469,7 @@ const objectOfAttrs = {
 </script>
 ```
 
-## Method Handlers - 方法事件处理器
+## 8.2. Method Handlers - 方法事件处理器
 
 方法事件处理器自动接收原生 DOM 事件并触发执行。
 
@@ -496,15 +496,15 @@ const objectOfAttrs = {
 </script>
 ```
 
-## Method vs. Inline Detection - 方式与内联事件判断
+## 8.3. Method vs. Inline Detection - 方式与内联事件判断
 
 模版编译器会通过检查`v-on`的值是否是合法的`JavaScript`标识符或属性访问路径来断定是何种形式的事件处理器。举例俩说，`foo`, `foo.bar` 和`foo['bar']`会被视为方法事件处理器，而`foo()`,`count++` 会被视为内联事件处理器。
 
-## 事件参数
+## 8.4. 事件参数
 
 事件参数可以获取`event`对象和通过事件传递数据
 
-### 获取`event`对象
+### 8.4.1. 获取`event`对象
 
 ```html
 <template>
@@ -533,7 +533,7 @@ const objectOfAttrs = {
 </script>
 ```
 
-## 传递参数
+## 8.5. 传递参数
 
 ```html
 <template>
@@ -561,7 +561,7 @@ const objectOfAttrs = {
 </script>
 ```
 
-## 传递参数过程获取`event`
+## 8.6. 传递参数过程获取`event`
 
 ```html
 <template>
@@ -593,12 +593,12 @@ const objectOfAttrs = {
 </script>
 ```
 
-# Event Modifiers - 事件修饰符
+# 9. Event Modifiers - 事件修饰符
 
 在处理事件时调用`event.preventDefault()`或`event.stopPropagation()`是很常见的。尽管我们可以直接在方法内调用，但如果方法能更专注于数据逻辑而不用处理 DOM 事件的细节会更好。
 为解决这一问题，Vue 为`v-on`提供了事件修饰符。
 
-## 补充知识：`event.preventDefault()` 与 `event.stopPropagation()`
+## 9.1. 补充知识：`event.preventDefault()` 与 `event.stopPropagation()`
 
 事件处理程序分三个阶段：捕获阶段，“处于目标”阶段, 冒泡阶段。
 
@@ -644,9 +644,9 @@ const objectOfAttrs = {
 
 [修饰符详解](https://segmentfault.com/a/1190000016786254) - 包含表单｜事件｜按键修饰符
 
-## Examples
+## 9.2. Examples
 
-### `.prevent` 阻止默认事件 & `stop` 阻止事件进一步捕获或冒泡
+### 9.2.1. `.prevent` 阻止默认事件 & `stop` 阻止事件进一步捕获或冒泡
 
 ```html
 <template>
@@ -674,6 +674,156 @@ const objectOfAttrs = {
             clickP() {
                 console.log("P clicked");
             },
+        },
+    };
+</script>
+```
+
+# 10. Array Change Watchers - 数组变化侦测
+
+## 10.1. Method to change - 变更方法
+
+Vue 能够侦听响应式数组的一些变更方法，并在它们被调用时触发相关的更新。这些变更方法包括：
+
+-   `push()`
+-   `pop()`
+-   `shift()`
+-   `unshift()`
+-   `splice()`
+-   `sort()`
+-   `reverse()`
+
+## 10.2. 替换一个数组
+
+相对地，也有一些不可变(immutable)方法，例如`filter()`, `concat()` 和 `slice()`，这些不会更改原数组，而总是返回一个新数组。当遇到的是非变更方法时，我们需要将旧的数组替换为新的
+
+```html
+<template>
+    <h3>Array Change Watchers</h3>
+    <p v-for="(item, index) in names" :key="index"></p>
+    <button @click="addLikstHandle">Add Data</button>
+    <ul>
+        <li v-for="(item, index) in names" :key="index">{{ item }}</li>
+    </ul>
+    <button @click="ConcatHandle">Concat Array</button>
+    <h3>Array 1</h3>
+    <p v-for="(item, index) in nums1" :key="index">{{ item }}</p>
+    <h3>Array 2</h3>
+    <p v-for="(item, index) in nums2" :key="index">{{ item }}</p>
+</template>
+
+<script>
+    export default {
+        data() {
+            return {
+                names: ["iwen", "ime", "frank"],
+                nums1: [1, 2, 3, 4, 5],
+                nums2: [6, 7, 8, 9, 10],
+            };
+        },
+        methods: {
+            addLikstHandle() {
+                // 引起UI自动更新
+                this.names.push("sakura");
+                // 不会引起UI自动更新;
+                this.names.concat(["sakura"]); // concat会生成一个新的数组，原数组不会发生变化
+                console.log(this.names);
+                // 将concat生成的新数组赋给names, 引起UI更新;
+                this.names = this.names.concat(["sakura"]);
+            },
+            ConcatHandle() {
+                this.nums1 = this.nums1.concat(this.nums2);
+            },
+        },
+    };
+</script>
+```
+
+# 11. Computed Properties - 计算属性
+
+模版中的表达式虽然方便，但也只能用来做简单的操作。如果在模版中写太多逻辑，会让模版变得臃肿，难以维护。因此我们推荐使用**计算属性**来描述依赖响应式状态的复杂逻辑。
+
+## 11.1. 计算属性缓存 vs 方法
+
+理论上，函数｜方法也能达到相同的效果，不同点在于，计算属性值会基于其响应式依赖被缓存。一个计算属性仅会在其响应式依赖更新时才重新计算，而方法调用总是会在重新渲染发生时再次执行函数。
+
+> 在依赖不更新情况下，计算属性多次调用但只有一次计算，方法在几次调用就有几次计算。
+
+# Class Binding - Class 绑定
+
+绑定 CSS Class 列表时数据绑定的一个常见需求场景，但是在处理比较复杂的绑定时，通过拼接字符串时麻烦且容易出错的。因此，Vue 专门为 `class` 的 `v-bing` 用法提供了特殊的功能增强。除了字符串外，表达式的值也可以是**对象**或**数组**。
+
+```html
+<template>
+    <p :class="{ active: isActive, 'text-danger': hasError }">
+        Class Binding 1
+    </p>
+    <p :class="classObject">Class Binding 2</p>
+    <p :class="[arrActive, arrHasError]">Class Binding 3</p>
+    <p :class="[isActive ? 'active' : '', hasError ? 'text-danger' : '']">
+        Class Binding 4
+    </p>
+    <p :class="[isActive ? 'active' : '', { 'text-danger': hasError }]">
+        Class Binding 5
+    </p>
+</template>
+<script>
+    import { isReactive } from "vue";
+
+    export default {
+        data() {
+            return {
+                // 属性绑定布尔值, 条件渲染
+                isActive: true,
+                hasError: true,
+                // 将属性创建为对象
+                classObject: {
+                    active: true,
+                    "text-danger": true,
+                },
+                // 数组，非条件渲染
+                arrActive: "active",
+                arrHasError: "text-danger",
+            };
+        },
+    };
+</script>
+
+<style>
+    .active {
+        font-size: 30px;
+    }
+    .text-danger {
+        color: red;
+    }
+</style>
+```
+
+> **TIP**
+> 数组和对象嵌套过程中，只能时数组嵌套对象，不能反其道而行之。
+
+# Style Banding - Style 绑定
+
+Vue 所提供的对于 Style 绑定的功能增强和和 Class 绑定相同，除了字符串外，表达式的值也可以是**对象**或**数组**。
+
+```html
+<template>
+    <p :style="{ color: activeColor, fontSize: fontSize + 'px' }">
+        Style Binding 1
+    </p>
+    <p :style="styleObject">Style Binding 2</p>
+</template>
+<script>
+    export default {
+        data() {
+            return {
+                activeColor: "green",
+                fontSize: 30,
+                styleObject: {
+                    color: "red",
+                    fontSize: "30px",
+                },
+            };
         },
     };
 </script>

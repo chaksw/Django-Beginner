@@ -9,17 +9,25 @@ import eventDemo3 from "./components/eventDemo3..vue";
 import eventDemo4 from "./components/eventDemo4.vue";
 import eventDemo5 from "./components/eventDemo5.vue";
 import eventDemo6 from "./components/eventDemo6.vue";
+import ArrayList from "./components/ArrayList.vue";
+import ComputedDemo from "./components/ComputedDemo.vue";
+import ClassDemo from "./components/ClassDemo.vue";
+import StyleDemo from "./components/StyleDemo.vue";
 </script>
 
 <template>
-    <!-- <HelloWorld />
-    <ifDemo />
-    <listDemo />
-    <keyDemo />
-    <eventDemo1 />
-    <eventDemo2 />
-    <eventDemo3 />
-    <eventDemo4 />
-    <eventDemo5 /> -->
-    <eventDemo6 />
+    <!-- <HelloWorld /> -->
+    <!-- <ifDemo /> -->
+    <!-- <listDemo /> -->
+    <!-- <keyDemo /> -->
+    <!-- <eventDemo1 /> -->
+    <!-- <eventDemo2 /> -->
+    <!-- <eventDemo3 /> -->
+    <!-- <eventDemo4 /> -->
+    <!-- <eventDemo5 /> -->
+    <!-- <eventDemo6 /> -->
+    <!-- <ArrayList /> -->
+    <!-- <ComputedDemo /> -->
+    <!-- <ClassDemo /> -->
+    <StyleDemo />
 </template>
