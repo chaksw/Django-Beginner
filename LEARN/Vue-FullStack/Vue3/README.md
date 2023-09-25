@@ -642,11 +642,11 @@ const objectOfAttrs = {
 <div @click.self="doThat">...</div>
 ```
 
-[修饰符详解](https://segmentfault.com/a/1190000016786254) - 包含表单｜事件｜按键修饰符
+## 9.2. 附录：[表单｜事件｜按键修饰符修饰符详解](https://segmentfault.com/a/1190000016786254)
 
-## 9.2. Examples
+## 9.3. Examples
 
-### 9.2.1. `.prevent` 阻止默认事件 & `stop` 阻止事件进一步捕获或冒泡
+### 9.3.1. `.prevent` 阻止默认事件 & `stop` 阻止事件进一步捕获或冒泡
 
 ```html
 <template>
@@ -749,7 +749,39 @@ Vue 能够侦听响应式数组的一些变更方法，并在它们被调用时�
 
 > 在依赖不更新情况下，计算属性多次调用但只有一次计算，方法在几次调用就有几次计算。
 
-# Class Binding - Class 绑定
+```html
+<template>
+    <h3>{{ itbaizhan.name }}</h3>
+    <p>{{ itbaizhanContent }}</p>
+    <p>{{ itbaizhanContents() }}</p>
+</template>
+
+<script>
+    export default {
+        data() {
+            return {
+                itbaizhan: {
+                    name: "BaizhanProgrammer",
+                    content: ["Front-end", "Java", "python"],
+                },
+            };
+        },
+        // Computed Property
+        computed: {
+            itbaizhanContent() {
+                return this.itbaizhan.content.length > 0 ? "Yes" : "No";
+            },
+        },
+        methods: {
+            itbaizhanContents() {
+                return this.itbaizhan.content.length > 0 ? "Yes" : "No";
+            },
+        },
+    };
+</script>
+```
+
+# 12. Class Binding - Class 绑定
 
 绑定 CSS Class 列表时数据绑定的一个常见需求场景，但是在处理比较复杂的绑定时，通过拼接字符串时麻烦且容易出错的。因此，Vue 专门为 `class` 的 `v-bing` 用法提供了特殊的功能增强。除了字符串外，表达式的值也可以是**对象**或**数组**。
 
@@ -802,7 +834,7 @@ Vue 能够侦听响应式数组的一些变更方法，并在它们被调用时�
 > **TIP**
 > 数组和对象嵌套过程中，只能时数组嵌套对象，不能反其道而行之。
 
-# Style Banding - Style 绑定
+# 13. Style Banding - Style 绑定
 
 Vue 所提供的对于 Style 绑定的功能增强和和 Class 绑定相同，除了字符串外，表达式的值也可以是**对象**或**数组**。
 
@@ -824,6 +856,42 @@ Vue 所提供的对于 Style 绑定的功能增强和和 Class 绑定相同，�
                     fontSize: "30px",
                 },
             };
+        },
+    };
+</script>
+```
+
+# 14. Wathcers - 侦听器
+
+计算属性允许我们声明性地计算衍生值。然而在有些情况下，我们需要在状态变化时执行一些“副作用”：例如更改 DOM，或是根据异步操作的结果去修改另一个状态。
+在组合式 API 中，我们可以使用`watch`函数在每次响应式状态（花括号`{{ }}`调用的响应式数据）发生变化时触发回调函数：
+
+```html
+<template>
+    <h3>Watchers</h3>
+    <p>{{ message }}</p>
+    <button @click="updateHandle">Change data</button>
+</template>
+<script>
+    export default {
+        data() {
+            return {
+                message: "Hello",
+            };
+        },
+        methods: {
+            updateHandle() {
+                this.message += "World";
+            },
+        },
+        watch: {
+            // watch 函数名要与对应的响应式数据名相同
+            message(newValue, oldValue) {
+                // 固定格式
+
+                // 数据发生变化时执行的逻辑
+                console.log(newValue, oldValue);
+            },
         },
     };
 </script>

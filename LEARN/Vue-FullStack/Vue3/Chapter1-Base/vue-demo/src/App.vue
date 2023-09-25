@@ -13,6 +13,7 @@ import ArrayList from "./components/ArrayList.vue";
 import ComputedDemo from "./components/ComputedDemo.vue";
 import ClassDemo from "./components/ClassDemo.vue";
 import StyleDemo from "./components/StyleDemo.vue";
+import WatchersDemo from "./components/WatchersDemo.vue";
 </script>
 
 <template>
@@ -29,5 +30,6 @@ import StyleDemo from "./components/StyleDemo.vue";
     <!-- <ArrayList /> -->
     <!-- <ComputedDemo /> -->
     <!-- <ClassDemo /> -->
-    <StyleDemo />
+    <!-- <StyleDemo /> -->
+    <WatchersDemo />
 </template>
