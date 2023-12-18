@@ -1,3 +1,4 @@
+<!-- Attribute Bindings v-bind -->
 <template>
     <div :id="dynamicId" :class="dynamicClass" :title="dynamicTitle">Test</div>
     <div v-bind="objectOfAttrs">Multiple Attributes Binding</div>
@@ -10,7 +11,7 @@ export default {
         return {
             dynamicClass: "appClass",
             dynamicId: "appID",
-            dynamicTitle: null,
+            dynamicTitle: 'Hello',
             isButtonDisabled: false,
             objectOfAttrs: {
                 id: "container",

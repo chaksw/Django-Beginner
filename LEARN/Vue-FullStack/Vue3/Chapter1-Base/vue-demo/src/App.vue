@@ -17,7 +17,7 @@ import WatchersDemo from "./components/WatchersDemo.vue";
 </script>
 
 <template>
-    <!-- <HelloWorld /> -->
+    <HelloWorld />
     <!-- <ifDemo /> -->
     <!-- <listDemo /> -->
     <!-- <keyDemo /> -->
@@ -31,5 +31,5 @@ import WatchersDemo from "./components/WatchersDemo.vue";
     <!-- <ComputedDemo /> -->
     <!-- <ClassDemo /> -->
     <!-- <StyleDemo /> -->
-    <WatchersDemo />
+    <!-- <WatchersDemo /> -->
 </template>
