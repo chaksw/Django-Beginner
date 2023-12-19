@@ -1,5 +1,7 @@
 # 1. [VueJS 3.0](https://cn.vuejs.org/)
 
+## 1.1. 1.1 [DOM (Document Object Model) 概述](https://developer.mozilla.org/zh-CN/docs/Web/API/Document_Object_Model/Introduction)
+
 # 2. Chapter 1: Vue Base
 
 ## 2.1. Precondition
@@ -397,7 +399,8 @@ const objectOfAttrs = {
 </script>
 ```
 
-> **温馨提示** 
+> **温馨提示**
+>
 > 1. `key`在这里是通过一个`v-bind`绑定特殊的 attribute
 > 2. 推荐在任何可行的时候为`v-for`提供一个`key` attribute
 > 3. `key`绑定的值最好是一个基础类型的值，例如字符串或者 number 类型
@@ -897,3 +900,255 @@ Vue 所提供的对于 Style 绑定的功能增强和和 Class 绑定相同，�
     };
 </script>
 ```
+
+# 15. Form Input Bindings - 表单输入绑定 `v-model`
+
+## 15.1. Basic Usage - 基本用法
+
+表单输入绑定的功能是将表单输入框(包括 `<input>`, `<textarea>` `<select>`)的内容实时自动同步给 Javascript 中相应的变量.
+
+```js
+<!-- Form input bindings v-model -->
+<template>
+    <!-- binding input -->
+    <h3>Form Input Bindings</h3>
+    <form action="">
+        <p>Message is: {{ message }}</p>
+        <input type="text" v-model="message" placeholder="edit me">
+    </form>
+
+    <form action="">
+        <input type="checkbox" id="checkobx" value="Hey" v-model="checked" >
+        <label for="checkobx">{{ checked }}</label>
+    </form>
+    <!-- binding textarea -->
+    <form action="">
+        <span>Multiline message is:</span>
+        <p>{{ message1 }}</p>
+        <textarea name="" id="" cols="50" rows="10" v-model="message1"></textarea>
+    </form>
+    <!-- binding checkbox to array or set, value will be send to checkedNamed once checkbox is set to true -->
+    <form action="">
+        <div>Checked names: {{ checkedNames }}</div>
+
+        <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+        <label for="jack">Jack</label>
+
+        <input type="checkbox" id="john" value="John" v-model="checkedNames">
+        <label for="john">John</label>
+
+        <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+        <label for="mike">Mike</label>
+
+    </form>
+    <!-- binding radio checkbox to array or set -->
+    <form action="">
+        <div>Picked: {{ picked }}</div>
+
+        <input type="radio" id="one" value="One" v-model="picked" />
+        <label for="one">One</label>
+
+        <input type="radio" id="two" value="Two" v-model="picked" />
+        <label for="two">Two</label>
+    </form>
+    <!-- binding select to array or set -->
+    <form action="">
+        <div>Selected: {{ selected }}</div>
+        <select name="" id="" v-model="selected">
+            <option disabled value="">Please select one</option>
+            <option value="Apple">A</option>
+            <option value="Bananas">B</option>
+            <option value="Cat">C</option>
+
+        </select>
+    </form>
+    <!-- Binding multiple select to array or set -->
+    <form action="">
+        <div>Multi-Selected: {{ selected1 }}</div>
+        <select name="" id="" multiple v-model="selected1">
+            <option value="Apple">A</option>
+            <option value="Bpple">B</option>
+            <option value="Cpple">C</option>
+        </select>
+    </form>
+
+    <!-- Rendering by v-for -->
+    <form action="">
+        <div>Selected: {{ selected2 }}</div>
+        <select name="" id="" v-model="selected2">
+            <option v-for="option in options" :value="option.value">
+            {{ option.text }}
+        </option></select>
+
+    </form>
+</template>
+
+<script>
+export default {
+    data() {
+        return {
+            message: '',
+            checked: true,
+            message1: '',
+            checkedNames: [],
+            picked: [],
+            selected: [],
+            selected1: [],
+            selected2: 'A',
+            options: [
+                {text: 'One', value: 'A'},
+                {text: 'Two', value: 'B'},
+                {text: 'Three', value: 'C'},
+                {text: ' asd', value: '613'}
+            ]
+        };
+    },
+    methods:{
+
+        }
+}
+
+</script>
+```
+
+## 15.2. Value Bindings - [值绑定](htps://cn.vuejs.org/guide/essentials/forms.html#value-bindings)
+
+1. 如果`v-model`绑定的是字符串(一般用在`<input>`, `<textarea>`),则同步的值为 input 输入框编辑的值.(实际就是`value`的值)
+2. 如果`v-model`绑定的是布尔值(一般用在`<checkbox>`),则同步的值为 input 触发的布尔值 `true|false`.(也是` value``值，但对于checkbox ` `value`只有 true 和 false)
+3. 如果`v-model`绑定的是 array(用在`<select>`, <input type='radio'>),则同步的值为对应的`value`属性值.
+
+## 15.3. Modifiers - 修饰符 `.lazy`, `.number`, `trim`
+
+### 15.3.1. `.lazy`
+
+默认情况下， `v-model` 会在每次`input`事件后更新数据。你可以添加`.lazy`修饰符来改为每次`change`事件后更新数据。
+
+### 15.3.2. `.number`
+
+如果你想让用户输入自动转换为数字，你可以在 v-model 后添加 .number 修饰符来管理输入
+
+```js
+<input v-model.number="age" />
+```
+
+> 如果该值无法被 parseFloat() 处理，那么将返回原始值。
+>
+> number 修饰符会在输入框有 type="number" 时自动启用。
+
+### 15.3.3. `.trim`
+
+如果你想要默认自动去除用户输入内容中两端的空格，你可以在 v-model 后添加 .trim 修饰符```js
+
+```js
+<input v-model.trim="msg" />
+```
+
+# 16. Template Refs - 模板引用 `ref`
+
+> **作用：在`Vue`中直接访问底层`DOM`元素**
+
+`ref` 是一个特殊的 attribute,和`v-for`章节提到的`key`类似。它允许我们在一个特定的 DOM 元素或子组件实例被挂载后，获得对它的直接引用。这样的用处比如在组件挂载时将焦点设置到一个 input 元素上，或在一个元素上初始化一个第三方库
+
+## 16.1. Accessing the Refs - 访问模板引用
+
+挂载结束后引用都会被暴露在`this.$refs`之上：
+
+```js
+
+<template>
+    <div ref="container" class="container">{{ content }}</div>
+    <input type="text" ref="username">
+    <button @click="getElementHandle">获取元素</button>
+</template>
+/** 在vue中对DOM的基本操作
+ * 内容改变： {{ 模板语法 }}
+ * 属性改变： v-bind: 指令
+ * 事件: v-on:
+ * 如果没有特别的需求，不要操作DOM
+ */
+<script>
+export default {
+    data() {
+        return {
+            content:"content"
+        };
+    },
+    methods: {
+        getElementHandle() {
+            console.log(this.$refs.container)
+            console.log(this.$refs.container.innerHTML = 'asdas')
+            // this.content = "tuqioq"
+            console.log(this.$refs.username.value)
+        }
+    }
+}
+</script>
+```
+
+# 17. Components Basics - 组件组成
+
+## 17.1. 定义一个组件
+
+```js
+<template>
+    <div class="container">{{ message }}</div>
+</template>
+<script>
+export default {
+    data() {
+        return {
+            message: 'asdasd',
+        }
+    }
+}
+</script>
+<!-- scope: 让当前样式只在当前组件中生效 -->
+<style>
+.container{
+    font-size: 30px;
+    color: **red**
+}
+</style>
+```
+
+## 17.2. 使用组件
+
+```js
+<script>
+// 1. import component
+import ComponentBasic from "./components/ComponentBasic.vue";
+
+export default {
+    // 2. injection of component
+    components: {
+        ComponentBasic
+    }
+}
+
+</script>
+
+<template>
+    <!-- 3. display component -->
+    <ComponentBasic/>
+    <component-basic/>
+</template>
+
+```
+
+## 17.3. 组件嵌套关系
+
+组件允许我们将 UI 划分为独立的、可重用的部分，并且可以对每个部分进行单独的思考。在实际应用中，组件常常被组织成层层嵌套的树状结构：
+![Alt text](components-1.png)
+这和我们嵌套 HTML 元素的方式类似，Vue 实现了自己的组件模型，使我们可以在每个组件内封装自定义内容与逻辑。Vue 同样也能很好地配合原生 Web Component。如果你想知道 Vue 组件与原生 Web Components 之间的关系，可以[阅读此章节](https://cn.vuejs.org/guide/extras/web-components.html)。
+
+### 17.3.1. 创建组件及引用关系
+
+See `vue-component-qt`
+
+# 18. Component Registration - 组件注册
+
+一个 Vue 组件在使用前需要先被“注册”，这样 Vue 才能在渲染模板时找到其对应的实现。组件注册有两种方式：**全局注册**和**局部注册**。(这个笔记之前的所有注册方式都是局部注册)
+
+## 18.1. 全局注册(不写了，反正不推荐使用)
+
+# 19. [Glossary - 术语表](https://cn.vuejs.org/glossary/#glossary)

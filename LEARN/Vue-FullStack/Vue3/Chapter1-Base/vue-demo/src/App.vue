@@ -1,35 +1,52 @@
-<script setup>
-import HelloWorld from "./components/v-bind.vue";
-import ifDemo from "./components/ifDemo.vue";
-import listDemo from "./components/listDemo.vue";
-import keyDemo from "./components/keyDemo.vue";
-import eventDemo1 from "./components/eventDemo1.vue";
-import eventDemo2 from "./components/eventDemo2.vue";
-import eventDemo3 from "./components/eventDemo3..vue";
-import eventDemo4 from "./components/eventDemo4.vue";
-import eventDemo5 from "./components/eventDemo5.vue";
-import eventDemo6 from "./components/eventDemo6.vue";
+<script>
+// 1. import component
+import ArrtibBinding from "./components/ArrtibBinding.vue";
+import IfDemo from "./components/IfDemo.vue";
+import ListDemo from "./components/ListDemo.vue";
+import KeyDemo from "./components/KeyDemo.vue";
+import EventDemo1 from "./components/EventDemo1.vue";
+import EventDemo2 from "./components/EventDemo2.vue";
+import EventDemo3 from "./components/EventDemo3..vue";
+import EventDemo4 from "./components/EventDemo4.vue";
+import EventDemo5 from "./components/EventDemo5.vue";
+import EventDemo6 from "./components/EventDemo6.vue";
 import ArrayList from "./components/ArrayList.vue";
 import ComputedDemo from "./components/ComputedDemo.vue";
 import ClassDemo from "./components/ClassDemo.vue";
 import StyleDemo from "./components/StyleDemo.vue";
 import WatchersDemo from "./components/WatchersDemo.vue";
+import ModelBinding from "./components/ModelBinding.vue";
+import TemplateRefs from "./components/TemplateRefs.vue";
+import ComponentBasic from "./components/ComponentBasic.vue";
+
+export default {
+    // 2. injection of component
+    components: {
+        ComponentBasic
+    }
+}
+
 </script>
 
 <template>
-    <!-- <v-bind /> -->
-    <!-- <ifDemo /> -->
-    <!-- <listDemo /> -->
-    <!-- <keyDemo /> -->
-    <!-- <eventDemo1 /> -->
-    <!-- <eventDemo2 /> -->
-    <!-- <eventDemo3 /> -->
-    <!-- <eventDemo4 /> -->
-    <!-- <eventDemo5 /> -->
-    <!-- <eventDemo6 /> -->
+    <!-- 3. display component -->
+    <!-- <ArrtibBinding /> -->
+    <!-- <IfDemo /> -->
+    <!-- <ListDemo /> -->
+    <!-- <KeyDemo /> -->
+    <!-- <EventDemo1 /> -->
+    <!-- <EventDemo2 /> -->
+    <!-- <EventDemo3 /> -->
+    <!-- <EventDemo4 /> -->
+    <!-- <EventDemo5 /> -->
+    <!-- <EventDemo6 /> -->
     <!-- <ArrayList /> -->
     <!-- <ComputedDemo /> -->
     <!-- <ClassDemo /> -->
     <!-- <StyleDemo /> -->
-    <WatchersDemo />
+    <!-- <WatchersDemo /> -->
+    <!-- <ModelBinding /> -->
+    <!-- <TemplateRefs/> -->
+    <ComponentBasic/>
+    <component-basic/>
 </template>
