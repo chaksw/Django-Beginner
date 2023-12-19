@@ -1,5 +1,5 @@
 <script setup>
-import HelloWorld from "./components/HelloWorld.vue";
+import HelloWorld from "./components/v-bind.vue";
 import ifDemo from "./components/ifDemo.vue";
 import listDemo from "./components/listDemo.vue";
 import keyDemo from "./components/keyDemo.vue";
@@ -17,7 +17,7 @@ import WatchersDemo from "./components/WatchersDemo.vue";
 </script>
 
 <template>
-    <HelloWorld />
+    <!-- <v-bind /> -->
     <!-- <ifDemo /> -->
     <!-- <listDemo /> -->
     <!-- <keyDemo /> -->
@@ -31,5 +31,5 @@ import WatchersDemo from "./components/WatchersDemo.vue";
     <!-- <ComputedDemo /> -->
     <!-- <ClassDemo /> -->
     <!-- <StyleDemo /> -->
-    <!-- <WatchersDemo /> -->
+    <WatchersDemo />
 </template>

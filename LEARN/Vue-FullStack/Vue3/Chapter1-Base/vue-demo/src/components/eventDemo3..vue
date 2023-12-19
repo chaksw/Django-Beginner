@@ -17,7 +17,7 @@ export default {
             // using this to refer variable in data()
             this.count++;
             // Event object in vue is the original JS object
-            console.log((e.target.innerHTML = "Add" + this.count));
+            console.log((e.target.innerHTML = "Add " + this.count));
         },
     },
 };

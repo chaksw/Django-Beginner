@@ -397,9 +397,10 @@ const objectOfAttrs = {
 </script>
 ```
 
-> **温馨提示** > `key`在这里是通过一个`v-bind`绑定的特殊 attribute
-> 推荐在任何可行的时候为`v-for`提供一个`key` attribute
-> `key`绑定的值期望是一个基础类型的值，例如字符串或者 number 类型
+> **温馨提示** 
+> 1. `key`在这里是通过一个`v-bind`绑定特殊的 attribute
+> 2. 推荐在任何可行的时候为`v-for`提供一个`key` attribute
+> 3. `key`绑定的值最好是一个基础类型的值，例如字符串或者 number 类型
 
 ### 7.3.1. key 的来源
 
@@ -526,7 +527,7 @@ const objectOfAttrs = {
                 // using this to refer variable in data()
                 this.count++;
                 // Event object in vue is the original JS object
-                console.log((e.target.innerHTML = "Add" + this.count));
+                console.log((e.target.innerHTML = "Add " + this.count));
             },
         },
     };
@@ -612,7 +613,7 @@ const objectOfAttrs = {
 
 而 `event.stopPropagation()` 则是取消事件的进一步捕获(当布尔值为 true)或冒泡(false)。
 
-> 使用场景如（布尔值为 false）：div 和 body 同时添加 click 事件，当点击 div 时，不触发 body 的事件，只要在 div 执行语句之后使用 `event.stopPropagation()`即可不触发 body 的事件。
+> 使用场景如（布尔值为 false）：div 和 body 同时添加 click 事件，要想当点击 div 时，不触发 body 的事件，只要在 div 执行语句之后使用 `event.stopPropagation()`即可不触发 body 的事件。
 
 修饰符是用`.`表示的指令后缀，包含以下这些：
 

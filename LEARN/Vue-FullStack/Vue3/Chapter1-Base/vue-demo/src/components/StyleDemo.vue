@@ -1,3 +1,4 @@
+<!-- Style Binding -->
 <template>
     <p :style="{ color: activeColor, fontSize: fontSize + 'px' }">
         Style Binding 1

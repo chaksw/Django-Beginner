@@ -15,7 +15,7 @@ export default {
         clickHandle(e) {
             // 阻止默认事件
             // e.preventDefault();
-            console.log("Clicked");
+            console.log("Clicked but default action is prevented");
         },
         clickDiv() {
             console.log("DIV clicked");

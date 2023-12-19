@@ -1,3 +1,4 @@
+<!-- Class Binding -->
 <template>
     <p :class="{ active: isActive, 'text-danger': hasError }">
         Class Binding 1
@@ -18,7 +19,7 @@ export default {
     data() {
         return {
             // 属性绑定布尔值, 条件渲染
-            isActive: true,
+            isActive: false,
             hasError: true,
             // 将属性创建为对象
             classObject: {
