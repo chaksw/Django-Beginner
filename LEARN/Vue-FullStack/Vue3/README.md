@@ -1011,7 +1011,7 @@ export default {
 </script>
 ```
 
-## 15.2. Value Bindings - [值绑定](htps://cn.vuejs.org/guide/essentials/forms.html#value-bindings)
+## 15.2. Value Bindings - [值绑定](https://cn.vuejs.org/guide/essentials/forms#form-input-bindings)
 
 1. 如果`v-model`绑定的是字符串(一般用在`<input>`, `<textarea>`),则同步的值为 input 输入框编辑的值.(实际就是`value`的值)
 2. 如果`v-model`绑定的是布尔值(一般用在`<checkbox>`),则同步的值为 input 触发的布尔值 `true|false`.(也是` value``值，但对于checkbox ` `value`只有 true 和 false)
@@ -1151,4 +1151,406 @@ See `vue-component-qt`
 
 ## 18.1. 全局注册(不写了，反正不推荐使用)
 
-# 19. [Glossary - 术语表](https://cn.vuejs.org/glossary/#glossary)
+# 19. Props - 组件传递数据
+
+组件与组件之间不是完全独立的，而是有交集的，那就是组件与组件之间是可以传递数据的，传递数据的解决方式就是`props`
+
+## 19.1. 基础用法（静态&动态）- 字符串声明形式 - String Declaration
+
+Parent vue, transfer data
+
+```js
+
+<template>
+    <h3>Parent</h3>
+    <!-- Transfer data (title) to child vue -->
+    <Child title="Parent Data" demo="data" :dynamic="message" />
+</template>
+<script>
+import Child from "./Child.vue";
+export default {
+    data() {
+        return {
+            message: "Dynamic Data",
+        };
+    },
+    components: {
+        Child,
+    },
+};
+</script>
+```
+
+Child vue, invoke data
+
+```js
+<template>
+    <h3>Child</h3>
+    <!-- use data by template syntax -->
+    <p>{{ title }}</p>
+    <p>{{ demo }}</p>
+    <p>{{ dynamic }}</p>
+</template>
+<script>
+export default {
+    data() {
+        return {};
+    },
+    // invoke data from Parent, format: string declaration ["string"]
+    props: ["title", "demo", "dynamic"],
+};
+</script>
+```
+
+> 注意事项：
+> `props`传递数据，只能从 import component 的组件传递到被 import 的组件，不能反其道而行
+
+## 19.2. 传递多种数据类型 - Passing Different Value Types
+
+对于动态传递，任何类型的值都可以作为 `props` 的值被传递。
+Parent
+
+```js
+<template>
+    <h3>Parent</h3>
+    <!-- Transfer data (title) to child vue -->
+    <Child
+        title="Parent Data"
+        demo="data"
+        :dynamic="message"
+        :age="age"
+        :names="names"
+        :userInfo="userInfo" />
+</template>
+<script>
+import Child from "./Child.vue";
+export default {
+    data() {
+        return {
+            // dynamic data
+            message: "Dynamic Data",
+            age: 20, // number
+            names: ["iwen", "amy", "frank"], // array
+            userInfo: {
+                // object
+                name: "iwen",
+                age: 20,
+            },
+        };
+    },
+    components: {
+        Child,
+    },
+};
+</script>
+
+```
+
+Child
+
+```js
+<template>
+    <h3>Child</h3>
+    <!-- use data by template syntax -->
+    <p>{{ title }}</p>
+    <p>{{ demo }}</p>
+    <p>{{ dynamic }}</p>
+    <p>{{ age }}</p>
+    <p>{{ names }}</p>
+    <ul>
+        <li v-for="(item, index) in names" :key="index">
+            {{ item }} - {{ index }}
+        </li>
+    </ul>
+    <p>{{ userInfo.name }}</p>
+    <p>{{ userInfo.age }}</p>
+</template>
+<script>
+export default {
+    data() {
+        return {};
+    },
+    // invoke data from Parent, format: string declaration ["string"]
+    props: ["title", "demo", "dynamic", "age", "names", "userInfo"],
+};
+</script>
+
+```
+
+## 19.3. 对象形式的 `props` 声明 & Props 校验 - Object Declaration & Prop Validation
+
+### 19.3.1. 对象形式的 `props` 声明
+
+以对象形式声明`props`可以为每个传入的属性值提供预期类型的定义
+
+```js
+export default {
+    props: {
+        title: String,
+        likes: Number,
+    },
+};
+```
+
+对于以对象形式声明中的每个属性，`key` 是 `prop` 的名称，而值则是该 `prop` 预期类型的构造函数。比如，如果要求一个 `prop` 的值是 `number` 类型，则可使用 `Number` 构造函数作为其声明的值。
+对象形式的 `props` 声明不仅可以一定程度上作为组件的文档，而且如果其他开发者在使用你的组件时传递了错误的类型，也会在浏览器控制台中抛出警告。
+
+也可以为属性声明多个预期类型
+
+```js
+export default {
+    props: {
+        title: [String, Number, Array],
+    },
+};
+```
+
+### 19.3.2. Prop 校验
+
+要声明对 props 的校验，你可以向 props 选项提供一个带有 props 校验选项的对象，例如：
+
+```js
+export default {
+    props: {
+        // 基础类型检查
+        //（给出 `null` 和 `undefined` 值则会跳过任何类型检查）
+        propA: Number,
+        // 多种可能的类型
+        propB: [String, Number],
+        // 必传，且为 String 类型
+        propC: {
+            type: String,
+            required: true,
+        },
+        // Number 类型的默认值
+        propD: {
+            type: Number,
+            default: 100,
+        },
+        // 对象类型的默认值
+        propE: {
+            type: Object,
+            // 对象或者数组应当用工厂函数返回。
+            // 工厂函数会收到组件所接收的原始 props
+            // 作为参数
+            default(rawProps) {
+                return { message: "hello" };
+            },
+        },
+        // 自定义类型校验函数
+        propF: {
+            validator(value) {
+                // The value must match one of these strings
+                return ["success", "warning", "danger"].includes(value);
+            },
+        },
+        // 函数类型的默认值
+        propG: {
+            type: Function,
+            // 不像对象或数组的默认，这不是一个
+            // 工厂函数。这会是一个用来作为默认值的函数
+            default() {
+                return "Default function";
+            },
+        },
+    },
+};
+```
+
+一些细节：
+
+1. 所有 `prop` 默认都是可选的，除非声明了 `required: true`。
+2. 除 `Boolean` 外的未传递的可选 `prop` 将会有一个默认值 `undefined。`
+3. `Boolean` 类型的未传递 `prop` 将被转换为 `false`。这可以通过为它设置 `default` 来更改——例如：设置为 `default`: `undefined` 将与非布尔类型的 `prop` 的行为保持一致。
+4. 如果声明了 `default` 值，那么在 `prop` 的值被解析为 `undefined` 时，无论 `prop` 是未被传递还是显式指明的 `undefined，都会改为` default 值。
+5. `prop` 数据会暴露在当前子组件的`this`中。
+6. `prop` 是只读的，不能在子组件中更新。
+
+# 组件事件 - Component Events
+
+在组件的模板表达式中，可以直接使用`$emit` 方法触发自定义事件
+触发自定义事件的目的是组件之间的传递数据(变相实现子组件想父组件传递数据)
+
+-   父组件
+
+```js
+<template>
+    <h3>Component Event</h3>
+    <!-- listener (kebab-case) -->
+    <Child @some-event="getHandle" />
+    <p>{{ message }}</p>
+</template>
+<script>
+import Child from "./Child.vue";
+export default {
+    data() {
+        return {
+            message: "",
+        };
+    },
+    components: {
+        Child,
+    },
+    methods: {
+        // listener event, here argument link to data from $emit
+        getHandle(data) {
+            console.log("triggle child event", data);
+            this.message = data;
+        },
+    },
+};
+</script>
+
+```
+
+-   子组件
+
+```js
+<template>
+    <h3>Child</h3>
+    <button @click="clickEventHandle">Transfer data</button>
+</template>
+<script>
+export default {
+    data() {
+        return {
+            msg: "Child data!",
+        };
+    },
+    methods: {
+        clickEventHandle() {
+            // use $emit to declarate component event, where 2 argument accepted, first for listener name in parent component (camelCase), second for data to transfer
+            this.$emit("someEvent", this.msg);
+        },
+    },
+};
+</script>
+
+
+```
+
+# [Component v-model - 组件 v-model](https://cn.vuejs.org/guide/components/v-model.html#component-v-model)
+
+组件结合`v-model`和`watcher`，可以实现实时讲子组件更新同步到父组件上
+
+-   子组件
+
+```js
+<template>
+    Search :
+    <input type="text" v-model="search" />
+</template>
+<script>
+export default {
+    data() {
+        return {
+            search: "",
+        };
+    },
+    // listener
+    watch: {
+        search(newValue, oldValue) {
+            this.$emit("searchEvent", newValue);
+        },
+    },
+    components: {},
+};
+</script>
+
+```
+
+-   父组件
+
+```js
+<template>
+    <h3>Main</h3>
+    <SearchComponent @search-event="getSearch" />
+    <p>Search Result: {{ search }}</p>
+</template>
+<script>
+import SearchComponent from "./SearchComponent.vue";
+export default {
+    data() {
+        return { search: "" };
+    },
+    methods: {
+        getSearch(data) {
+            this.search = data;
+        },
+    },
+    components: {
+        SearchComponent,
+    },
+};
+</script>
+
+```
+
+# 组件数据传递 - 使用`props`实现子传父 (好垃圾的方法。)
+
+> Tips:
+> 组件之间传递数据的方案：
+>
+> 1. 父传子： `props`
+> 2. 子传父： `this.$emit`
+
+除了上述方案，`props`也可以实现子传父, 具体做法是在父组件传递带参函数给子组件，在子组件中实例化函数参数，最后在父组件中接收该参数数据。
+
+-   父组件
+
+```js
+<template>
+    <h3>ComponentA</h3>
+    <!-- 1. 传递带参函数给子组件 -->
+    <ComponentB title="Title" :on-event="dataFn" />
+    <p>{{ message }}</p>
+</template>
+<script>
+import ComponentB from "./ComponentB.vue";
+export default {
+    data() {
+        return {
+            message: "",
+        };
+    },
+    components: {
+        ComponentB,
+    },
+    methods: {
+        dataFn(data) {
+            // 3. 接受参数数据
+            this.message = data;
+        },
+    },
+};
+</script>
+
+
+```
+
+```js
+<template>
+    <h3>ComponentB</h3>
+    <p>{{ title }}</p>
+    <!-- 实例化参数数据 -->
+    <p>{{ onEvent("Transfer Data") }}</p>
+</template>
+<script>
+export default {
+    data() {
+        return {};
+    },
+    components: {},
+    props: {
+        title: {
+            type: String,
+        },
+        onEvent: Function,
+    },
+};
+</script>
+```
+
+# [Fallthrough Attributes - 透传 Attributes (不常用)](https://cn.vuejs.org/guide/components/attrs.html#fallthrough-attributes)
+
+# 20. [Glossary - 术语表](https://cn.vuejs.org/glossary/#glossary)
