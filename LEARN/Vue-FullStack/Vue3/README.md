@@ -1,3 +1,100 @@
+-   [1. VueJS 3.0](#1-vuejs-30)
+    -   [1.1. 1.1 DOM (Document Object Model) 概述](#11-11-dom-document-object-model-概述)
+-   [2. Chapter 1: Vue Base](#2-chapter-1-vue-base)
+    -   [2.1. Precondition](#21-precondition)
+    -   [2.2. Create Vue Project](#22-create-vue-project)
+    -   [2.3. 安装`cnpm`](#23-安装cnpm)
+-   [3. Vue Project Structure](#3-vue-project-structure)
+-   [4. `Template` Syntax - 模版语法 `{{ }}`](#4-template-syntax---模版语法--)
+    -   [4.1. Text Interpolation - 文本插值 - `{{ variable }}`](#41-text-interpolation---文本插值----variable-)
+    -   [4.2. Using `JavaScript` Expressions - `{{ expression }}`](#42-using-javascript-expressions----expression-)
+    -   [4.3. 原始`HTML` - `v-html`](#43-原始html---v-html)
+-   [5. Attribute Bindings - 属性绑定 - `v-bind:attribute` | `:arrtribute`](#5-attribute-bindings---属性绑定---v-bindattribute--arrtribute)
+    -   [5.0.1. Shorthand - 简写](#501-shorthand---简写)
+    -   [5.1. Boolean Attributes - 布尔型 Attribute](#51-boolean-attributes---布尔型-attribute)
+    -   [5.2. Dynamically Binding Multiple Attributes - 动态绑定多个值](#52-dynamically-binding-multiple-attributes---动态绑定多个值)
+-   [6. Conditional Rendering - 条件渲染](#6-conditional-rendering---条件渲染)
+    -   [6.1. `v-if`](#61-v-if)
+    -   [6.2. `v-else`](#62-v-else)
+    -   [6.3. `v-else-if`](#63-v-else-if)
+    -   [6.4. `v-show`](#64-v-show)
+    -   [6.5. `v-if` VS `v-show`](#65-v-if-vs-v-show)
+-   [7. List Rendering - 列表渲染 `v-for`](#7-list-rendering---列表渲染-v-for)
+    -   [7.1. 复杂数据](#71-复杂数据)
+    -   [7.2. `v-for`对象](#72-v-for对象)
+    -   [7.3. 通过 key 管理状态 - `:key`](#73-通过-key-管理状态---key)
+        -   [7.3.1. key 的来源](#731-key-的来源)
+-   [8. Event Handing - 事件处理 - `v-on:event` |`@event`](#8-event-handing---事件处理---v-onevent-event)
+    -   [8.1. Inline Handlers - 内联事件处理器](#81-inline-handlers---内联事件处理器)
+    -   [8.2. Method Handlers - 方法事件处理器](#82-method-handlers---方法事件处理器)
+    -   [8.3. Method vs. Inline Detection - 方式与内联事件判断](#83-method-vs-inline-detection---方式与内联事件判断)
+    -   [8.4. 事件参数](#84-事件参数)
+        -   [8.4.1. 获取`event`对象](#841-获取event对象)
+    -   [8.5. 传递参数](#85-传递参数)
+    -   [8.6. 传递参数过程获取`event`](#86-传递参数过程获取event)
+-   [9. Event Modifiers - 事件修饰符](#9-event-modifiers---事件修饰符)
+    -   [9.1. 补充知识：`event.preventDefault()` 与 `event.stopPropagation()`](#91-补充知识eventpreventdefault-与-eventstoppropagation)
+    -   [9.2. 附录：表单｜事件｜按键修饰符修饰符详解](#92-附录表单事件按键修饰符修饰符详解)
+    -   [9.3. Examples](#93-examples)
+        -   [9.3.1. `.prevent` 阻止默认事件 \& `stop` 阻止事件进一步捕获或冒泡](#931-prevent-阻止默认事件--stop-阻止事件进一步捕获或冒泡)
+-   [10. Array Change Watchers - 数组变化侦测](#10-array-change-watchers---数组变化侦测)
+    -   [10.1. Method to change - 变更方法](#101-method-to-change---变更方法)
+    -   [10.2. 替换一个数组](#102-替换一个数组)
+-   [11. Computed Properties - 计算属性 `computed`](#11-computed-properties---计算属性-computed)
+    -   [11.1. 计算属性缓存 vs 方法](#111-计算属性缓存-vs-方法)
+-   [12. Class Binding - Class 绑定](#12-class-binding---class-绑定)
+-   [13. Style Banding - Style 绑定](#13-style-banding---style-绑定)
+-   [14. Wathcers - 侦听器](#14-wathcers---侦听器)
+-   [15. Form Input Bindings - 表单输入绑定 `v-model`](#15-form-input-bindings---表单输入绑定-v-model)
+    -   [15.1. Basic Usage - 基本用法](#151-basic-usage---基本用法)
+    -   [15.2. Value Bindings - 值绑定](#152-value-bindings---值绑定)
+    -   [15.3. Modifiers - 修饰符 `.lazy`, `.number`, `trim`](#153-modifiers---修饰符-lazy-number-trim)
+        -   [15.3.1. `.lazy`](#1531-lazy)
+        -   [15.3.2. `.number`](#1532-number)
+        -   [15.3.3. `.trim`](#1533-trim)
+-   [16. Template Refs - 模板引用 `ref`](#16-template-refs---模板引用-ref)
+    -   [16.1. Accessing the Refs - 访问模板引用](#161-accessing-the-refs---访问模板引用)
+-   [17. Components Basics - 组件组成](#17-components-basics---组件组成)
+    -   [17.1. 定义一个组件](#171-定义一个组件)
+    -   [17.2. 使用组件](#172-使用组件)
+    -   [17.3. 组件嵌套关系](#173-组件嵌套关系)
+        -   [17.3.1. 创建组件及引用关系](#1731-创建组件及引用关系)
+-   [18. Component Registration - 组件注册](#18-component-registration---组件注册)
+    -   [18.1. 全局注册(不写了，反正不推荐使用)](#181-全局注册不写了反正不推荐使用)
+-   [19. Props - 组件传递数据 - 父传子](#19-props---组件传递数据---父传子)
+    -   [19.1. 基础用法（静态\&动态）- 字符串声明形式 - String Declaration](#191-基础用法静态动态--字符串声明形式---string-declaration)
+    -   [19.2. 传递多种数据类型 - Passing Different Value Types](#192-传递多种数据类型---passing-different-value-types)
+    -   [19.3. 对象形式的 `props` 声明 \& Props 校验 - Object Declaration \& Prop Validation](#193-对象形式的-props-声明--props-校验---object-declaration--prop-validation)
+        -   [19.3.1. 对象形式的 `props` 声明](#1931-对象形式的-props-声明)
+        -   [19.3.2. Prop 校验](#1932-prop-校验)
+-   [20. 组件事件 - Component Events 子传父 - `this.$emit`](#20-组件事件---component-events-子传父---thisemit)
+-   [21. Component v-model - 组件 v-model](#21-component-v-model---组件-v-model)
+-   [22. 组件数据传递 - 使用`props`实现子传父 (好垃圾的方法。)](#22-组件数据传递---使用props实现子传父-好垃圾的方法)
+-   [23. Fallthrough Attributes - 透传 Attributes (不常用)](#23-fallthrough-attributes---透传-attributes-不常用)
+-   [24. Slots - 插槽 `<slot></slot>`](#24-slots---插槽-slotslot)
+    -   [24.1. Basic](#241-basic)
+    -   [24.2. Render Scope - 渲染作用域](#242-render-scope---渲染作用域)
+    -   [24.3. Fallback Content - 插槽默认值](#243-fallback-content---插槽默认值)
+    -   [24.4. Named Slot - 具名插槽 `v-slot` | `#`](#244-named-slot---具名插槽-v-slot--)
+-   [25. Scoped Slots - 作用域插槽： 插槽内容中使用子组件域内数据](#25-scoped-slots---作用域插槽-插槽内容中使用子组件域内数据)
+    -   [25.1. 具体步骤：（非具名） `<ChildComponent v-slot='slotProps'>`](#251-具体步骤非具名-childcomponent-v-slotslotprops)
+    -   [25.2. 具体步骤 (具名) `<template #name="slotProps">`](#252-具体步骤-具名-template-nameslotprops)
+-   [26. Lifecycle Hook - 组件生命周期 Hook `mounted`](#26-lifecycle-hook---组件生命周期-hook-mounted)
+    -   [26.1. Lifecycle Diagram](#261-lifecycle-diagram)
+    -   [26.2. Options: Lifecycle](#262-options-lifecycle)
+    -   [26.3. Application of Lifecycle](#263-application-of-lifecycle)
+        -   [26.3.1. 通过 `ref` 获取元素 DOM 结构](#2631-通过-ref-获取元素-dom-结构)
+        -   [26.3.2. 模拟网络请求渲染数据](#2632-模拟网络请求渲染数据)
+-   [27. Dynamic Component - 动态组件 `<component :is="..."></component>`](#27-dynamic-component---动态组件-component-iscomponent)
+-   [28. 组件保持存活 - `<keep-alive></keep-alive>`](#28-组件保持存活---keep-alivekeep-alive)
+-   [29. Async Components - 异步组件](#29-async-components---异步组件)
+-   [30. Provide / Inject - 依赖注入](#30-provide--inject---依赖注入)
+    -   [30.1. `Provide` (提供)](#301-provide-提供)
+    -   [30.2. `Inject` (注入)](#302-inject-注入)
+    -   [全局注入](#全局注入)
+    -   [和响应式数据配合使用(不清楚具体作用)](#和响应式数据配合使用不清楚具体作用)
+-   [31. Glossary - 术语表](#31-glossary---术语表)
+
 # 1. [VueJS 3.0](https://cn.vuejs.org/)
 
 ## 1.1. 1.1 [DOM (Document Object Model) 概述](https://developer.mozilla.org/zh-CN/docs/Web/API/Document_Object_Model/Introduction)
@@ -54,7 +151,7 @@ Done. Now run:
 
 # 3. Vue Project Structure
 
-![project-structure](image.png)
+![project-structure](./imgs/project-structure.png)
 
 ```js
 .vscode         --- VSCODE工具的配置文件
@@ -68,11 +165,11 @@ README.md       --- 项目描述文件
 vite.config.js  --- Vue配置文件
 ```
 
-# 4. `Template` Syntax - 模版语法
+# 4. `Template` Syntax - 模版语法 `{{ }}`
 
 > Vue 使用一种基于`HTML`的模版语法，使我们能够声明式地将其组件实例的数据绑定到呈现的 DOM 上，所有的`Vue`模版都是语法层面合法的`HTML`，可以被符合规范的浏览器和`HTML`解析器解析
 
-## 4.1. Text Interpolation - 文本插值
+## 4.1. Text Interpolation - 文本插值 - `{{ variable }}`
 
 最基本的数据绑定形式时文本差值（Text Interpolation， 它使用的是 "Mustache" 语法（即双大括号 `{{ }}`）：
 
@@ -92,7 +189,7 @@ vite.config.js  --- Vue配置文件
 </script>
 ```
 
-## 4.2. Using `JavaScript` Expressions
+## 4.2. Using `JavaScript` Expressions - `{{ expression }}`
 
 每一个绑定仅支持单一表达式，也就是一段能够被求值的`JavaScript`代码。一个简单的判断代码是是否可以合法写在`return`后面。
 
@@ -116,7 +213,7 @@ vite.config.js  --- Vue配置文件
 </script>
 ```
 
-## 4.3. 原始`HTML`
+## 4.3. 原始`HTML` - `v-html`
 
 双大括号将会将数据插值为纯文本，而不是`HTML`。若想插入`HTML`，则需要使用`v-html`指令
 
@@ -139,7 +236,7 @@ vite.config.js  --- Vue配置文件
 </script>
 ```
 
-# 5. Attribute Bindings - 属性绑定
+# 5. Attribute Bindings - 属性绑定 - `v-bind:attribute` | `:arrtribute`
 
 文本差值`{{}}`不能用在`HTML` attributes 中。想要响应式地绑定一个 attribute,应该使用`v-bind`指令
 
@@ -194,6 +291,12 @@ const objectOfAttrs = {
     id: "container",
     class: "wrappper",
 };
+```
+
+通过不带参数的 v-bind，你可以将它们绑定到单个元素上：
+
+```html
+<div v-bind="objectOfAttrs"></div>
 ```
 
 # 6. Conditional Rendering - 条件渲染
@@ -258,7 +361,7 @@ const objectOfAttrs = {
 </script>
 ```
 
-# 7. List Rendering - 列表渲染
+# 7. List Rendering - 列表渲染 `v-for`
 
 我们可以使用`v-for`指令基于一个数组来渲染一个列表。`v-for`指令的值需要使用`item in items`形式的特殊语法，其中`items`是源数据的数组，`item`是迭代项的别名.
 在`v-for`快中可以完整地访问父作用域内的数据和变量。`v-for`也支持可选的第二个参数表示当前项的位置索引。
@@ -376,7 +479,7 @@ const objectOfAttrs = {
 </script>
 ```
 
-## 7.3. 通过 key 管理状态
+## 7.3. 通过 key 管理状态 - `:key`
 
 `Vue`默认按照“就地更新”的策略来更新通过`v-for`渲染的元素列表。当数据项的顺序改变时，`Vue`不会随之移动 DOM 元素的顺序，而是就地更新每个元素，确保他们在原本制定的索引位置上渲染。
 为了给`Vue`一个提示，以便它可以跟踪每个节点的标识，从而重用和重新排序现有的元素，你需要为每个元素对应的块提供一个唯一的`key` attribute:
@@ -444,7 +547,7 @@ const objectOfAttrs = {
 </script>
 ```
 
-# 8. Event Handing - 事件处理 `@event`
+# 8. Event Handing - 事件处理 - `v-on:event` |`@event`
 
 我们可以使用`v-on`指令（简写`@`）来监听 DOM 事件，并在实践触发时执行对应的`JavaScript`.用法：`v-on:click="methodName"`或`@click='handler'`
 事件处理器的值可以是
@@ -606,7 +709,7 @@ const objectOfAttrs = {
 
 事件处理程序分三个阶段：捕获阶段，“处于目标”阶段, 冒泡阶段。
 
-![processEvent](image-1.png)
+![processEvent](./imgs/processEvent.png)
 
 在所有 DOM 节点中都包含事件监听`addEventListener()` 和 `removeEventListener()` 这两个方法，并且它们都接受 3 个参数：要处理的事情名（eventnName），作为事件处理程序的函数(function) 和一个布尔值 (true|false)。如果布尔值是 true，则在捕获阶段调用事件处理程序；如果是 false，表示在冒泡阶段调用事件处理程序。默认为冒泡阶段调用事件处理程序(false)，即事件触发是从目标组件开始自下而上。(div->body)
 
@@ -743,7 +846,7 @@ Vue 能够侦听响应式数组的一些变更方法，并在它们被调用时�
 </script>
 ```
 
-# 11. Computed Properties - 计算属性
+# 11. Computed Properties - 计算属性 `computed`
 
 模版中的表达式虽然方便，但也只能用来做简单的操作。如果在模版中写太多逻辑，会让模版变得臃肿，难以维护。因此我们推荐使用**计算属性**来描述依赖响应式状态的复杂逻辑。
 
@@ -751,7 +854,7 @@ Vue 能够侦听响应式数组的一些变更方法，并在它们被调用时�
 
 理论上，函数｜方法也能达到相同的效果，不同点在于，计算属性值会基于其响应式依赖被缓存。一个计算属性仅会在其响应式依赖更新时才重新计算，而方法调用总是会在重新渲染发生时再次执行函数。
 
-> 在依赖不更新情况下，计算属性多次调用但只有一次计算，方法在几次调用就有几次计算。
+> **在依赖不更新情况下，计算属性多次调用但只有一次计算，方法在几次调用就有几次计算。**
 
 ```html
 <template>
@@ -787,7 +890,7 @@ Vue 能够侦听响应式数组的一些变更方法，并在它们被调用时�
 
 # 12. Class Binding - Class 绑定
 
-绑定 CSS Class 列表时数据绑定的一个常见需求场景，但是在处理比较复杂的绑定时，通过拼接字符串时麻烦且容易出错的。因此，Vue 专门为 `class` 的 `v-bing` 用法提供了特殊的功能增强。除了字符串外，表达式的值也可以是**对象**或**数组**。
+绑定 CSS Class 列表是数据绑定的一个常见需求场景，但是在处理比较复杂的绑定时，通过拼接字符串时麻烦且容易出错的。因此，Vue 专门为 `class` 的 `v-bing` 用法提供了特殊的功能增强。除了字符串外，表达式的值也可以是**对象**或**数组**。
 
 ```html
 <template>
@@ -835,8 +938,8 @@ Vue 能够侦听响应式数组的一些变更方法，并在它们被调用时�
 </style>
 ```
 
-> **TIP**
-> 数组和对象嵌套过程中，只能时数组嵌套对象，不能反其道而行之。
+> **Tips**
+> 数组和对象嵌套过程中，只能是数组嵌套对象，不能反其道而行之。
 
 # 13. Style Banding - Style 绑定
 
@@ -1103,7 +1206,7 @@ export default {
 }
 </script>
 <!-- scope: 让当前样式只在当前组件中生效 -->
-<style>
+<style scoped>
 .container{
     font-size: 30px;
     color: **red**
@@ -1138,7 +1241,9 @@ export default {
 ## 17.3. 组件嵌套关系
 
 组件允许我们将 UI 划分为独立的、可重用的部分，并且可以对每个部分进行单独的思考。在实际应用中，组件常常被组织成层层嵌套的树状结构：
-![Alt text](components-1.png)
+
+![Alt text](./imgs/components.png)
+
 这和我们嵌套 HTML 元素的方式类似，Vue 实现了自己的组件模型，使我们可以在每个组件内封装自定义内容与逻辑。Vue 同样也能很好地配合原生 Web Component。如果你想知道 Vue 组件与原生 Web Components 之间的关系，可以[阅读此章节](https://cn.vuejs.org/guide/extras/web-components.html)。
 
 ### 17.3.1. 创建组件及引用关系
@@ -1151,13 +1256,13 @@ See `vue-component-qt`
 
 ## 18.1. 全局注册(不写了，反正不推荐使用)
 
-# 19. Props - 组件传递数据
+# 19. Props - 组件传递数据 - 父传子
 
 组件与组件之间不是完全独立的，而是有交集的，那就是组件与组件之间是可以传递数据的，传递数据的解决方式就是`props`
 
 ## 19.1. 基础用法（静态&动态）- 字符串声明形式 - String Declaration
 
-Parent vue, transfer data
+-   父组件： 注册（引用）子组件，并传递相关数据。
 
 ```js
 
@@ -1181,7 +1286,7 @@ export default {
 </script>
 ```
 
-Child vue, invoke data
+-   子组件：定义`props`，调用父组件传递的数据。
 
 ```js
 <template>
@@ -1366,12 +1471,38 @@ export default {
 5. `prop` 数据会暴露在当前子组件的`this`中。
 6. `prop` 是只读的，不能在子组件中更新。
 
-# 组件事件 - Component Events
+# 20. 组件事件 - Component Events 子传父 - `this.$emit`
 
 在组件的模板表达式中，可以直接使用`$emit` 方法触发自定义事件
-触发自定义事件的目的是组件之间的传递数据(变相实现子组件想父组件传递数据)
+触发自定义事件的目的是组件之间的传递数据(变相实现子组件向父组件传递数据)
 
--   父组件
+-   子组件: 以被监听的事件和所要传递数据作为参数，创建组件事件。
+
+```js
+<template>
+    <h3>Child</h3>
+    <button @click="clickEventHandle">Transfer data</button>
+</template>
+<script>
+export default {
+    data() {
+        return {
+            msg: "Child data!",
+        };
+    },
+    methods: {
+        clickEventHandle() {
+            // use $emit to declarate component event, where 2 argument accepted, first for listener name in parent component (camelCase), second for data to transfer
+            this.$emit("someEvent", this.msg);
+        },
+    },
+};
+</script>
+
+
+```
+
+-   父组件: 建立组件事件和监听器（方法）的关系，监听器为带参数的方法。参数为组件事件传递的数据。
 
 ```js
 <template>
@@ -1403,37 +1534,11 @@ export default {
 
 ```
 
--   子组件
-
-```js
-<template>
-    <h3>Child</h3>
-    <button @click="clickEventHandle">Transfer data</button>
-</template>
-<script>
-export default {
-    data() {
-        return {
-            msg: "Child data!",
-        };
-    },
-    methods: {
-        clickEventHandle() {
-            // use $emit to declarate component event, where 2 argument accepted, first for listener name in parent component (camelCase), second for data to transfer
-            this.$emit("someEvent", this.msg);
-        },
-    },
-};
-</script>
-
-
-```
-
-# [Component v-model - 组件 v-model](https://cn.vuejs.org/guide/components/v-model.html#component-v-model)
+# 21. [Component v-model - 组件 v-model](https://cn.vuejs.org/guide/components/v-model.html#component-v-model)
 
 组件结合`v-model`和`watcher`，可以实现实时讲子组件更新同步到父组件上
 
--   子组件
+-   子组件：在`watch`上定义被监听的组件事件，该事件所在的方法为`v-model`绑定数据的侦听器。
 
 ```js
 <template>
@@ -1459,7 +1564,7 @@ export default {
 
 ```
 
--   父组件
+-   父组件：建立组件事件和监听器（方法）的关系，监听器为带参数的方法。参数为组件事件传递的数据。
 
 ```js
 <template>
@@ -1486,7 +1591,7 @@ export default {
 
 ```
 
-# 组件数据传递 - 使用`props`实现子传父 (好垃圾的方法。)
+# 22. 组件数据传递 - 使用`props`实现子传父 (好垃圾的方法。)
 
 > Tips:
 > 组件之间传递数据的方案：
@@ -1551,6 +1656,762 @@ export default {
 </script>
 ```
 
-# [Fallthrough Attributes - 透传 Attributes (不常用)](https://cn.vuejs.org/guide/components/attrs.html#fallthrough-attributes)
+# 23. [Fallthrough Attributes - 透传 Attributes (不常用)](https://cn.vuejs.org/guide/components/attrs.html#fallthrough-attributes)
 
-# 20. [Glossary - 术语表](https://cn.vuejs.org/glossary/#glossary)
+# 24. Slots - 插槽 `<slot></slot>`
+
+> **组件如何接受模板内容 ？ **
+
+![Alt text](./imgs/slots.png)
+
+组件可以通过`props`接受来源于其他组件的任意类型的`Javascript`值，而要接受来源于其他组件的模板内容片段(`<div></div>`, `<button></button>` 等 `html` 结构),则需要用到 `slots`.
+
+## 24.1. Basic
+
+-   父组件：
+    1. 将原本引用子组件的标签格式由`<Child/>`改为`<Child></Child>`
+    2. 在子组件标签定义模板内容
+
+```js
+<template>
+    <SlotsBase>
+        <div>
+            <h3>Slots Title</h3>
+            <p>Slots Contents</p>
+        </div>
+    </SlotsBase>
+</template>
+<script>
+import SlotsBase from "./components/SlotsBase.vue";
+export default {
+    data() {
+        return {};
+    },
+    components: {
+        SlotsBase,
+    },
+};
+</script>
+
+```
+
+-   子组件： 添加`<slot></slot>`标签，引用
+
+```js
+<template>
+    <h3>Slots Basic</h3>
+    <slot></slot>
+</template>
+<script></script>
+
+```
+
+## 24.2. Render Scope - 渲染作用域
+
+插槽内容可以访问到父组件的数据作用域，因为插槽内容本身是在父组件模板中定义的. 换句话说，插槽内容可以直接引用父组件的变量和数据。
+
+```js
+<template>
+    <SlotsRenderScope>
+        <!-- 引用父组件变量 -->
+        <h3>{{ message }}</h3>
+    </SlotsRenderScope>
+</template>
+<script>
+import SlotsBase from "./components/SlotsBase.vue";
+import SlotsRenderScope from "./components/SlotsRenderScope.vue";
+export default {
+    data() {
+        return {
+            message: "Slot Content",
+        };
+    },
+    components: {
+        SlotsBase,
+        SlotsRenderScope,
+    },
+};
+</script>
+
+
+```
+
+```js
+<template>
+    <h3>Slots Render Scope</h3>
+    <slot></slot>
+</template>
+<script>
+export default {
+    data() {
+        return {};
+    },
+};
+</script>
+
+```
+
+## 24.3. Fallback Content - 插槽默认值
+
+在外部没有提供任何内容的情况下，可以为插槽指定默认内容。
+
+```js
+<template>
+    <h3>Slots Render Scope</h3>
+    <slot>
+        <!-- fallback content -->
+        <p>FallBack Content</p>
+    </slot>
+</template>
+<script>
+export default {
+    data() {
+        return {};
+    },
+};
+</script>
+
+
+```
+
+## 24.4. Named Slot - 具名插槽 `v-slot` | `#`
+
+![Alt text](./imgs/namedSlots.png)
+
+通过为每一个插槽赋予一个特殊的 attribute `name` ，用来给各个插槽分配唯一的 ID，以确定每一处要渲染的内容.这类带 `name` 的插槽被称为具名插槽 (named slots)。没有提供 `name` 的 `<slot>` 出口会隐式地命名为 `default`.
+
+同时，要为具名插槽传入内容，我们需要使用一个含 `v-slot` 指令的 `<template>` 元素，并将目标插槽的名字传给该指令：
+
+-   父组件：为每个插槽内容添加 `<template v-slot:name></template>`
+
+```js
+<template>
+    <SlotsRenderScope>
+        <!-- 引用父组件变量 -->
+        <template v-slot:header>
+            <h3>{{ title }}</h3>
+        </template>
+        <template v-slot:main>
+            <p>{{ content }}</p>
+        </template>
+    </SlotsRenderScope>
+</template>
+<script>
+import SlotsBase from "./components/SlotsBase.vue";
+import SlotsRenderScope from "./components/SlotsRenderScope.vue";
+export default {
+    data() {
+        return {
+            title: "Slot Title",
+            content: "Slot Content",
+        };
+    },
+    components: {
+        SlotsBase,
+        SlotsRenderScope,
+    },
+};
+</script>
+```
+
+-   子组件: 为每个插槽添加`name`
+
+```js
+<template>
+    <h3>Slots Render Scope</h3>
+    <slot name="header">
+        <!-- fallback content -->
+        <p>FallBack Content1</p>
+    </slot>
+    <hr />
+    <slot name="main">
+        <!-- fallback content -->
+        <p>FallBack Content2</p>
+    </slot>
+</template>
+<script>
+export default {
+    data() {
+        return {};
+    },
+};
+</script>
+```
+
+`v-slot:` 可以简写为 `#`
+
+```js
+<template>
+
+    <SlotsRenderScope>
+        <!-- 引用父组件变量 -->
+        <template #header>
+            <h3>{{ title }}</h3>
+        </template>
+        <template #main>
+            <p>{{ content }}</p>
+        </template>
+    </SlotsRenderScope>
+</template>
+<script>
+import SlotsBase from "./components/SlotsBase.vue";
+import SlotsRenderScope from "./components/SlotsRenderScope.vue";
+export default {
+    data() {
+        return {
+            title: "Slot Title",
+            content: "Slot Content",
+        };
+    },
+    components: {
+        SlotsBase,
+        SlotsRenderScope,
+    },
+};
+</script>
+
+```
+
+# 25. Scoped Slots - 作用域插槽： 插槽内容中使用子组件域内数据
+
+在上面的渲染作用域中我们讨论到，插槽的内容无法访问到子组件的状态。
+
+某些场景下插槽的内容可能想要同时使用父组件域内和子组件域内的数据。要做到这一点，我们可以先对组件传递 `props`那样，向插槽出口上传递 attributes.
+![Alt text](./imgs/slotScope.jpg)
+
+## 25.1. 具体步骤：（非具名） `<ChildComponent v-slot='slotProps'>`
+
+1. 在子组件中，,定义一个 attribute, 像属性绑定一般给 attribute 传递数据
+
+```js
+<slot :attr="{{ data }}"></slot>
+```
+
+2. 在父组件中，在子组件标签上添加`v-slot`指令，相当于创建一个`props`对象, 该对象包含了所有子组件中定义的所有`slot` attribute, 我们只需要在对象中调用子组件创建的 attribute 来调取数据.
+
+```js
+<ChildComponent v-slot='slotProps'>
+    <p>{{ slotProps.attr }}</p>
+</ChildComponent>
+```
+
+-   父组件
+
+```js
+<template>
+    <SlotsAttr v-slot="slotProps">
+        <p>{{ content }}</p>
+        <p>{{ slotProps.msg }}</p>
+    </SlotsAttr>
+</template>
+<script>
+import SlotsAttr from "./components/SlotsAttr.vue";
+export default {
+    data() {
+        return {
+            title: "Slot Title",
+            content: "Slot Content",
+        };
+    },
+    components: {
+        SlotsAttr,
+    },
+};
+</script>
+```
+
+-   子组件
+
+```js
+<template>
+    <h3>Slots Attribute</h3>
+    <slot :msg="childMessage"></slot>
+</template>
+<script>
+export default {
+    data() {
+        return {
+            childMessage: "Child Component Data",
+        };
+    },
+};
+</script>
+
+```
+
+## 25.2. 具体步骤 (具名) `<template #name="slotProps">`
+
+1. 在父组件中，不再在子组件标签上添加`v-slot`指令，而是给具名属性赋值`slotProps`对象, 原理和非具名相同，只是实现不同。
+
+```js
+<template>
+    <SlotsAttr>
+        <template #header="slotProps">
+            <p>{{ content }}</p>
+            <p>{{ slotProps.msg }}</p>
+        </template>
+        <template #main="slotProps">
+            <p>{{ slotProps.job }}</p>
+        </template>
+    </SlotsAttr>
+</template>
+<script>
+import SlotsBase from "./components/SlotsBase.vue";
+import SlotsRenderScope from "./components/SlotsRenderScope.vue";
+import SlotsAttr from "./components/SlotsAttr.vue";
+export default {
+    data() {
+        return {
+            title: "Slot Title",
+            content: "Slot Content",
+        };
+    },
+    components: {
+        SlotsBase,
+        SlotsRenderScope,
+        SlotsAttr,
+    },
+};
+</script>
+
+```
+
+2. 子组件中除了要添加`name`之外跟非具名没有区别，插槽上的 `name` 是一个 Vue 特别保留的 attribute，不会作为 `props` 传递给插槽。
+
+```js
+<template>
+    <h3>Slots Attribute</h3>
+    <slot name="header" :msg="childMessage"></slot>
+    <slot name="main" :job="job"></slot>
+</template>
+<script>
+export default {
+    data() {
+        return {
+            childMessage: "Child Component Data",
+            job: "Software Engr",
+        };
+    },
+};
+</script>
+
+```
+
+# 26. Lifecycle Hook - 组件生命周期 Hook `mounted`
+
+每个 Vue 组件实例在创建时都需要经历一系列的初始化步骤，比如设置好数据侦听，编译模板，挂载实例到 DOM, 以及在数据改变时更新 DOM. 在此过程中，它也会运行被称为生命周期钩子的函数，让开发者有机会在特定阶段运行自己的代码。
+
+## 26.1. Lifecycle Diagram
+
+![Life Cycle](./imgs/LifeCycle.png)
+
+## 26.2. [Options: Lifecycle](https://cn.vuejs.org/api/options-lifecycle.html#options-lifecycle)
+
+1. Creation
+    - `beforeCreate()`
+    - `created()`
+2. Mount
+    - `beforeMount()`
+    - `mounted()`
+3. Update
+    - `befreUpdate()`
+    - `updated()`
+4. Unmount
+    - `beforeUnmount()`
+    - `unmounted()`
+
+## 26.3. Application of Lifecycle
+
+组件生命周期会随着我们对 `vue`的了解越多，也会越来越重要，两个常见的应用有：
+
+1. 通过 `ref` 获取元素 DOM 结构
+2. 模拟网络请求渲染数据
+
+### 26.3.1. 通过 `ref` 获取元素 DOM 结构
+
+```js
+<template>
+    <h3>Component Lifecycle application</h3>
+    <p ref="name">Data</p>
+</template>
+
+<script>
+export default {
+    data() {
+        return {
+            banner:[],
+        };
+    },
+    beforeMount() {
+        console.log(this.$refs.name); // undefined
+    },
+    mounted() {
+        console.log(this.$refs.name);
+    },
+};
+</script>
+```
+
+### 26.3.2. 模拟网络请求渲染数据
+
+```js
+<template>
+    <h3>Component Lifecycle application</h3>
+    <p ref="name">Data</p>
+    <ul>
+        <li v-for="(item, index) in banner" :key="index">
+            <h3>{{ item.name }}</h3>
+            <p>{{ item.secretIdentity }}</p>
+        </li>
+    </ul>
+</template>
+
+<script>
+export default {
+    data() {
+        return {
+            banner: [],
+        };
+    },
+    // 不可行，在组件创建之前初始化 data()不存在
+    beforeCreate() {
+        // 模拟网络请求
+        this.banner = [
+            {
+                name: "Molecule Man",
+                age: 29,
+                secretIdentity: "Dan Jukes",
+            },
+            {
+                name: "Madame Uppercut",
+                age: 39,
+                secretIdentity: "Jane Wilson",
+            },
+            {
+                name: "Eternal Flame",
+                age: 1000000,
+                secretIdentity: "Unknown",
+            },
+        ];
+    },
+    // 可以实现模拟网络请求，但此时UI渲染还未加载完成
+    created() {
+        // 模拟网络请求
+        // this.banner = [
+        //     {
+        //         name: "Molecule Man",
+        //         age: 29,
+        //         secretIdentity: "Dan Jukes",
+        //     },
+        //     {
+        //         name: "Madame Uppercut",
+        //         age: 39,
+        //         secretIdentity: "Jane Wilson",
+        //     },
+        //     {
+        //         name: "Eternal Flame",
+        //         age: 1000000,
+        //         secretIdentity: "Unknown",
+        //     },
+        // ];
+    },
+    beforeMount() {
+        console.log(this.$refs.name); // undefined
+    },
+    // 最好的情况：先完成渲染结构，再请求数据
+    mounted() {
+        console.log(this.$refs.name);
+        // 模拟网络请求
+        this.banner = [
+            {
+                name: "Molecule Man",
+                age: 29,
+                secretIdentity: "Dan Jukes",
+            },
+            {
+                name: "Madame Uppercut",
+                age: 39,
+                secretIdentity: "Jane Wilson",
+            },
+            {
+                name: "Eternal Flame",
+                age: 1000000,
+                secretIdentity: "Unknown",
+            },
+        ];
+    },
+};
+</script>
+
+```
+
+# 27. Dynamic Component - 动态组件 `<component :is="..."></component>`
+
+有些场景会需要两个组件来回切换，比如 Tab 界面
+
+```js
+<template>
+    <component :is="tabComponent"></component>
+    <button @click="switchHandle">Switch Component</button>
+</template>
+
+<script>
+import ComponentLifecycleApp from "./components/ComponentLifecycleApp.vue";
+import ComponentA from "./components/ComponentA.vue";
+import ComponentB from "./components/ComponentB.vue";
+export default {
+    data() {
+        return {
+            // 赋值必须以字符串形式
+            tabComponent: "ComponentA",
+        };
+    },
+    methods: {
+        switchHandle() {
+            this.tabComponent =
+                this.tabComponent == "ComponentA" ? "ComponentB" : "ComponentA";
+        },
+    },
+    components: {
+        ComponentLifecycleApp,
+        ComponentA,
+        ComponentB,
+    },
+};
+</script>
+
+```
+
+# 28. 组件保持存活 - `<keep-alive></keep-alive>`
+
+当使用 `<component :is="..."></component>` 来在多个组件间进行切换时，被切掉的组件会被卸载。我们可以通过`<keep-alive></keep-alive>`组件强制被切换掉的组件仍然保持"存活"的状态。
+
+-   Component A
+
+```js
+<template>
+    <h3>Component A</h3>
+    <p>{{ message }}</p>
+    <button @click="updateHandle">update data</button>
+</template>
+
+<script>
+export default {
+    data() {
+        return {
+            // 切换组件后组件会被销毁，再切换回来后组件会重新进行生命周期，所以会显示 old data
+            message: "old data",
+        };
+    },
+    methods: {
+        updateHandle() {
+            this.message = "new Data";
+        },
+    },
+    // 在没有keep-alive情况下，每次切换组件后都会触发销毁流程
+    beforeUnmount() {
+        console.log("before component unmounted");
+    },
+    unmounted() {
+        console.log("component unmounted");
+    },
+};
+</script>
+
+
+```
+
+-   Component B
+
+```js
+<template>
+    <h3>Component B</h3>
+</template>
+```
+
+-   App
+
+```js
+<template>
+    <keep-alive>
+        <component :is="tabComponent"></component>
+    </keep-alive>
+    <button @click="switchHandle">Switch Component</button>
+</template>
+
+<script>
+import ComponentLifecycleApp from "./components/ComponentLifecycleApp.vue";
+import ComponentA from "./components/ComponentA.vue";
+import ComponentB from "./components/ComponentB.vue";
+export default {
+    data() {
+        return {
+            // 赋值需要以字符串形式
+            tabComponent: "ComponentA",
+        };
+    },
+    methods: {
+        switchHandle() {
+            this.tabComponent =
+                this.tabComponent == "ComponentA" ? "ComponentB" : "ComponentA";
+        },
+    },
+    components: {
+        ComponentLifecycleApp,
+        ComponentA,
+        ComponentB,
+    },
+};
+</script>
+
+```
+
+# 29. Async Components - 异步组件
+
+在大型项目中，我们可能需要拆分应用为更小的块，并仅在需要时在从服务器加载相关组件。Vue 提供了`defineAsyncComponent`方法来实现此功能。
+
+> 同步：每个组件按顺序加载
+>
+> 异步：每个组件同时加载，通过设置可以按需对组件进行加载
+
+-   将组件设置为异步加载的形式
+
+```js
+import { defineAsyncComponent } from "vue";
+// 将 ComponentB 设置为异步加载
+const ComponentB = defineAsyncComponent(() =>
+    import("./components/ComponentB.vue")
+);
+```
+
+# 30. Provide / Inject - 依赖注入
+
+通常情况下，当我们需要从父组件向子组件传递数据时，会使用 `props` 。想象一下这样的结构：有一些多层级嵌套的组件，形成了一颗巨大的组件树，而某个深层的子组件需要一个较远的祖先组件中的部分数据。在这种情况下，如果仅使用 props 则必须将其沿着组件链逐级传递下去，这会非常麻烦：
+![ProvideInject](./imgs/ProvideInject.png)
+
+注意，虽然这里的 `<Footer>` 组件可能根本不关心这些 `props` ，但为了使`<DeepChild>` 能访问到它们，仍然需要定义并向下传递。如果组件链路非常长，可能会影响到更多这条路上的组件。这一问题被称为“prop 逐级透传”，显然是我们希望尽量避免的情况。
+
+`provide` 和 `inject` 可以帮助我们解决这一问题。一个父组件相对于其所有的后代组件，会作为依赖提供者。任何后代的组件树，无论层级有多深，都可以注入由父组件提供给整条链路的依赖。
+![ProvideInject2](./imgs/ProvideInject2.png)
+
+## 30.1. `Provide` (提供)
+
+```js
+<template>
+    <h3>App</h3>
+    <Parent />
+</template>
+<script>
+import Parent from "./components/Parent.vue";
+export default {
+    data() {
+        return {};
+    },
+    components: {
+        Parent,
+    },
+    // provide 提供数据
+    provide: {
+        message: "App Data",
+    },
+};
+</script>
+
+```
+
+## 30.2. `Inject` (注入)
+
+```js
+<template>
+    <h3>Child</h3>
+    <p>{{ message }}</p>
+</template>
+<script>
+export default {
+    data() {
+        return {};
+    },
+    // 注入数据
+    inject: ["message"],
+};
+</script>
+
+```
+
+如果我们需要提供依赖当前组件实例的状态 (比如那些由 `data()` 定义的数据属性)，那么可以以函数形式使用 `provide`:
+
+```js
+<template>
+    <h3>App</h3>
+    <Parent />
+</template>
+<script>
+import Parent from "./components/Parent.vue";
+export default {
+    data() {
+        return {
+            message: "App Data",
+        };
+    },
+    components: {
+        Parent,
+    },
+    // provide: {
+    //     message: "App Data",
+    // },
+    provide() {
+        return {
+            message: this.message,
+        };
+    },
+};
+</script>
+
+```
+
+注入会在组件自身的状态之前被解析，因此你可以在 `data()` 中访问到注入的属性：
+
+```js
+<template>
+    <h3>Child</h3>
+    <p>{{ message }}</p>
+    <p>{{ msg }}</p>
+</template>
+<script>
+export default {
+    inject: ["message"],
+    data() {
+        return {
+            msg: this.message,
+        };
+    },
+};
+</script>
+
+```
+
+> Tips:
+>
+> Provide 和 Inject 只能由上到下传递
+
+## 全局注入
+
+```js
+const app = createApp(App);
+app.provide("globalData", "global data");
+app.mount("#app");
+```
+
+## 和响应式数据配合使用(不清楚具体作用)
+
+为保证注入方和供给方之间的响应性链接，我们需要使用 computed() 函数提供一个计算属性：
+
+```js
+provide() {
+    return {
+        message: computed(() => this.message),
+    };
+},
+```
+
+# 31. [Glossary - 术语表](https://cn.vuejs.org/glossary/#glossary)
