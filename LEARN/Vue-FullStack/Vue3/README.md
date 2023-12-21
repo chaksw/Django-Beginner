@@ -91,9 +91,10 @@
 -   [30. Provide / Inject - 依赖注入](#30-provide--inject---依赖注入)
     -   [30.1. `Provide` (提供)](#301-provide-提供)
     -   [30.2. `Inject` (注入)](#302-inject-注入)
-    -   [全局注入](#全局注入)
-    -   [和响应式数据配合使用(不清楚具体作用)](#和响应式数据配合使用不清楚具体作用)
--   [31. Glossary - 术语表](#31-glossary---术语表)
+    -   [30.3. 全局注入](#303-全局注入)
+    -   [30.4. 和响应式数据配合使用(不清楚具体作用)](#304-和响应式数据配合使用不清楚具体作用)
+-   [31. Vue Application - Vue 应用](#31-vue-application---vue-应用)
+-   [32. Glossary - 术语表](#32-glossary---术语表)
 
 # 1. [VueJS 3.0](https://cn.vuejs.org/)
 
@@ -2394,7 +2395,7 @@ export default {
 >
 > Provide 和 Inject 只能由上到下传递
 
-## 全局注入
+## 30.3. 全局注入
 
 ```js
 const app = createApp(App);
@@ -2402,7 +2403,7 @@ app.provide("globalData", "global data");
 app.mount("#app");
 ```
 
-## 和响应式数据配合使用(不清楚具体作用)
+## 30.4. 和响应式数据配合使用(不清楚具体作用)
 
 为保证注入方和供给方之间的响应性链接，我们需要使用 computed() 函数提供一个计算属性：
 
@@ -2414,4 +2415,6 @@ provide() {
 },
 ```
 
-# 31. [Glossary - 术语表](https://cn.vuejs.org/glossary/#glossary)
+# 31. Vue Application - Vue 应用
+
+# 32. [Glossary - 术语表](https://cn.vuejs.org/glossary/#glossary)
