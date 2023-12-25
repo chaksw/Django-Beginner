@@ -1,29 +1,50 @@
-# [React](https://react.dev/)
+-   [1. React](#1-react)
+    -   [1.1. ReactJS for Python Backend Devs](#11-reactjs-for-python-backend-devs)
+        -   [1.1.1. Requirement:](#111-requirement)
+        -   [1.1.2. Recommandation](#112-recommandation)
+    -   [1.2. Creation](#12-creation)
+        -   [1.2.1. Related commands](#121-related-commands)
+    -   [1.3. React based FontEnd Structure](#13-react-based-fontend-structure)
+        -   [1.3.1. React 如何通过`index.js` 和 `App.js` 渲染前端`html`](#131-react-如何通过indexjs-和-appjs-渲染前端html)
+            -   [1.3.1.1. 总结](#1311-总结)
+        -   [1.3.2. Props Attribute](#132-props-attribute)
+        -   [1.3.3. Class-based component](#133-class-based-component)
+        -   [1.3.4. React HOOKs(`useState`) (new feature in react since v16.8)](#134-react-hooksusestate-new-feature-in-react-since-v168)
+    -   [1.4. Development based on `Django` (backend) and `React` （frontend)](#14-development-based-on-django-backend-and-react-frontend)
+        -   [1.4.1. Virtual Env](#141-virtual-env)
+        -   [1.4.2. Back-End](#142-back-end)
+        -   [1.4.3. Front-End](#143-front-end)
+        -   [1.4.4. Connecting Back-End(Django) to Front-End(React) using Axios](#144-connecting-back-enddjango-to-front-endreact-using-axios)
+        -   [1.4.5. Setting for interaction between Django and React](#145-setting-for-interaction-between-django-and-react)
+    -   [1.5. Practice - Task Manager](#15-practice---task-manager)
+        -   [1.5.1. Project Structure](#151-project-structure)
+
+# 1. [React](https://react.dev/)
 
 React is a JavaScript libraryt for buildingg user interfaces, the majority call **React** as framework as they compare it with the other front-end frameworks in the market (`Angular` & `Vue.js` )
 
 React allows us to create an individual front-end component(as `.js` function) and then collect them like pieces of lego.
 
-## ReactJS for Python Backend Devs
+## 1.1. ReactJS for Python Backend Devs
 
 this README is a summary of tutorial about how to use `ReactJS` as front-end for python django(as back-end) development.
 
-### Requirement:
+### 1.1.1. Requirement:
 
 1. Node.js installed (need `npm` as node package management) PS: npm is equivalent of `pip` in python
 2. [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) (exetension in google chrome)
 3. [create-react-app](https://github.com/facebook/create-react-app) (command line program)
     - Use `npx` (a package runner tool that comes with `npm 5.2+` and higher)
 
-### Recommandation
+### 1.1.2. Recommandation
 
 Vscode exetension
 
 1. Shortcut for React dev: [ES7+ React/Redux/React-Native snippets](https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets)
 
-## Creation
+## 1.2. Creation
 
-### Related commands
+### 1.2.1. Related commands
 
 1. Creat React App
    In using command(`npx`) below, it will be going to download the more crecnt `create-react-app` release, so that we can make sure we won't use a outdated version.
@@ -52,7 +73,7 @@ npm run **build**
 npm test
 ```
 
-## React based FontEnd Structure
+## 1.3. React based FontEnd Structure
 
 The main working space is `src` folder, and inside this folder:
 
@@ -108,7 +129,7 @@ function App() {
 export default App;
 ```
 
-### React 如何通过`index.js` 和 `App.js` 渲染前端`html`
+### 1.3.1. React 如何通过`index.js` 和 `App.js` 渲染前端`html`
 
 1. 在`App.js`中，我们通过定义一个函数（或者类）来创建一个前端模块（语法为`JSX`）,并通过`export default App` 将其导出。
 2. 而在`index.js`中，我们将`App.js`进行导入，并通过`.render`函数渲染，而渲染的对象则使用`DOM`在`public/index.html`中寻找 component 的`id`定位。
@@ -194,13 +215,13 @@ export default App;
 
 一般来说，自定义的 function based component 都创建在 component 文件夹中。
 
-#### 总结
+#### 1.3.1.1. 总结
 
 1. 以`index.js`作为入口（连接`JSX`定义的 components 和`html`）；
 2. `App.js`作为主窗口 layout，其中放入自定义的各种`JSX` components
 3. 在`./components/.js`中定义各种 component unit，导入到`App.js`中
 
-### Props Attribute
+### 1.3.2. Props Attribute
 
 Props can be considered as input parameter of component function, it's a collection attribute of component that allow us to use it's attribute when using in `App.js`
 
@@ -234,7 +255,7 @@ function App() {
 export default App;
 ```
 
-### Class-based component
+### 1.3.3. Class-based component
 
 ```js
 // Class based component [ES6 class based]
@@ -247,7 +268,7 @@ class Hello extends React.Component {
 export default Hello;
 ```
 
-### React HOOKs(`useState`) (new feature in react since v16.8)
+### 1.3.4. React HOOKs(`useState`) (new feature in react since v16.8)
 
 React Hook is the best pratice (for now) to build a component
 
@@ -274,9 +295,9 @@ function Counter() {
 export default Counter;
 ```
 
-## Development based on `Django` (backend) and `React` （frontend)
+## 1.4. Development based on `Django` (backend) and `React` （frontend)
 
-### Virtual Env
+### 1.4.1. Virtual Env
 
 1. Use `pipenv`
 
@@ -288,7 +309,7 @@ also use `exit` to exit virtual env anything we need.
 pipenv shell
 ```
 
-### Back-End
+### 1.4.2. Back-End
 
 2. Install Django Rest Framework (a toolkit to build api)
 
@@ -306,7 +327,7 @@ pipenv install django-cors-headers
 
 To create api in django project we need to create a `serializer.py` file, which a used to convert complex data to nactive python data types, then be easily rendered into json.
 
-### Front-End
+### 1.4.3. Front-End
 
 5. React app
 
@@ -321,7 +342,7 @@ npx create-react-app frontend #name of application
 npm install reactstrap bootstrap
 ```
 
-### Connecting Back-End(Django) to Front-End(React) using [Axios](https://axios-http.com/docs/intro)
+### 1.4.4. Connecting Back-End(Django) to Front-End(React) using [Axios](https://axios-http.com/docs/intro)
 
 A Axios installed in frontend folder to connect back-end and front-end
 
@@ -329,7 +350,7 @@ A Axios installed in frontend folder to connect back-end and front-end
 npm install axios # install for react (in fontend folder)
 ```
 
-### Setting for interaction between Django and React
+### 1.4.5. Setting for interaction between Django and React
 
 Connect backend server which will be written in django framework to our front-end which will be written in React.
 
@@ -362,9 +383,9 @@ CORS_ORIGIN_WHITELIST = ('http://localhost:3000')
 
 In django app, we need to create `serializer.py` which is to convert the model instances (define in `models.py`) to `json` data (**`json` is the standard for data interchange on the web**)
 
-## Practice - Task Manager
+## 1.5. Practice - Task Manager
 
-### Project Structure
+### 1.5.1. Project Structure
 
 1. **Back-End:** Django + pipenv packages (django rest framework + django cors headers)
 2. **Front-End:** React + npm packages (reactstrap + boostrap + axios)
